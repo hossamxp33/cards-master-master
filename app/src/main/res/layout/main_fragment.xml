@@ -56,7 +56,7 @@
             <com.facebook.shimmer.ShimmerFrameLayout
                     android:id="@+id/shimmer_view_container2"
                     android:layout_width="match_parent"
-                    android:layout_height="0dp"
+                    android:layout_height="300dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
                     android:layout_marginTop="16dp"
@@ -64,7 +64,8 @@
                     android:layout_marginRight="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/logo"
-                    app:layout_constraintHeight_percent="0.2"
+                    app:layout_constraintBottom_toTopOf="@id/constraintLayouttest"
+                    app:layout_constraintHeight_percent="0.4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.8">
                 <include layout="@layout/layout_placeholder_row_for_slider"  />
