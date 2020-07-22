@@ -48,6 +48,8 @@
 
     <style name="DialogTheme" parent="Theme.AppCompat.Light.Dialog">
         <item name="colorAccent">@color/colorPrimary</item>
+
+
     </style>
 
 
@@ -58,5 +60,14 @@
 
 
 
+    <style name="yourCustomDialog" parent="@android:style/Theme">
+        <item name="android:windowAnimationStyle">@style/yourCustomDialogAnimation</item>
+    </style>
+
+    <style name="yourCustomDialogAnimation">
+        <item name="android:windowEnterAnimation">@anim/slide_down</item>
+        <item name="android:windowExitAnimation">@anim/slide_up</item>
+
+    </style>
 
 </resources>

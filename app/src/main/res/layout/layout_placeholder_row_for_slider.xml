@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<androidx.cardview.widget.CardView android:id="@+id/doctorlayout"
+                                   android:layout_width="match_parent"
+                                   android:layout_height="wrap_content"
+                                   android:layout_margin="5dp"
+                                   android:padding="15dp"
+                                   android:orientation="vertical"
+                                   android:gravity="center"
+                                   app:cardCornerRadius="10dp"
+                                   xmlns:android="http://schemas.android.com/apk/res/android"
+                                   xmlns:app="http://schemas.android.com/apk/res-auto">
+
+
+    <View
+        android:id="@+id/itemimage"
+        android:layout_width="match_parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_height="300dp"
+        android:padding="4dp"
+        android:background="@color/placeholder_bg"
+        />
+
+
+</androidx.cardview.widget.CardView>
+

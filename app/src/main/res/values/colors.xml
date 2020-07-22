@@ -18,6 +18,8 @@
     <color name="slider_home3">#490D39</color>
     <color name="back_home3">#9C9898</color>
     <color name="notfy_home3">#DC214C</color>
+    <color name="placeholder_bg">#dddddd</color>
+
     <color name="text_numbers">#DC214C</color>
     <color name="colortwo">#DC214C</color>
     <color name="colorbackinorderconf">#D91368</color>

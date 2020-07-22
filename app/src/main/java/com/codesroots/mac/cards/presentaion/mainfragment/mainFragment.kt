@@ -69,9 +69,11 @@ class mainFragment  : Fragment(){
             indicator.setViewPager(view.pager)
 
             it?.size?.let { it1 -> init(it1) }
+            stoploading()
 
         })
         animation()
+
         return view.root;
     }
 
@@ -105,5 +107,23 @@ class mainFragment  : Fragment(){
             override fun onPageScrolled(pos: Int, arg1: Float, arg2: Int) {}
             override fun onPageScrollStateChanged(pos: Int) {}
         })
+    }
+    override fun onResume() {
+        super.onResume()
+        shimmer_view_container2.startShimmerAnimation()
+
+    }
+    override fun onPause() {
+        shimmer_view_container2?.stopShimmerAnimation()
+
+        super.onPause()
+    }
+
+    fun stoploading() {
+
+        shimmer_view_container2?.stopShimmerAnimation()
+
+        shimmer_view_container2?.setVisibility(View.GONE)
+
     }
 }
