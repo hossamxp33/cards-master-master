@@ -50,7 +50,7 @@ class mainFragment  : Fragment(){
         viewModel.GetMyImages(PreferenceHelper.getAuthId())
         viewModel.CompanyResponseLD?.observe(this , Observer {
             MainAdapter = MainAdapter(viewModel,context,it)
-            view.recyler.layoutManager = GridLayoutManager(context,2)
+            view.recyler.layoutManager = GridLayoutManager(context,3)
             view.recyler.adapter = MainAdapter;
             view.textView11.typeface = typeface
             view.textView5.typeface = typeface
