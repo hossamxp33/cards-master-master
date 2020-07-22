@@ -36,7 +36,7 @@ app:layout_constraintEnd_toEndOf="parent"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
                 android:onClick="@{() -> listener.SwitchToPackages(Context,data.id)}"
-         app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -45,12 +45,14 @@ app:layout_constraintEnd_toEndOf="parent"
                 android:layout_centerVertical="true"
                 >
         <androidx.appcompat.widget.AppCompatImageView
-
+                android:adjustViewBounds="true"
                 app:imageResource="@{data.src}"
                 android:id="@+id/roundedimage"
+                android:scaleType="fitXY"
+
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:scaleType="centerCrop" />
+                />
         </androidx.cardview.widget.CardView>
     </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>

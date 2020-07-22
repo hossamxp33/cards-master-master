@@ -32,7 +32,7 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/linear_background_for_addtocart"
+            android:background="@drawable/button_background"
             android:gravity="center"
             android:padding="5dp"
             android:text="شراء"
@@ -46,10 +46,12 @@
             android:layout_gravity="center"
             android:layout_marginTop="5dp"
             android:layout_marginBottom="10dp"
-            android:background="@drawable/linear_background_for_addtocart"
+            android:background="@drawable/button_background"
             android:gravity="center"
             android:padding="5dp"
             android:text="حفظ"
+            android:fontFamily="@font/fonts"
+
             android:textColor="@color/white"
             android:textSize="16dp" />
     <TextView
@@ -62,6 +64,8 @@
             android:gravity="center"
             android:padding="5dp"
             android:visibility="gone"
+            android:fontFamily="@font/fonts"
+
             android:text="تاكيد الحجز"
             android:textColor="#FD0000"
             android:textSize="16dp"/>
