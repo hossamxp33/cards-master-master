@@ -13,9 +13,21 @@
         <androidx.appcompat.widget.Toolbar
                 android:id="@+id/toolBar"
                 android:layout_width="match_parent"
-                android:layout_height="?attr/actionBarSize"
-                android:background="#50017e"
+                android:layout_height="100dp"
+                android:background="@color/colorBottomNavigationInactive"
                 app:popupTheme="@style/AppTheme.PopupOverlay">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="140dp"
+                    android:layout_height="100dp"
+                    android:adjustViewBounds="true"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/logos"
+                    android:layout_gravity="center"
+
+                    >
+
+            </androidx.appcompat.widget.AppCompatImageView>
 
         </androidx.appcompat.widget.Toolbar>
 
@@ -27,7 +39,7 @@
             android:id="@+id/main_frame"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginTop="55dp"
+            android:layout_marginTop="100dp"
             android:layout_marginBottom="50dp"
             android:background="@color/lightergrey" />
 

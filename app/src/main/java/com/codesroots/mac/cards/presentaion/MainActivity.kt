@@ -5,6 +5,7 @@ import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
+import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
@@ -22,6 +23,7 @@ import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isGone
+import androidx.databinding.DataBindingUtil
 import androidx.databinding.library.baseAdapters.BR.context
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
@@ -32,13 +34,18 @@ import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
+import com.codesroots.mac.cards.DataLayer.usecases.checkUserLogin
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.databinding.ActivityMainBinding
+import com.codesroots.mac.cards.databinding.ActivityPaymentBinding
+import com.codesroots.mac.cards.databinding.MainAdapterBinding
 import com.codesroots.mac.cards.db.CardDao
 import com.codesroots.mac.cards.db.CardDatabase
 import com.codesroots.mac.cards.models.Buypackge
 import com.codesroots.mac.cards.presentaion.Printer.AidlUtil
 
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
+import com.codesroots.mac.cards.presentaion.login.LoginActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.portifliofragment.PortiflioFragment
 
@@ -64,6 +71,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var reportsFragment: ReportsFragment
     lateinit var moreFragment: MenuFragment
     lateinit var wallet: PortiflioFragment
+    lateinit var viewModel: MainViewModel
 
     lateinit var navigationView: NavigationView
     override fun onResume() {
@@ -73,6 +81,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        window.statusBarColor = ContextCompat.getColor(this, R.color.colorAccent)
+
+        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+        val typeface = Typeface.createFromAsset(this!!.assets, "fonts/DroidKufi_Regular.ttf")
+
+        viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.getMyBalance()
 
         ///////// tool bar and drawerToggle
         setSupportActionBar(toolBar)
@@ -97,24 +112,16 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         AidlUtil.getInstance().connectPrinterService(this)
         PreferenceHelper(this)
         animation()
-naz.setOnClickListener {
-val launchIntent = getPackageManager().getLaunchIntentForPackage("com.codesroots.mac.Tajnaz");
-if (launchIntent != null) {
-   startActivity(launchIntent);
-} else {
-    val i =  Intent(android.content.Intent.ACTION_VIEW);
-    i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.codesroots.mac.Tajnaz" ));
-    startActivity(i);
-}
-    naz2.setOnClickListener {
-        homeFragment = mainFragment()
-        supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-            .replace(R.id.main_frame, homeFragment)
-            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-            .commit()
-    }
-}
 
+        viewModel.MyBalanceResponseLD?.observe(this , Observer {
+
+            binding.myBalance = it
+            //binding.textView11.typeface = typeface
+            binding.textView5.typeface = typeface
+            binding.lastvalue.typeface = typeface
+
+           // binding.value.typeface = typeface
+        })
     }
     override fun onNavigationItemSelected(menuItem: MenuItem): Boolean {
 
@@ -136,11 +143,13 @@ if (launchIntent != null) {
                     .commit()
             }
             R.id.more -> {
-                moreFragment = MenuFragment()
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-                    .replace(R.id.main_frame, moreFragment)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
+                if (checkUserLogin(this)) {
+                    PreferenceHelper.setToken("0",this)
+                    Toast.makeText(this, "تم تسجيل خروجك", Toast.LENGTH_SHORT).show()
+
+                    val homeIntent = Intent(this, LoginActivity::class.java)
+                    ( context as MainActivity).startActivity(homeIntent)
+                }
             }
             R.id.more -> {
                 wallet = PortiflioFragment()
@@ -157,7 +166,6 @@ if (launchIntent != null) {
     }
     private fun animation(){
         val ttb = AnimationUtils.loadAnimation(this, R.anim.img)
-        naz.animation = ttb
 
     }
     override fun onBackPressed() {
@@ -240,6 +248,8 @@ Glide.with(context as MainActivity)
     .into(object : SimpleTarget<Bitmap>(100, 100) {
         override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
             try {
+                IPosPrinterTestDemo.getInstance().printText(it,resource);
+
                 AidlUtil.getInstance().printRecipte(it,resource);
 
                 val homeIntent = Intent(context, Payment::class.java)
@@ -262,51 +272,51 @@ Glide.with(context as MainActivity)
                     })
                 }
             }
-            dialogView.saveToRoom.setOnClickListener { v: View? ->
-            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                return@setOnClickListener
-            }
-            v!!.isGone = true
-            mLastClickTime = SystemClock.elapsedRealtime();
-            val auth = PreferenceHelper.getAuthId()
-            viewmodel.BuyPackage(id,auth!!,dialogView.from.text.toString())
-
-            if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-                viewmodel.BuyPackageResponseLD?.observe(context, Observer {
-
-
-                    if (it.err != null) {
-                        it.err!!.snack((context as MainActivity).window.decorView.rootView)
-                        dialogView.err.text = it.err
-                        dialogView.err.isGone = false
-                    } else {
-                        if (!it!!.pencode.isNullOrEmpty()) {
-        Thread {
-            val db = Room.databaseBuilder(
-                context,
-                CardDatabase::class.java, "card-database"
-            ).build()
-            insertUserWithPet(it, db.getCardDao())
-            "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-        }.start()
-
-                   GlobalScope.launch {
-                       val db = Room.databaseBuilder(
-                          context,
-                           CardDatabase::class.java, "card-database"
-                       ).build()
-                       db.getCardDao().GetAllData()
-                  "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-                   }
-
-
-                        }
-
-                    }
-
-                })
-            }
-        }
+//            dialogView.saveToRoom.setOnClickListener { v: View? ->
+//            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
+//                return@setOnClickListener
+//            }
+//            v!!.isGone = true
+//            mLastClickTime = SystemClock.elapsedRealtime();
+//            val auth = PreferenceHelper.getAuthId()
+//            viewmodel.BuyPackage(id,auth!!,dialogView.from.text.toString())
+//
+//            if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
+//                viewmodel.BuyPackageResponseLD?.observe(context, Observer {
+//
+//
+//                    if (it.err != null) {
+//                        it.err!!.snack((context as MainActivity).window.decorView.rootView)
+//                        dialogView.err.text = it.err
+//                        dialogView.err.isGone = false
+//                    } else {
+//                        if (!it!!.pencode.isNullOrEmpty()) {
+//        Thread {
+//            val db = Room.databaseBuilder(
+//                context,
+//                CardDatabase::class.java, "card-database"
+//            ).build()
+//            insertUserWithPet(it, db.getCardDao())
+//            "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
+//        }.start()
+//
+//                   GlobalScope.launch {
+//                       val db = Room.databaseBuilder(
+//                          context,
+//                           CardDatabase::class.java, "card-database"
+//                       ).build()
+//                       db.getCardDao().GetAllData()
+//                  "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
+//                   }
+//
+//
+//                        }
+//
+//                    }
+//
+//                })
+//            }
+//        }
     }
 
     fun insertUserWithPet(user: Buypackge, cardDao: CardDao) {
@@ -402,6 +412,7 @@ Glide.with(context as MainActivity)
                                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                                     try {
                                         AidlUtil.getInstance().printRecipte(it, resource);
+                                        IPosPrinterTestDemo.getInstance().printText(it,resource);
 
 
                                     } catch (e: IOException) {

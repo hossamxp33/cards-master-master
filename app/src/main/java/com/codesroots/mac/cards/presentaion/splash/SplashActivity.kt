@@ -9,11 +9,14 @@ import com.codesroots.mac.cards.R
 
 import android.widget.VideoView
 import android.os.Bundle
-import androidx.core.app.ComponentActivity.ExtraData
 import androidx.core.content.ContextCompat.getSystemService
 import android.icu.lang.UCharacter.GraphemeClusterBreak.T
 import android.net.Uri
+import android.view.WindowManager
 import com.codesroots.mac.cards.presentaion.login.LoginActivity
+import androidx.core.content.ContextCompat.getSystemService
+import android.icu.lang.UCharacter.GraphemeClusterBreak.T
+import android.view.View
 
 
 class SplashActivity : AppCompatActivity (){
@@ -21,13 +24,16 @@ class SplashActivity : AppCompatActivity (){
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
+
+        setContentView(R.layout.splash);
+
         try {
-            val videoHolder = VideoView(this)
-            setContentView(videoHolder)
-            val video = Uri.parse("android.resource://" + packageName + "/" + R.raw.splash)
-            videoHolder.setVideoURI(video)
-            videoHolder.setOnCompletionListener { jump() }
-            videoHolder.start()
+            val video = findViewById<View>(R.id.videoView) as VideoView
+            video.setVideoPath("android.resource://" + packageName + "/" + R.raw.splash);
+
+            video.setOnCompletionListener { jump() }
+            video.start()
         } catch (ex: Exception) {
             jump()
         }

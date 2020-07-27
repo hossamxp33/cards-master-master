@@ -1,5 +1,7 @@
 <resources>
-
+    <style name="NavigationView" >
+        <item name="fontFamily">@font/fonts</item>
+    </style>
 
 
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.NoActionBar">

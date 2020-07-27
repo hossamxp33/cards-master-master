@@ -49,6 +49,9 @@ class MainViewModel : ViewModel() {
         mCompositeDisposable  = CompositeDisposable()
     }
 
+    fun getBanksData(){
+        DateRepoCompnay.GetMyBalance(MyBalanceResponseLD)
+    }
 
     fun getMyBalance(){
         DateRepoCompnay.GetMyBalance(MyBalanceResponseLD)

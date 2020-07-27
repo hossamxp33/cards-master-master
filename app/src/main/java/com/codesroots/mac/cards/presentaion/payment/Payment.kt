@@ -7,10 +7,12 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.databinding.DataBindingUtil
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.ActivityPaymentBinding
+import com.codesroots.mac.cards.databinding.PaymentNewBinding
 import com.codesroots.mac.cards.models.Buypackge
 import com.codesroots.mac.cards.presentaion.Printer.AidlUtil
 import com.codesroots.mac.cards.presentaion.Printer.ESCUtil
 import kotlinx.android.synthetic.main.activity_payment.*
+import kotlinx.android.synthetic.main.payment_new.*
 import woyou.aidlservice.jiuiv5.IWoyouService
 import java.io.IOException
 import java.net.HttpURLConnection
@@ -29,24 +31,24 @@ class Payment : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_payment)
-        val binding = DataBindingUtil.setContentView<ActivityPaymentBinding>(this, R.layout.activity_payment)
+        val binding = DataBindingUtil.setContentView<PaymentNewBinding>(this, R.layout.payment_new)
 
         var extras = intent.extras
-        val value = extras!!.getParcelable<Buypackge>("myobj")
+        val value = extras?.getParcelable<Buypackge>("myobj")
 
 
 
         if (!value!!.pencode.isNullOrEmpty()) {
 
-            value.pencode!!.forEach {
+            value!!.pencode!!.forEach {
 
-                secret.append(it.pencode)
-                secret.append("\n")
-                secret.text.toString()
+                numbervalue.append(it.pencode)
+                numbervalue.append("\n")
+                numbervalue.text.toString()
 
-                fatoravalue.append(it.serial)
-                fatoravalue.append("\n")
-                fatoravalue.text.toString()
+                serialvalue.append(it.serial)
+                serialvalue.append("\n")
+                serialvalue.text.toString()
 
 
             }

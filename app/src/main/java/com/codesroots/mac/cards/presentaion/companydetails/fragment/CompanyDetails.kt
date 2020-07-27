@@ -18,12 +18,15 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.bumptech.glide.Glide
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.presentaion.Printer.AidlUtil
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
 import kotlinx.android.synthetic.main.company_details.*
 import kotlinx.android.synthetic.main.company_details.view.*
+import kotlinx.android.synthetic.main.dialog_custom_view.view.*
 import org.jetbrains.anko.doAsync
 import org.jetbrains.anko.support.v4.runOnUiThread
 import java.io.IOException
@@ -35,7 +38,7 @@ class CompanyDetails  : Fragment() {
 
     lateinit var MainAdapter: CompanyDetailsAdapter
     lateinit var viewModel: MainViewModel
-
+var data :List<CompanyDatum>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -56,6 +59,7 @@ class CompanyDetails  : Fragment() {
             viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
             viewModel.getPackageDetails(packageId!!)
             viewModel.CompanyResponseLD?.observe(this, Observer {
+                data = it
                 MainAdapter = CompanyDetailsAdapter(viewModel, context, it)
                 view.recyler.layoutManager = LinearLayoutManager(context)
                 view.recyler.adapter = MainAdapter;
@@ -71,9 +75,9 @@ class CompanyDetails  : Fragment() {
         val inflater: LayoutInflater = this.getLayoutInflater()
         val dialogView: View = inflater.inflate(R.layout.dialog_custom_view, null)
 
-        val header_txt = dialogView.findViewById<TextView>(R.id.header)
-        header_txt.text = "Header Message"
-        val details_txt = dialogView.findViewById<TextView>(R.id.details)
+        val details_image = dialogView.details
+        Glide.with(context!!).load(data!!.first().detailimg).into(details_image)
+
         val custom_button: Button = dialogView.findViewById(R.id.customBtn)
         custom_button.setOnClickListener {
             // Dismiss the popup window

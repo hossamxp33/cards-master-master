@@ -103,6 +103,24 @@ class  DataRepo {
     }
     @SuppressLint("CheckResult")
 
+    fun getBanksData(livedata: MutableLiveData<MyBalance>?) {
+
+        APIServices.create().GetMyBlanceData(PreferenceHelper.getAuthId())
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+
     fun GetMyBalance(livedata: MutableLiveData<MyBalance>?) {
 
         APIServices.create().GetMyBlanceData(PreferenceHelper.getAuthId())

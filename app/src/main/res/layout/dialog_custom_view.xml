@@ -8,7 +8,7 @@
 
     <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
@@ -17,34 +17,20 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/content"
                 android:layout_width="match_parent"
-                android:layout_height="0dp"
+                android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
-            <TextView
-                    android:id="@+id/header"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginTop="32dp"
-                    android:ellipsize="end"
-                    android:maxLines="3"
-                    android:text="Header"
-                    android:textAlignment="center"
-                    android:textAllCaps="false"
-                    android:textColor="@color/black"
-                    android:textSize="17sp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/customBtn" />
 
-            <TextView
+
+            <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/details"
                     android:layout_width="match_parent"
-                    android:layout_height="400dp"
+                    android:layout_height="match_parent"
                     android:layout_marginLeft="8dp"
+                    android:adjustViewBounds="true"
                     android:layout_marginRight="8dp"
-                    android:text="@string/details_here_set_multiple_lines_if_you_want"
-                    app:layout_constraintTop_toBottomOf="@+id/header"
+                    app:layout_constraintTop_toTopOf="parent"
                     tools:layout_editor_absoluteX="10dp" />
 
             <Button

@@ -7,7 +7,7 @@ apply plugin: 'kotlin-kapt'
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.codesroots.mac.cards"
+        applicationId "com.codesroots.mac.buycards"
         minSdkVersion 16
         targetSdkVersion 29
         multiDexEnabled true

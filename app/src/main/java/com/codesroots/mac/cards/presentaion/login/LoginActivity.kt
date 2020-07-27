@@ -18,7 +18,9 @@ import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.isInternetConnectionAvailable
 import com.codesroots.mac.cards.presentaion.snack
+import kotlinx.android.synthetic.main.activity_login.*
 import kotlinx.android.synthetic.main.activity_signin.*
+import kotlinx.android.synthetic.main.activity_signin.btnLogin
 import org.jetbrains.anko.internals.AnkoInternals.getContext
 
 class LoginActivity : AppCompatActivity() {
@@ -31,7 +33,7 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-      setContentView(R.layout.activity_signin)
+      setContentView(R.layout.activity_login)
         PreferenceHelper(this)
 
         if (checkUserLogin(this))
@@ -44,10 +46,10 @@ class LoginActivity : AppCompatActivity() {
             if (PreferenceHelper.getToken() != "0" ) {
                "تاني مرة".snack(window.decorView.rootView)
                 if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
-                viewModel.Login(etUsername.text.toString(),etPassword.text.toString())
+                viewModel.Login(username.text.toString(),password.text.toString())
             }else {
                 if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
-                viewModel.LoginFirstTime(etUsername.text.toString(),etPassword.text.toString())
+                viewModel.LoginFirstTime(username.text.toString(),password.text.toString())
                 "اول مرة".snack(window.decorView.rootView)
             }
         }

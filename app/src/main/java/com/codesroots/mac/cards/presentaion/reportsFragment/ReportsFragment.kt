@@ -20,8 +20,7 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.report_adapters
 import com.codesroots.mac.cards.presentaion.snack
 import kotlinx.android.synthetic.main.main_fragment.*
-import kotlinx.android.synthetic.main.main_fragment.lastvalue
-import kotlinx.android.synthetic.main.main_fragment.value
+
 import kotlinx.android.synthetic.main.main_fragment.view.recyler
 import kotlinx.android.synthetic.main.report_fragment.*
 import kotlinx.android.synthetic.main.report_fragment.view.*
@@ -62,7 +61,6 @@ class ReportsFragment  : Fragment() {
                 lastvalue.text = it.first().amount
                 value.text = it.get(it.size - 2).amount
                 println(it.get(it.size - 1).amount)
-                commision.text = it.last().amount
 
                 view.recyler.layoutManager = LinearLayoutManager(context);
                 view.recyler.adapter = MainAdapter;
@@ -92,7 +90,7 @@ class ReportsFragment  : Fragment() {
                     lastvalue.text = it.first().amount
                     value.text = it.get(it.size - 2).amount
                     println(it.get(it.size - 2).amount)
-                    commision.text = it.last().amount
+                    //commision.text = it.last().amount
 
                     MainAdapter.notifyDataSetChanged()
 

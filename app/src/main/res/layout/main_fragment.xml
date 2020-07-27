@@ -30,6 +30,7 @@
         android:id="@+id/logo"
         android:layout_width="0dp"
         android:layout_height="100dp"
+        android:visibility="gone"
         app:srcCompat="@drawable/logos"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -45,11 +46,10 @@
                     android:layout_height="0dp"
                     android:layout_marginStart="8dp"
                     android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
                     android:layout_marginEnd="8dp"
                     android:layout_marginRight="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo"
+                    app:layout_constraintTop_toTopOf="@id/logo"
                     app:layout_constraintHeight_percent="0.2"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.8" />
@@ -64,7 +64,7 @@
                     android:layout_marginRight="8dp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/logo"
-                    app:layout_constraintBottom_toTopOf="@id/constraintLayouttest"
+                    app:layout_constraintBottom_toTopOf="@id/pager"
                     app:layout_constraintHeight_percent="0.4"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintWidth_percent="0.8">
@@ -99,89 +99,9 @@
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/constraintLayouttest" />
+                    app:layout_constraintTop_toBottomOf="@id/pager" />
 
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                    android:id="@+id/constraintLayouttest"
-                    android:layout_width="wrap_content"
-                    android:layout_height="40dp"
-                    android:layout_marginTop="8dp"
-                    android:background="@drawable/reduisbackground"
-                    android:orientation="vertical"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/pager">
-
-                <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="@font/fonts"
-                        android:text="الرصيد"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                        android:id="@+id/lastvalue"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="6dp"
-                        android:background="@color/white"
-                        android:fontFamily="@font/fonts"
-                        android:text="@{MyBalance.account}"
-                        android:textColor="@color/red"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@+id/textView5"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                        android:id="@+id/textView11"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginRight="32dp"
-                        android:layout_marginBottom="6dp"
-                        android:fontFamily="@font/fonts"
-                        android:text="عمولة"
-                        android:textColor="@color/black"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/lastvalue"
-                        app:layout_constraintRight_toRightOf="parent"
-                        app:layout_constraintTop_toTopOf="parent" />
-
-                <TextView
-                        android:id="@+id/value"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="6dp"
-                        android:layout_marginRight="16dp"
-                        android:layout_marginBottom="6dp"
-                        android:background="@color/white"
-                        android:fontFamily="@font/fonts"
-                        android:paddingLeft="10dp"
-                        android:paddingRight="10dp"
-                        android:text="@{MyBalance.commession}"
-                        android:textColor="@color/red"
-                        android:textSize="18sp"
-                        android:textStyle="bold"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        app:layout_constraintRight_toLeftOf="@id/textView11"
-                        app:layout_constraintTop_toTopOf="parent" />
-            </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 

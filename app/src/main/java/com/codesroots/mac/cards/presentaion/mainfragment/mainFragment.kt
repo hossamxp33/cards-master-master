@@ -47,22 +47,16 @@ class mainFragment  : Fragment(){
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getcompanyData()
         viewModel.getMyBalance()
+
         viewModel.GetMyImages(PreferenceHelper.getAuthId())
         viewModel.CompanyResponseLD?.observe(this , Observer {
             MainAdapter = MainAdapter(viewModel,context,it)
             view.recyler.layoutManager = GridLayoutManager(context,3)
             view.recyler.adapter = MainAdapter;
-            view.textView11.typeface = typeface
-            view.textView5.typeface = typeface
-            view.lastvalue.typeface = typeface
 
-            view.value.typeface = typeface
 
         })
-        viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
-            view.myBalance = it
-        })
         viewModel.SliderDataResponseLD?.observe(this , Observer {
 
             view.pager.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
@@ -110,18 +104,15 @@ class mainFragment  : Fragment(){
     }
     override fun onResume() {
         super.onResume()
-        shimmer_view_container2.startShimmerAnimation()
 
     }
     override fun onPause() {
-        shimmer_view_container2?.stopShimmerAnimation()
 
         super.onPause()
     }
 
     fun stoploading() {
 
-        shimmer_view_container2?.stopShimmerAnimation()
 
         shimmer_view_container2?.setVisibility(View.GONE)
 

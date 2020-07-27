@@ -69,6 +69,14 @@ interface APIServices {
     @GET("fw_main/16")/*{company_id}*/
     fun GetPartnersData():
             Observable<List<PartnersModel>>
+
+
+    @GET("fw_main/16")/*{company_id}*/
+    fun getBanksData():
+            Observable<List<PartnersModel>>
+
+
+
     companion object {
         fun create(): APIServices {
 

@@ -25,7 +25,6 @@
             android:background="@drawable/reduisbackground"
             android:layout_width="match_parent"
             android:layout_height="150dp"
-            android:layoutAnimation="@anim/layout_animation"
 
             android:layout_marginLeft="8dp"
             android:layout_marginEnd="8dp"
@@ -44,7 +43,7 @@
                 android:scaleType="fitXY"
                 app:imageResourcee="@{data.src}"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/common_ic_googleplayservices"
                 tools:srcCompat="@tools:sample/avatars[6]" />
@@ -57,7 +56,7 @@
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:text="@{data.name}"
-                app:layout_constraintEnd_toStartOf="@id/appCompatImageView"
+                app:layout_constraintRight_toLeftOf="@id/appCompatImageView"
                 app:layout_constraintTop_toTopOf="@id/appCompatImageView" />
 
         <TextView
@@ -72,7 +71,7 @@
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/appCompatImageView"
+                app:layout_constraintRight_toLeftOf="@+id/appCompatImageView"
                 app:layout_constraintTop_toTopOf="parent" />
 
 
@@ -80,15 +79,14 @@
                 android:id="@+id/amount"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
+                android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
                 android:fontFamily="@font/fonts"
-                android:text="أسرعوا فقط ٥ متبقي"
+                android:text="@{ data.mount == 0 ? `غير متوفر`  : `متوفر`}"
                 android:textColor="@color/red"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="@id/appCompatImageView" />
 
 
@@ -106,6 +104,6 @@
                 android:text="شراء"
                 android:textColor="@color/white"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"></androidx.appcompat.widget.AppCompatButton>
+                app:layout_constraintLeft_toLeftOf="parent"></androidx.appcompat.widget.AppCompatButton>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
