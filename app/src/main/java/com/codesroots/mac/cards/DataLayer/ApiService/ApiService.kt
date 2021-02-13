@@ -17,7 +17,7 @@ import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 
 interface APIServices {
 
-    @POST("{token}/logup/{username}/{password}")/*{company_id}*/
+    @POST("{token}/login/{username}/{password}")/*{company_id}*/
     fun Login(@Path("token")  token:String,@Path("username")  username:String,
               @Path("password")  password:String): Observable<LogData>
 
@@ -40,7 +40,9 @@ interface APIServices {
             Observable<List<CompanyDatum>>
 
 
-
+    @POST("fw_main/1/23")/*{company_id}*/
+    fun GetMyBanksData():
+            Observable<BankData>
 
     @POST("fw_main/{auth}/5")/*{company_id}*/
     fun BuyPackage(@Path("auth") auth: String,@Query("val") packageid: String,@Query("mount") amount: String):

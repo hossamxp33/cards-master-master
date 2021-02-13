@@ -113,7 +113,7 @@ fun setupviewPager(viewPager: ViewPager) {
 }
 
  fun checkUserLogin(context: Context): Boolean {
-     if (PreferenceHelper.getToken() != "0")
+     if (PreferenceHelper.getAuthId() != "0")
     return true
      else
      {

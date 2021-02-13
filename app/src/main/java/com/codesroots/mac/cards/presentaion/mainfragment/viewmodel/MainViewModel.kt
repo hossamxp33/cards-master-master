@@ -39,6 +39,7 @@ class MainViewModel : ViewModel() {
     var SliderDataResponseLD : MutableLiveData<List<SliderElement>>? = null
     var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null
     var ReportDailyResponseLD : MutableLiveData<List<ReportDaily>>? = null
+    var BankResponseLD : MutableLiveData<List<BankDatum>>? = null
 
     init {
         CompanyResponseLD = MutableLiveData()
@@ -46,11 +47,13 @@ class MainViewModel : ViewModel() {
         MyBalanceResponseLD = MutableLiveData()
         SliderDataResponseLD = MutableLiveData()
         ReportDailyResponseLD = MutableLiveData()
+        BankResponseLD = MutableLiveData()
+
         mCompositeDisposable  = CompositeDisposable()
     }
 
     fun getBanksData(){
-        DateRepoCompnay.GetMyBalance(MyBalanceResponseLD)
+        DateRepoCompnay.getBanksData(BankResponseLD)
     }
 
     fun getMyBalance(){

@@ -103,9 +103,9 @@ class  DataRepo {
     }
     @SuppressLint("CheckResult")
 
-    fun getBanksData(livedata: MutableLiveData<MyBalance>?) {
+    fun getBanksData(livedata: MutableLiveData<List<BankDatum>>?) {
 
-        APIServices.create().GetMyBlanceData(PreferenceHelper.getAuthId())
+        APIServices.create().GetMyBanksData()
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }

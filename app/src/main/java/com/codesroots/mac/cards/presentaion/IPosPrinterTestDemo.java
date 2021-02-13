@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.codesroots.mac.cards.R;
 import com.codesroots.mac.cards.models.Buypackge;
 import com.codesroots.mac.cards.presentaion.Utils.HandlerUtils;
+import com.codesroots.mac.cards.presentaion.payment.Payment;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
@@ -326,6 +327,9 @@ public class IPosPrinterTestDemo {
         Log.i(TAG, "#### printerStatus" + printerStatus);
         return printerStatus;
     }
+    public boolean isConnect() {
+        return mIPosPrinterService != null;
+    }
 
     /**
      * 打印机初始化
@@ -364,7 +368,7 @@ public class IPosPrinterTestDemo {
     /**
      * 打印文字
      */
-    public void printText(Buypackge value, Bitmap bitmaps) {
+    public void printText(Buypackge value, Bitmap bitmaps,Bitmap notes)  {
         if (mIPosPrinterService != null )
             if (getPrinterStatus() == PRINTER_NORMAL)
                 ThreadPoolManager.getInstance().executeTask(new Runnable() {
@@ -386,6 +390,8 @@ public class IPosPrinterTestDemo {
 
                                     mIPosPrinterService.PrintSpecFormatText(value.getPencode().get(i).getPencode()+"\n", "ST", 32, 1, callback);
                                     mIPosPrinterService.printBlankLines(1, 8, callback);
+                                    mIPosPrinterService.printBitmap(1, 8, notes, callback);
+
                                     mIPosPrinterService.printBlankLines(1, 8, callback);
                                     mIPosPrinterService.printSpecifiedTypeText("SERIAL :" + value.getPencode().get(i).getSerial()+"\n", "ST", 32, callback);
                                     mIPosPrinterService.printBlankLines(1, 8, callback);
@@ -398,13 +404,18 @@ public class IPosPrinterTestDemo {
                                     mIPosPrinterService.printBlankLines(1, 16, callback);
                                     mIPosPrinterService.PrintSpecFormatText(value.getTime()+"\n", "ST", 32, 1, callback);
                                     mIPosPrinterService.printSpecifiedTypeText("********************************", "ST", 24, callback);
-                                    mIPosPrinterService.printBitmap(1, 6, bitmap, callback);
+                                    mIPosPrinterService.printBitmap(1, 2, bitmap, callback);
                                     mIPosPrinterService.printBlankLines(1, 16, callback);
 
                                     //   bitmapRecycle(bitmap);
                                     mIPosPrinterService.printerPerformPrint(160, callback);
 
                             }
+                            Intent intent = new Intent(context, Payment.class);
+
+                            intent.putExtra("myobj", value);
+
+                            (context).startActivity(intent);
                         } catch (RemoteException e) {
                             e.printStackTrace();
                         }

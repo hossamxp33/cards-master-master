@@ -43,6 +43,7 @@ import com.codesroots.mac.cards.db.CardDao
 import com.codesroots.mac.cards.db.CardDatabase
 import com.codesroots.mac.cards.models.Buypackge
 import com.codesroots.mac.cards.presentaion.Printer.AidlUtil
+import com.codesroots.mac.cards.presentaion.banks.BankActitvity
 
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.login.LoginActivity
@@ -82,6 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorAccent)
+        IPosPrinterTestDemo.getInstance().connectPrinterService(this)
 
         val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val typeface = Typeface.createFromAsset(this!!.assets, "fonts/DroidKufi_Regular.ttf")
@@ -142,22 +144,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
                     .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
                     .commit()
             }
+            R.id.banks -> {
+
+                val homeIntent = Intent(this, BankActitvity::class.java)
+                startActivity(homeIntent)
+            }
             R.id.more -> {
                 if (checkUserLogin(this)) {
-                    PreferenceHelper.setToken("0",this)
+                    PreferenceHelper.setAuthId("0",this)
                     Toast.makeText(this, "تم تسجيل خروجك", Toast.LENGTH_SHORT).show()
 
                     val homeIntent = Intent(this, LoginActivity::class.java)
-                    ( context as MainActivity).startActivity(homeIntent)
+                   startActivity(homeIntent)
                 }
             }
-            R.id.more -> {
-                wallet = PortiflioFragment()
-                supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb, 0, 0,0)
-                    .replace(R.id.main_frame, wallet)
-                    .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                    .commit()
-            }
+
 
         }
 
@@ -246,17 +247,43 @@ Glide.with(context as MainActivity)
     .asBitmap()
     .load("http://across-cities.com/"+it.src)
     .into(object : SimpleTarget<Bitmap>(100, 100) {
-        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+        override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
             try {
-                IPosPrinterTestDemo.getInstance().printText(it,resource);
+                Glide.with(context as MainActivity)
+                    .asBitmap()
+                    .load("http://across-cities.com/"+it.notesimg)
+                    .into(object : SimpleTarget<Bitmap>(100, 100) {
+                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                            try {
 
-                AidlUtil.getInstance().printRecipte(it,resource);
+                                IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource);
+if (IPosPrinterTestDemo.getInstance().isConnect == false ){
 
-                val homeIntent = Intent(context, Payment::class.java)
 
-                homeIntent.putExtra("myobj", it)
-                (context as MainActivity).startActivity(homeIntent)
+                                val homeIntent = Intent(( context as MainActivity), Payment::class.java)
+                                homeIntent.putExtra("myobj", it)
 
+                                ( context as MainActivity).startActivity(homeIntent)
+
+}
+
+
+
+                            } catch (e: IOException) {
+                                // handle exception
+                            }
+
+
+                        }})
+
+                AidlUtil.getInstance().printRecipte(it,resourcee);
+if (AidlUtil.getInstance().isConnect() == false) {
+    val intent = Intent(context, Payment::class.java)
+
+    intent.putExtra("myobj", it)
+
+    context.startActivity(intent)
+}
             }
             catch (e: IOException) {
                 // handle exception
@@ -409,10 +436,30 @@ Glide.with(context as MainActivity)
                             .asBitmap()
                             .load("http://across-cities.com/" + it.src)
                             .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
                                     try {
-                                        AidlUtil.getInstance().printRecipte(it, resource);
-                                        IPosPrinterTestDemo.getInstance().printText(it,resource);
+                                        AidlUtil.getInstance().printRecipte(it, resourcee);
+                                        Glide.with(context as MainActivity)
+                                            .asBitmap()
+                                            .load("http://across-cities.com/"+it.notesimg)
+                                            .into(object : SimpleTarget<Bitmap>(100, 100) {
+                                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                                    try {
+
+                                                        IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource);
+
+                                                        val homeIntent = Intent(context, Payment::class.java)
+
+                                                        homeIntent.putExtra("myobj", it)
+
+                                                        (context as MainActivity).startActivity(homeIntent)
+
+                                                    } catch (e: IOException) {
+                                                        // handle exception
+                                                    }
+
+
+                                                }})
 
 
                                     } catch (e: IOException) {

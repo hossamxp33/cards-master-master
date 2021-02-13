@@ -14,6 +14,8 @@ import android.widget.Toast;
 import com.codesroots.mac.cards.R;
 import com.codesroots.mac.cards.models.Buypackge;
 import com.codesroots.mac.cards.models.Pencode;
+import com.codesroots.mac.cards.presentaion.payment.Payment;
+
 import woyou.aidlservice.jiuiv5.ICallback;
 import woyou.aidlservice.jiuiv5.IWoyouService;
 
@@ -175,7 +177,7 @@ public class AidlUtil {
     public void initPrinter() {
         if (woyouService == null) {
             Toast.makeText(context, "he service has been disconnected!", Toast.LENGTH_LONG).show();
-            return;
+            return ;
         }
 
         try {
@@ -310,6 +312,11 @@ public class AidlUtil {
 
 
             }
+            Intent intent = new Intent(context, Payment.class);
+
+            intent.putExtra("myobj", value);
+
+            (context).startActivity(intent);
         }catch (RemoteException e) {
             e.printStackTrace();
         }

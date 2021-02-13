@@ -19,21 +19,7 @@
 
             android:layout_height="match_parent">
 
-        <TextView
-                android:id="@+id/img"
-                android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="@font/fonts"
-                android:scaleType="fitXY"
-                android:text="عبر المدن"
-                android:textColor="@color/black"
-                android:textSize="25dp"
-                app:layout_constraintBottom_toTopOf="@id/to"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
+
 
         <TextView
                 android:id="@+id/to"
@@ -49,7 +35,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.4" />
 
         <TextView
@@ -66,7 +52,7 @@
                 android:textColor="@color/black"
                 android:textStyle="bold"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/img"
+                app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.4" />
 
         <TextView

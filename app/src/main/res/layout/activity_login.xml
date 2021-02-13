@@ -22,7 +22,7 @@
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent">
+                android:layout_height="wrap_content">
 
             <EditText
                     android:id="@+id/username"
@@ -88,6 +88,7 @@
             <RelativeLayout
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
+                    android:id="@+id/bottom"
                     android:layout_below="@+id/password"
                     android:layout_marginStart="20dp"
                     android:layout_marginTop="40dp"
@@ -107,9 +108,21 @@
                         android:textSize="12sp"
                         android:textStyle="bold" />
 
+
             </RelativeLayout>
 
+            <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/bottom"
+                    android:layout_marginTop="30dp"
+                    android:text="1.0.0"
+                    android:textSize="18sp"
 
+                    android:layout_centerHorizontal="true"
+                    android:textAlignment="center"
+                    android:textColor="@color/red"
+                    ></androidx.appcompat.widget.AppCompatTextView>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 

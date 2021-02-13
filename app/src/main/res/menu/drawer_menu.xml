@@ -17,7 +17,11 @@
                 android:icon="@drawable/analytics"
                 android:title="تقارير" />
 
+        <item
 
+                android:id="@+id/banks"
+                android:icon="@drawable/bank"
+                android:title="حسابات بنكية" />
 
     </group>
 

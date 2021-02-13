@@ -8,7 +8,7 @@
 
         <variable
                 name="Context"
-                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+                type="com.codesroots.mac.cards.presentaion.banks.BankActitvity"/>
         <variable
                 name="viewmodel"
                 type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
@@ -17,7 +17,7 @@
                 type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
         <variable
                 name="data"
-                type="com.codesroots.mac.cards.models.CompanyDatum"/>
+                type="com.codesroots.mac.cards.models.BankDatum"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_marginTop="10dp"
@@ -41,7 +41,7 @@
                 android:layout_marginBottom="8dp"
                 android:adjustViewBounds="true"
                 android:scaleType="fitXY"
-                app:imageResourcee="@{data.src}"
+                app:imageResourcee="@{data.logo}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -54,8 +54,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:layout_marginEnd="16dp"
+                android:fontFamily="@font/fonts"
+
                 android:layout_marginRight="16dp"
-                android:text="@{data.name}"
+                android:text="@{data.bankname}"
                 app:layout_constraintRight_toLeftOf="@id/appCompatImageView"
                 app:layout_constraintTop_toTopOf="@id/appCompatImageView" />
 
@@ -65,8 +67,10 @@
                 android:layout_height="wrap_content"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
+                android:fontFamily="@font/fonts"
+
                 android:layout_marginBottom="8dp"
-                android:text="@{data.sprice}"
+                android:text="@{data.accountname}"
                 android:textColor="@color/black"
                 android:textSize="14sp"
                 android:textStyle="bold"
@@ -80,9 +84,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginRight="16dp"
-                android:layout_marginTop="16dp"
                 android:fontFamily="@font/fonts"
-                android:text="@{ data.mount == 0 ? `غير متوفر`  : `متوفر`}"
+
+                android:layout_marginTop="16dp"
+                android:text="@{ data.accountno}"
                 android:textColor="@color/red"
                 android:textSize="12sp"
                 android:textStyle="bold"

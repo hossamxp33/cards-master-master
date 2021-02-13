@@ -12,6 +12,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -55,6 +56,8 @@ var data :List<CompanyDatum>? = null
         )
         if (arguments != null) {
             AidlUtil.getInstance().initPrinter()
+            Toast.makeText(context, AidlUtil.getInstance().isConnect().toString(), Toast.LENGTH_LONG).show()
+
             val packageId = arguments?.getString("packageId")
             viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
             viewModel.getPackageDetails(packageId!!)
