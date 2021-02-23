@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.DataLayer.usecases.checkUserLogin
+import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 
 
 class MenuFragment : Fragment() {
@@ -30,6 +31,11 @@ class MenuFragment : Fragment() {
 //        }
         view.partners.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,Partners())?.addToBackStack("login")?.commit()
+        }
+        view.back_btn.setOnClickListener {
+            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,
+                mainFragment()
+            )?.addToBackStack("home")?.commit()
         }
 //
         view.profile.setOnClickListener {

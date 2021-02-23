@@ -16,49 +16,62 @@
                 name="data"
                 type="com.codesroots.mac.cards.models.CompanyDatum"/>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="match_parent"
-            android:layout_height="120dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:padding="28dp"
+            android:background="@drawable/reduisshadowbackground"
+            android:onClick="@{() -> listener.SwitchToPackages(Context,data.id)}"
 
             >
-    <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="106dp"
-            android:layout_height="106dp"
-            android:layoutAnimation="@anim/layout_animation"
 
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            android:background="@drawable/imgcircle"
-            >
-
-
-    <androidx.cardview.widget.CardView
-                android:id="@+id/myCardView"
-                android:layout_width="100dp"
-            android:layoutAnimation="@anim/layout_animation"
-
-            android:layout_height="100dp"
-                android:onClick="@{() -> listener.SwitchToPackages(Context,data.id)}"
-                app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-                app:cardCornerRadius="50dp"
-                android:layout_centerHorizontal="true"
-                android:layout_centerVertical="true"
-                >
-        <androidx.appcompat.widget.AppCompatImageView
-                android:adjustViewBounds="true"
-                app:imageResource="@{data.src}"
-                android:id="@+id/roundedimage"
-                android:scaleType="fitXY"
-                android:layoutAnimation="@anim/layout_animation"
-
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                />
-        </androidx.cardview.widget.CardView>
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:background="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+
+            <androidx.cardview.widget.CardView
+                    android:id="@+id/myCardView"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    app:cardCornerRadius="0dp"
+                    app:cardElevation="0dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/roundedimage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:adjustViewBounds="true"
+                        android:scaleType="fitXY"
+                        app:imageResource="@{data.src}" />
+
+            </androidx.cardview.widget.CardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:text="@{data.name}"
+                android:textColor="@color/black"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout">
+
+        </TextView>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

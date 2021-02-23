@@ -8,6 +8,7 @@ import android.graphics.Color
 import android.graphics.Typeface
 import android.graphics.drawable.Drawable
 import android.net.Uri
+import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.SystemClock
@@ -19,12 +20,12 @@ import android.view.View
 import android.view.animation.AnimationUtils
 import android.widget.TextView
 import android.widget.Toast
+import androidx.annotation.RequiresApi
 import androidx.appcompat.app.ActionBarDrawerToggle
 import androidx.core.content.ContextCompat
 import androidx.core.view.GravityCompat
 import androidx.core.view.isGone
 import androidx.databinding.DataBindingUtil
-import androidx.databinding.library.baseAdapters.BR.context
 import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -36,7 +37,6 @@ import com.bumptech.glide.request.transition.Transition
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.DataLayer.usecases.checkUserLogin
 import com.codesroots.mac.cards.R
-import com.codesroots.mac.cards.databinding.ActivityMainBinding
 import com.codesroots.mac.cards.databinding.ActivityPaymentBinding
 import com.codesroots.mac.cards.databinding.MainAdapterBinding
 import com.codesroots.mac.cards.db.CardDao
@@ -79,13 +79,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         super.onResume()
         println("onressomes")
     }
+    @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorAccent)
         IPosPrinterTestDemo.getInstance().connectPrinterService(this)
 
-        val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
+    //    val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val typeface = Typeface.createFromAsset(this!!.assets, "fonts/DroidKufi_Regular.ttf")
 
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -117,10 +118,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
-            binding.myBalance = it
-            //binding.textView11.typeface = typeface
-            binding.textView5.typeface = typeface
-            binding.lastvalue.typeface = typeface
+//            binding.myBalance = it
+//            //binding.textView11.typeface = typeface
+//            binding.textView5.typeface = typeface
+//            binding.lastvalue.typeface = typeface
 
            // binding.value.typeface = typeface
         })
@@ -180,361 +181,4 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 }
 
 
-class ClickHandler {
 
-    var  mLastClickTime: Long = 0
-
-    fun SwitchToPackages( context: Context,comid :String) {
-
-        val bundle = Bundle()
-        //  bundle.putParcelable("cliObj" ,clients[position] )
-        val frag = CompanyDetails()
-        frag.arguments = bundle
-        bundle.putString("packageId" , comid)
-        ( context as MainActivity).supportFragmentManager!!.beginTransaction().setCustomAnimations(R.anim.ttb,0, 0,0)
-            .replace(R.id.main_frame, frag).addToBackStack(null).commit()
-    }
-    fun SwitchToReports( context: Context,comid :String) {
-
-        val bundle = Bundle()
-        //  bundle.putParcelable("cliObj" ,clients[position] )
-        val frag = ReportsFragment()
-        frag.arguments =bundle
-        bundle.putString("packageId" , comid)
-        ( context as MainActivity).supportFragmentManager.beginTransaction()
-            .replace(R.id.main_frame, frag).addToBackStack(null).commit()
-    }
-
-    fun SwitchToPayment(context: Context,id:String,viewmodel:MainViewModel) {
-
-        val dialogBuilder = AlertDialog.Builder(( context as MainActivity) )
-        val inflater = ( context as MainActivity).getSystemService(Context.LAYOUT_INFLATER_SERVICE) as LayoutInflater
-        val dialogView = inflater.inflate(R.layout.alert_add_reserve, null)
-        dialogBuilder.setView(dialogView)
-        val alertDialog = dialogBuilder.create()
-    var  title =  TextView(context as MainActivity);
-// You Can Customise your Title here
-         title.setText("إضافة طلب");
-title.setBackgroundColor(Color.DKGRAY);
-title.setPadding(10, 10, 10, 10);
-title.setGravity(Gravity.CENTER);
-title.setTextSize(20f);
-
-        dialogBuilder.setCustomTitle(title);
-        alertDialog.show()
-            dialogView.save.setOnClickListener { v: View? ->
-                if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-                    return@setOnClickListener
-                }
-                v!!.isGone = true
-                mLastClickTime = SystemClock.elapsedRealtime();
-                val auth = PreferenceHelper.getAuthId()
-                viewmodel.BuyPackage(id,auth!!,dialogView.from.text.toString())
-
-                if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-                    viewmodel.BuyPackageResponseLD?.observe(context, Observer {
-
-
-                            if (it.err != null) {
-                                it.err!!.snack((context as MainActivity).window.decorView.rootView)
-                                dialogView.err.isGone = false
-
-                                dialogView.err.text = it.err
-                            } else {
-                                if (!it!!.pencode.isNullOrEmpty()) {
-
-Glide.with(context as MainActivity)
-    .asBitmap()
-    .load("http://across-cities.com/"+it.src)
-    .into(object : SimpleTarget<Bitmap>(100, 100) {
-        override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
-            try {
-                Glide.with(context as MainActivity)
-                    .asBitmap()
-                    .load("http://across-cities.com/"+it.notesimg)
-                    .into(object : SimpleTarget<Bitmap>(100, 100) {
-                        override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                            try {
-
-                                IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource);
-if (IPosPrinterTestDemo.getInstance().isConnect == false ){
-
-
-                                val homeIntent = Intent(( context as MainActivity), Payment::class.java)
-                                homeIntent.putExtra("myobj", it)
-
-                                ( context as MainActivity).startActivity(homeIntent)
-
-}
-
-
-
-                            } catch (e: IOException) {
-                                // handle exception
-                            }
-
-
-                        }})
-
-                AidlUtil.getInstance().printRecipte(it,resourcee);
-if (AidlUtil.getInstance().isConnect() == false) {
-    val intent = Intent(context, Payment::class.java)
-
-    intent.putExtra("myobj", it)
-
-    context.startActivity(intent)
-}
-            }
-            catch (e: IOException) {
-                // handle exception
-            }
-        }
-
-        override fun onLoadFailed(errorDrawable: Drawable?) {
-            // handle exception
-        }
-    })
-                                    }
-                                    }
-                    })
-                }
-            }
-//            dialogView.saveToRoom.setOnClickListener { v: View? ->
-//            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-//                return@setOnClickListener
-//            }
-//            v!!.isGone = true
-//            mLastClickTime = SystemClock.elapsedRealtime();
-//            val auth = PreferenceHelper.getAuthId()
-//            viewmodel.BuyPackage(id,auth!!,dialogView.from.text.toString())
-//
-//            if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-//                viewmodel.BuyPackageResponseLD?.observe(context, Observer {
-//
-//
-//                    if (it.err != null) {
-//                        it.err!!.snack((context as MainActivity).window.decorView.rootView)
-//                        dialogView.err.text = it.err
-//                        dialogView.err.isGone = false
-//                    } else {
-//                        if (!it!!.pencode.isNullOrEmpty()) {
-//        Thread {
-//            val db = Room.databaseBuilder(
-//                context,
-//                CardDatabase::class.java, "card-database"
-//            ).build()
-//            insertUserWithPet(it, db.getCardDao())
-//            "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-//        }.start()
-//
-//                   GlobalScope.launch {
-//                       val db = Room.databaseBuilder(
-//                          context,
-//                           CardDatabase::class.java, "card-database"
-//                       ).build()
-//                       db.getCardDao().GetAllData()
-//                  "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-//                   }
-//
-//
-//                        }
-//
-//                    }
-//
-//                })
-//            }
-//        }
-    }
-
-    fun insertUserWithPet(user: Buypackge, cardDao: CardDao) {
-        val pets = user.pencode!!
-        for (i in pets.indices) {
-            pets.get(i).buypackageid = user.opno!!
-        }
-        cardDao.insertPetList(pets)
-        cardDao. insertPackege(user)
-    }
-
-    fun  deletedata(context: MainActivity,its:Buypackge) {
-        GlobalScope.launch {
-            let {
-            val db = Room.databaseBuilder(context ,
-                CardDatabase::class.java, "card-database"
-            ).build()
-            db.getCardDao().deleteCard(its.opno!!)
-
-        }}
-
-    }
-    suspend fun getUserWithPets(id: Int, room: CardDao): Buypackge {
-        val user = room.getUser(id)
-        val pets = room.getPetList(id)
-        user.pencode = pets
-        return user
-    }
-    fun ShowReport(context: Context,id:String) {
-
-        lateinit var viewModel: MainViewModel
-        val auth = PreferenceHelper.getAuthId()
-        viewModel =   ViewModelProviders.of(( context as MainActivity)).get(MainViewModel::class.java)
-        viewModel.PrintReport(id,auth!!)
-        if (viewModel.BuyPackageResponseLD?.hasObservers() == false) {
-
-            viewModel.BuyPackageResponseLD?.observe(context, Observer {
-                if (it.err != null) {
-                    it.err!!.snack((context as MainActivity).window.decorView.rootView)
-
-
-                } else {
-                    if (!it!!.pencode.isNullOrEmpty()) {
-                        Glide.with(context as MainActivity)
-                            .asBitmap()
-                            .load("http://across-cities.com/" + it.src)
-                            .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                    try {
-
-                                        val homeIntent = Intent(context, Payment::class.java)
-                                        homeIntent.putExtra("myobj", it)
-                                        (context as MainActivity).startActivity(homeIntent)
-
-                                    } catch (e: IOException) {
-                                        // handle exception
-                                    }
-                                }
-
-                                override fun onLoadFailed(errorDrawable: Drawable?) {
-                                    // handle exception
-                                }
-                            })
-                    }
-                }
-            })
-        }
-
-    }
-
-    fun PrintReport(context: Context,id:String) {
-
-        lateinit var viewModel: MainViewModel
-
-            val auth = PreferenceHelper.getAuthId()
-            viewModel =   ViewModelProviders.of(( context as MainActivity)).get(MainViewModel::class.java)
-            viewModel.PrintReport(id,auth!!)
-        if (viewModel.BuyPackageResponseLD?.hasObservers() == false) {
-
-            viewModel.BuyPackageResponseLD?.observe(context, Observer {
-                if (it.err != null) {
-                    it.err!!.snack((context as MainActivity).window.decorView.rootView)
-
-
-                } else {
-                    if (!it!!.pencode.isNullOrEmpty()) {
-
-
-                        Glide.with(context as MainActivity)
-                            .asBitmap()
-                            .load("http://across-cities.com/" + it.src)
-                            .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
-                                    try {
-                                        AidlUtil.getInstance().printRecipte(it, resourcee);
-                                        Glide.with(context as MainActivity)
-                                            .asBitmap()
-                                            .load("http://across-cities.com/"+it.notesimg)
-                                            .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                                    try {
-
-                                                        IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource);
-
-                                                        val homeIntent = Intent(context, Payment::class.java)
-
-                                                        homeIntent.putExtra("myobj", it)
-
-                                                        (context as MainActivity).startActivity(homeIntent)
-
-                                                    } catch (e: IOException) {
-                                                        // handle exception
-                                                    }
-
-
-                                                }})
-
-
-                                    } catch (e: IOException) {
-                                        // handle exception
-                                    }
-                                }
-
-                                override fun onLoadFailed(errorDrawable: Drawable?) {
-                                    // handle exception
-                                }
-                            })
-                    }
-                }
-            })
-        }
-
-        }
-
-    fun PrintReportFromPortifolio(context: Context,its:Buypackge) {
-        var card: Buypackge? = null
-
-        GlobalScope.launch {
-            context.let {
-                val db = Room.databaseBuilder(
-                    it,
-                    CardDatabase::class.java, "card-database"
-                ).build()
-                var data = getUserWithPets(its.opno!!, db.getCardDao())
-                card = data
-                if (!card!!.pencode.isNullOrEmpty()) {
-                    Thread {
-                        context!!.runOnUiThread {
-                            Glide.with(context as MainActivity)
-                                .asBitmap()
-                                .load("http://across-cities.com/" + card!!.src)
-                                .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                    override fun onResourceReady(
-                                        resource: Bitmap,
-                                        transition: Transition<in Bitmap>?
-                                    ) {
-                                        try {
-                                            AidlUtil.getInstance().printRecipte(card, resource);
-                                            deletedata(context, card!!)
-
-
-                                        } catch (e: IOException) {
-                                            // handle exception
-                                        }
-                                    }
-
-                                    override fun onLoadFailed(errorDrawable: Drawable?) {
-                                        // handle exception
-                                    }
-                                })
-                        }
-                    }.start()
-                }
-            }
-        }
-    }
-//thread {
-//
-//}.start()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-}

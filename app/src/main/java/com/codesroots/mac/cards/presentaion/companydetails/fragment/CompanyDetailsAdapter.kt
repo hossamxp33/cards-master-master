@@ -15,28 +15,46 @@ import com.codesroots.mac.cards.models.CompanyDatum
 import com.codesroots.mac.cards.models.MyLocationUseCase
 import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
+import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
-class CompanyDetailsAdapter ( var viewModel: MainViewModel,var context :Context?,var data:List<CompanyDatum>) : RecyclerView.Adapter<CustomViewHolders>() {
+
+class CompanyDetailsAdapter ( var viewModel: MainViewModel,var context :Context?,var data:List<CompanyDatum>, val listener: ContentListener) : RecyclerView.Adapter<CustomViewHolders>() {
+    var  companyDetails : CompanyDetails? = null
+    var row_index : Int ? = -1
+
     override fun getItemCount(): Int {
 
         return  data.size
 
     }
-
-    override fun onBindViewHolder(p0: CustomViewHolders, p1: Int) {
-        p0.bind(viewModel,context,data.get(p1),viewModel)
+    init {
+        data
 
     }
 
-    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CustomViewHolders {
-//        val layoutInflater  = LayoutInflater.from(p0.context);
-//        val cellforrow = layoutInflater.inflate(R.layout.main_adapter,p0,false);
 
-//        val layoutParams = cellforrow.getLayoutParams()
-//        layoutParams.height = (p0.getHeight() /  2).toInt()
-//        layoutParams.width = (p0.getWidth() /  2.5).toInt()
-//        cellforrow.setLayoutParams(layoutParams)
-        val  binding: CompanyDetailsItemBinding = DataBindingUtil.inflate (LayoutInflater.from(p0.context),R.layout.company_details_item,p0,false)
+
+    override fun onBindViewHolder(p0: CustomViewHolders, p1: Int) {
+        p0.bind(viewModel,context,data.get(p1),viewModel)
+        listener.onItemClicked(data.get(p1))
+        p0.binding.categoryPrice?.setOnClickListener {
+            row_index = p1
+            notifyDataSetChanged();
+        }
+        if (row_index == p1){
+            p0.binding.categoryPrice.setBackgroundResource(com.codesroots.mac.cards.R.drawable.bluereduisbackground)
+        }
+        else
+        {
+            p0.binding.categoryPrice.setBackgroundResource(com.codesroots.mac.cards.R.drawable.nav_bg)
+
+        }
+    }
+
+    override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CustomViewHolders {
+        val  binding: CompanyDetailsItemBinding = DataBindingUtil.inflate (LayoutInflater.from(p0.context),
+            com.codesroots.mac.cards.R.layout.company_details_item,p0,false)
+
 
         return  CustomViewHolders(binding)
     }
@@ -44,7 +62,7 @@ class CompanyDetailsAdapter ( var viewModel: MainViewModel,var context :Context?
 
 }
 class CustomViewHolders (
-    private val binding:CompanyDetailsItemBinding
+    public var binding:CompanyDetailsItemBinding
 ) : RecyclerView.ViewHolder(binding.root){
 
     fun bind(viewModel:MainViewModel,context: Context?,data:CompanyDatum,viewModels: MainViewModel) {
@@ -52,7 +70,12 @@ class CustomViewHolders (
         binding.listener = ClickHandler()
         binding.viewmodel = viewModels
         binding.data = data
-        binding.context = context as MainActivity?
+        binding.context = context as CompanyDetails?
+
+
     }
 
+}
+public interface ContentListener {
+    fun onItemClicked(item: CompanyDatum)
 }

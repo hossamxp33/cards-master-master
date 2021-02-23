@@ -80,7 +80,7 @@ public class PreferenceHelper {
 	}
 	public static String getAuthId() {
 
-		return app_prefs.getString(AuthId,"eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJzdWIiOjEsImV4cCI6MTU3Mzk2ODg3MH0.w45qrjLBSXaGfHRATa33EwGG-IfPkhKbnZSbflWRLSo");
+		return app_prefs.getString(AuthId,"0");
 	}
 
 	public static void setAuthId(String API_TOKEN, Context context) {

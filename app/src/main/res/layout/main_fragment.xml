@@ -3,11 +3,12 @@
         xmlns:tools="http://schemas.android.com/tools"
         xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/layout"
-
-        >
+        android:id="@+id/layout">
 
     <data>
+        <variable
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.MainActivity"/>
         <variable
                 name="MyBalance"
                 type="com.codesroots.mac.cards.models.MyBalance"/>
@@ -15,95 +16,411 @@
                 name="ViewModel"
                 type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
 
+        <variable
+                name="listener"
+                type="com.codesroots.mac.cards.presentaion.ClickHandler"/>
 
     </data>
-    <androidx.core.widget.NestedScrollView
+
+
+
+
+    <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:background="@color/white">
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.13" />
+
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.1" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/logoLayout"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="#7E7C7C">
-<androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/logo"
-        android:layout_width="0dp"
-        android:layout_height="100dp"
-        android:visibility="gone"
-        app:srcCompat="@drawable/logos"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintWidth_percent="0.5"
+                android:layout_height="0dp"
+                android:background="@drawable/bottom_rounded"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintHeight_percent="0.23"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
 
-
-        ></androidx.appcompat.widget.AppCompatImageView>
-
-            <androidx.viewpager.widget.ViewPager
-                    android:id="@+id/pager"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toTopOf="@id/logo"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintWidth_percent="0.8" />
-            <com.facebook.shimmer.ShimmerFrameLayout
-                    android:id="@+id/shimmer_view_container2"
-                    android:layout_width="match_parent"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="8dp"
-                    android:layout_marginLeft="8dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:layout_marginRight="8dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/logo"
-                    app:layout_constraintBottom_toTopOf="@id/pager"
-                    app:layout_constraintHeight_percent="0.4"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintWidth_percent="0.8">
-                <include layout="@layout/layout_placeholder_row_for_slider"  />
-            </com.facebook.shimmer.ShimmerFrameLayout>
-            <com.viewpagerindicator.CirclePageIndicator
-                    android:id="@+id/indicator"
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/logo"
                     android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="5dp"
-                    android:padding="10dip"
-                    app:centered="true"
-                    app:fillColor="@color/colorPrimary"
-                    app:layout_constraintBottom_toBottomOf="@+id/pager"
-                    app:layout_constraintBottom_toTopOf="@id/recyler"
-                    app:layout_constraintEnd_toEndOf="@+id/pager"
-                    app:layout_constraintStart_toStartOf="@+id/pager"
-                    app:pageColor="#fff"
-                    app:snap="false" />
+                    android:layout_height="0dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHeight_percent="0.6"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.3"
 
-            <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/recyler"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginStart="4dp"
-                    android:layout_marginLeft="4dp"
-                    android:layout_marginTop="8dp"
-                    android:layout_marginEnd="4dp"
-                    android:layout_marginRight="4dp"
-                    android:layout_marginBottom="4dp"
-                    android:visibility="visible"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/pager" />
-
+                    app:srcCompat="@drawable/name" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    </androidx.core.widget.NestedScrollView>
+        <androidx.viewpager.widget.ViewPager
+                android:id="@+id/pager"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                app:layout_constraintHeight_percent="0.2"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guid" />
+
+        <com.facebook.shimmer.ShimmerFrameLayout
+                android:id="@+id/shimmer_view_container2"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginEnd="8dp"
+                android:layout_marginRight="8dp"
+                app:layout_constraintHeight_percent="0.19"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guid"
+                app:layout_constraintWidth_percent="0.8">
+
+            <include
+                    layout="@layout/layout_placeholder_row_for_slider"
+                    android:layout_width="wrap_content"
+                    android:layout_height="110dp" />
+        </com.facebook.shimmer.ShimmerFrameLayout>
+
+        <com.viewpagerindicator.CirclePageIndicator
+                android:id="@+id/indicator"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="7dip"
+                app:centered="true"
+                app:fillColor="@color/colorPrimary"
+                app:layout_constraintBottom_toBottomOf="@+id/pager"
+                app:layout_constraintRight_toRightOf="@+id/pager"
+                app:layout_constraintLeft_toLeftOf="@+id/pager"
+                app:pageColor="#fff"
+                app:snap="false" />
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid5"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.4" />
+        <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recyler"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="4dp"
+                android:layout_marginLeft="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bottom_navigation"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/round_bg"
+                android:padding="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/bottom_navigation1"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/naz2"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/round_bg"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHeight_percent="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:srcCompat="@drawable/logo"
+                    tools:srcCompat="@drawable/logo" />
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/bottom_navigation1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/round_bg"
+                android:padding="15dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
+                app:layout_constraintLeft_toLeftOf="parent">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/naz"
+                    android:layout_width="45dp"
+                    android:layout_height="45dp"
+                    android:background="@drawable/round_bg"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHeight_percent="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5"
+                    app:srcCompat="@drawable/logonaz"
+                    tools:srcCompat="@drawable/logonaz" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="8dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
+                app:layout_constraintRight_toRightOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/myOrderConstraintLayout"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="4dp"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/nav_bg"
+                    android:padding="4dp"
+                    android:onClick="@{() -> listener.SwitchToWallet(Context)}"
+
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/reportsconstraintLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/myorder"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/wallet"
+                        tools:srcCompat="@drawable/wallet" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="المحفظة"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/myorder" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/moreIconLayout"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="4dp"
+                    android:onClick="@{() -> listener.SwitchToMore(Context)}"
+                    android:background="@drawable/nav_bg"
+                    android:padding="4dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintLeft_toRightOf="@+id/myOrderConstraintLayout"
+                    app:layout_constraintTop_toBottomOf="@+id/homeconstraintLayout">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/moreIcon"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/material"
+                        tools:srcCompat="@drawable/material" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="المزيد"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/moreIcon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/reportsconstraintLayout"
+                    android:layout_width="80dp"
+                    android:layout_height="80dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/nav_bg"
+                    android:padding="4dp"
+                    android:onClick="@{() -> listener.SwitchToReports(Context)}"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/reports"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/reports"
+                        tools:srcCompat="@drawable/reports" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="التقارير"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/reports" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                    android:id="@+id/homeconstraintLayout"
+                    android:layout_width="80dp"
+                    android:onClick="@{() -> listener.SwitchToHome(Context)}"
+                    android:layout_height="80dp"
+                    android:layout_margin="4dp"
+                    android:background="@drawable/nav_bg"
+                    android:padding="4dp"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/homeicon"
+                        android:layout_width="35dp"
+                        android:layout_height="35dp"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:srcCompat="@drawable/home"
+                        tools:srcCompat="@drawable/home" />
+
+                <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="الرئيسية"
+                        android:textColor="@color/white"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintRight_toRightOf="parent"
+                        app:layout_constraintLeft_toLeftOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/homeicon" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayouttest"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginLeft="24dp"
+                android:layout_marginRight="24dp"
+                android:layout_marginBottom="4dp"
+                android:background="@drawable/nav_bg"
+                android:orientation="vertical"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent">
+
+            <TextView
+                    android:id="@+id/textView5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/fonts"
+                    android:text="الرصيد"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/lastvalue"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/fonts"
+                    android:text="@{MyBalance.account}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@+id/textView5"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/textView11"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/fonts"
+                    android:text="عمولة"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/lastvalue"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                    android:id="@+id/value"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="6dp"
+                    android:layout_marginRight="16dp"
+                    android:layout_marginBottom="6dp"
+                    android:fontFamily="@font/fonts"
+                    android:paddingLeft="10dp"
+                    android:paddingRight="10dp"
+                    android:text="@{MyBalance.commession}"
+                    android:textColor="@color/white"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toLeftOf="@id/textView11"
+                    app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+
 
 </layout>

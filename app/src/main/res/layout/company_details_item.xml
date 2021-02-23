@@ -2,13 +2,13 @@
 <layout
         xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
         xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/layout"
->
+        >
 
     <data>
 
         <variable
-            name="Context"
-            type="com.codesroots.mac.cards.presentaion.MainActivity"/>
+                name="Context"
+                type="com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails"/>
         <variable
                 name="viewmodel"
                 type="com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel"/>
@@ -19,91 +19,31 @@
                 name="data"
                 type="com.codesroots.mac.cards.models.CompanyDatum"/>
     </data>
+
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_marginTop="10dp"
-            android:orientation="vertical"
-            android:background="@drawable/reduisbackground"
-            android:layout_width="match_parent"
-            android:layout_height="150dp"
+            android:layout_width="90dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:orientation="vertical">
 
-            android:layout_marginLeft="8dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginRight="8dp"
-           >
-
-        <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView"
-                android:layout_width="110dp"
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/category_price"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
-                android:adjustViewBounds="true"
-                android:scaleType="fitXY"
-                app:imageResourcee="@{data.src}"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:srcCompat="@drawable/common_ic_googleplayservices"
-                tools:srcCompat="@tools:sample/avatars[6]" />
-
-        <TextView
-                android:id="@+id/textView"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="@{data.name}"
-                app:layout_constraintRight_toLeftOf="@id/appCompatImageView"
-                app:layout_constraintTop_toTopOf="@id/appCompatImageView" />
-
-        <TextView
-                android:id="@+id/sprice"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:layout_marginBottom="8dp"
-                android:text="@{data.sprice}"
-                android:textColor="@color/black"
-                android:textSize="14sp"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintRight_toLeftOf="@+id/appCompatImageView"
-                app:layout_constraintTop_toTopOf="parent" />
-
-
-        <TextView
-                android:id="@+id/amount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/fonts"
-                android:text="@{ data.mount == 0 ? `غير متوفر`  : `متوفر`}"
-                android:textColor="@color/red"
-                android:textSize="12sp"
-                android:textStyle="bold"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="@id/appCompatImageView" />
-
-
-        <androidx.appcompat.widget.AppCompatButton
-                android:id="@+id/appCompatButton"
-                android:layout_width="110dp"
-                android:layout_height="40dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginBottom="16dp"
-
-                android:background="@drawable/button_background"
-                android:fontFamily="@font/fonts"
-                android:onClick="@{() -> listener.SwitchToPayment(Context,data.id,viewmodel)}"
-                android:text="شراء"
-                android:textColor="@color/white"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent"></androidx.appcompat.widget.AppCompatButton>
+                android:background="@drawable/nav_bg"
+                android:orientation="vertical">
+            <TextView
+                    android:id="@+id/sprice"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@{data.sprice}"
+                    android:textColor="@color/white"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

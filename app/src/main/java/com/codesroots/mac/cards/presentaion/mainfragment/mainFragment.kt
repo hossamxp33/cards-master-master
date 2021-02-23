@@ -1,12 +1,20 @@
 package com.codesroots.mac.cards.presentaion.mainfragment
 
+import android.app.AlertDialog
+import android.content.DialogInterface
+import android.content.Intent
 import android.graphics.Typeface
+import android.net.Uri
+import android.os.Build
 import android.os.Bundle
 import android.os.Handler
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.Button
+import android.widget.TextView
+import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -17,20 +25,35 @@ import androidx.viewpager.widget.ViewPager
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.MainFragmentBinding
+import com.codesroots.mac.cards.models.CompanyDatum
+import com.codesroots.mac.cards.presentaion.ClickHandler
+import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.MainAdapter
 import com.codesroots.mac.cards.presentaion.mainfragment.Adapter.SliderAdapter
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
+import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.setImageResource
+import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
+import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.ContentListener
+import kotlinx.android.synthetic.main.dialog_custom_view.view.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
+import kotlinx.android.synthetic.main.main_fragment.view.recyler
 import java.util.*
 
-class mainFragment  : Fragment(){
+class mainFragment  : Fragment(), ContentListener {
+    override fun onItemClicked(item: CompanyDatum) {
+
+    }
+
+    lateinit var CompanyAdapter: CompanyDetailsAdapter
 
     lateinit var MainAdapter: MainAdapter
     lateinit var viewModel: MainViewModel
     private var currentPage = 0
     private var NUM_PAGES = 0
     var pager: ViewPager? = null
+    var data : List<CompanyDatum>? = null
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
@@ -38,25 +61,52 @@ class mainFragment  : Fragment(){
 
     }
 
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
-
         var view:MainFragmentBinding =
             DataBindingUtil.inflate(inflater,R.layout.main_fragment, container,false)
         val typeface = Typeface.createFromAsset(getContext()!!.assets, "fonts/DroidKufi_Regular.ttf")
+
+        view.listener = ClickHandler()
+        view.context = context as MainActivity
         pager = view.pager
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getcompanyData()
         viewModel.getMyBalance()
-
         viewModel.GetMyImages(PreferenceHelper.getAuthId())
-        viewModel.CompanyResponseLD?.observe(this , Observer {
-            MainAdapter = MainAdapter(viewModel,context,it)
-            view.recyler.layoutManager = GridLayoutManager(context,3)
-            view.recyler.adapter = MainAdapter;
 
+        viewModel.CompanyResponseLD?.observe(this , Observer {
+
+            MainAdapter = MainAdapter(viewModel,context,it)
+            view.recyler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
+            data =it
+
+
+
+            naz.setOnClickListener {
+                val launchIntent =    getActivity()!!.getPackageManager().getLaunchIntentForPackage("com.codesroots.mac.Tajnaz");
+                if (launchIntent != null) {
+                    startActivity(launchIntent);
+                } else {
+                    val i =  Intent(Intent.ACTION_VIEW);
+                    i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.codesroots.mac.Tajnaz" ));
+                    startActivity(i);
+                }
+
+            }
+
+            view.recyler.adapter = MainAdapter;
+            view.textView11.typeface = typeface
+            view.textView5.typeface = typeface
+            view.lastvalue.typeface = typeface
+
+            view.value.typeface = typeface
 
         })
+        viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
+            view.myBalance = it
+        })
         viewModel.SliderDataResponseLD?.observe(this , Observer {
 
             view.pager.adapter = it?.let { it1 -> SliderAdapter(activity!!, it1) }
@@ -66,11 +116,50 @@ class mainFragment  : Fragment(){
             stoploading()
 
         })
-        animation()
 
+        view.naz2.setOnClickListener (){
+            val packageId = arguments?.getString("packageId")
+            showCustomDialog()
+        }
         return view.root;
     }
+    private lateinit var alertDialog: AlertDialog
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+    fun showCustomDialog() {
 
+        val inflater: LayoutInflater = this.getLayoutInflater()
+        val dialogView: View = inflater.inflate(R.layout.dialog_custom_view, null)
+
+        viewModel.CompanyResponseLD?.observe(this, Observer {
+            CompanyAdapter = CompanyDetailsAdapter(viewModel,activity, it,this)
+            dialogView.recyler.layoutManager = LinearLayoutManager(context)
+            dialogView.recyler.adapter = CompanyAdapter;
+            data = it
+
+        })
+        val logoicon = dialogView.logoo
+        setImageResource( logoicon ,data!!.get(0).src)
+
+
+        val header_txt = dialogView.findViewById<TextView>(R.id.header)
+        header_txt.text = "الشراء السريع"
+        val custom_button: Button = dialogView.findViewById(R.id.customBtn)
+
+        custom_button.setOnClickListener {
+            // Dismiss the popup window
+            alertDialog.dismiss()        }
+
+        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.yourCustomDialog)
+
+        dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
+            override fun onDismiss(arg0: DialogInterface) {
+            }
+        })
+        dialogBuilder.setView(dialogView)
+        alertDialog = dialogBuilder.create();
+        alertDialog.show()
+
+    }
     private fun animation(){
         val ttb = AnimationUtils.loadAnimation(context, R.anim.ttb)
         pager!!.animation = ttb
@@ -104,15 +193,18 @@ class mainFragment  : Fragment(){
     }
     override fun onResume() {
         super.onResume()
+        shimmer_view_container2.startShimmerAnimation()
 
     }
     override fun onPause() {
+        shimmer_view_container2?.stopShimmerAnimation()
 
         super.onPause()
     }
 
     fun stoploading() {
 
+        shimmer_view_container2?.stopShimmerAnimation()
 
         shimmer_view_container2?.setVisibility(View.GONE)
 

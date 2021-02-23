@@ -13,7 +13,7 @@
             android:layout_height="180dp"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
-            android:background="@drawable/logo" />
+            android:background="@drawable/topname" />
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="wrap_content"
@@ -22,7 +22,10 @@
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:padding="15dp"
+                android:layout_margin="15dp"
+                android:background="@drawable/reduisbackground">
 
             <EditText
                     android:id="@+id/username"
@@ -32,9 +35,9 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="7dp"
-                    android:background="@drawable/sign_background"
+                    android:background="@drawable/reduisbackground"
                     android:paddingStart="7dp"
-                    android:hint="ادخل كلمة المرور"
+                    android:hint="اسم المستخدم"
                     android:paddingEnd="40dp"
                     android:singleLine="true"
                     android:textSize="12sp"
@@ -63,8 +66,8 @@
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="7dp"
-                    android:background="@drawable/sign_background"
                     android:paddingStart="7dp"
+                    android:background="@drawable/reduisbackground"
                     android:hint="ادخل كلمة المرور"
                     android:paddingEnd="40dp"
                     android:singleLine="true"
@@ -90,39 +93,27 @@
                     android:layout_height="45dp"
                     android:id="@+id/bottom"
                     android:layout_below="@+id/password"
-                    android:layout_marginStart="20dp"
+                    android:layout_marginStart="30dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginEnd="20dp"
-                    >
+                    android:layout_marginEnd="30dp"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp">
 
-                <androidx.appcompat.widget.AppCompatButton
+                <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/btnLogin"
                         android:background="@drawable/button_background"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:padding="10dp"
                         android:layout_centerInParent="true"
                         android:gravity="center"
-                        android:singleLine="true"
-                        android:text="تسجيل الدخول"
-                        android:textColor="@color/white"
-                        android:textSize="12sp"
-                        android:textStyle="bold" />
+                      android:src="@drawable/login"
+
+                        />
 
 
             </RelativeLayout>
 
-            <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/bottom"
-                    android:layout_marginTop="30dp"
-                    android:text="1.0.0"
-                    android:textSize="18sp"
-
-                    android:layout_centerHorizontal="true"
-                    android:textAlignment="center"
-                    android:textColor="@color/red"
-                    ></androidx.appcompat.widget.AppCompatTextView>
         </RelativeLayout>
     </androidx.core.widget.NestedScrollView>
 

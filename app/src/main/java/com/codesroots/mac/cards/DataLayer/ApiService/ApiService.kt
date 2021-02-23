@@ -87,6 +87,7 @@ interface APIServices {
                 .connectTimeout(30, TimeUnit.SECONDS)
                 .addInterceptor( HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build()
+
             val retrofit = Retrofit.Builder()
                 .baseUrl("http://across-cities.com/")
                 .addConverterFactory(GsonConverterFactory.create())

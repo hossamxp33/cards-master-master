@@ -30,7 +30,7 @@ class MainAdapter (var viewModel: MainViewModel,var context :Context?,var data:L
 
         val  binding: MainAdapterBinding = DataBindingUtil.inflate (LayoutInflater.from(p0.context),R.layout.main_adapter,p0,false)
         val typeface = Typeface.createFromAsset(context!!.assets, "fonts/DroidKufi_Regular.ttf")
-       // binding.textView7.typeface = typeface
+        // binding.textView7.typeface = typeface
         return  CustomViewHolder(binding)
     }
 
@@ -42,7 +42,7 @@ class CustomViewHolder (
 
     fun bind(viewModel:MainViewModel,context: Context?,data:CompanyDatum) {
 
-binding.listener = ClickHandler()
+        binding.listener = ClickHandler()
         binding.data = data
         binding.context = context as MainActivity?
     }

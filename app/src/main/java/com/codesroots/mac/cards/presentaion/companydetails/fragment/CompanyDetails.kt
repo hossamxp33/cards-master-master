@@ -6,6 +6,7 @@ import android.graphics.Bitmap
 import android.graphics.BitmapFactory
 import android.os.Build
 import android.os.Bundle
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
@@ -14,6 +15,8 @@ import android.widget.Button
 import android.widget.TextView
 import android.widget.Toast
 import androidx.annotation.RequiresApi
+import androidx.appcompat.app.AppCompatActivity
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -21,10 +24,14 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.bumptech.glide.Glide
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.databinding.CompanyDetailsBinding
 import com.codesroots.mac.cards.models.CompanyDatum
+import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.Printer.AidlUtil
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
+import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.setImageResourcee
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
+import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.ContentListener
 import kotlinx.android.synthetic.main.company_details.*
 import kotlinx.android.synthetic.main.company_details.view.*
 import kotlinx.android.synthetic.main.dialog_custom_view.view.*
@@ -35,65 +42,90 @@ import java.net.HttpURLConnection
 import java.net.URL
 
 
-class CompanyDetails  : Fragment() {
+public class CompanyDetails  : AppCompatActivity() , ContentListener {
+
+
 
     lateinit var MainAdapter: CompanyDetailsAdapter
     lateinit var viewModel: MainViewModel
-var data :List<CompanyDatum>? = null
+    var data : List<CompanyDatum>? = null
+    var  binding : CompanyDetailsBinding? = null
+    var minteger = 1
+    var Company_id : String? = null
+    var NUM_PAGES = 0
+    var currentPage = 0
+
+    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        binding = DataBindingUtil.setContentView(this,R.layout.company_details)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
 
-    }
+        var extras = intent.extras
+        val packageId = extras?.getString("packageId")
+        binding!!.context = this
+        binding!!.listener = ClickHandler()
+        binding!!.viewmodel = viewModel
 
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        minteger   = Integer.parseInt(integer_number.getText().toString());
 
-        val view = inflater.inflate(R.layout.company_details, container, false)
-        viewModel = ViewModelProviders.of(this).get(
-            MainViewModel::
-            class.java
-        )
-        if (arguments != null) {
-            AidlUtil.getInstance().initPrinter()
-            Toast.makeText(context, AidlUtil.getInstance().isConnect().toString(), Toast.LENGTH_LONG).show()
 
-            val packageId = arguments?.getString("packageId")
-            viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-            viewModel.getPackageDetails(packageId!!)
-            viewModel.CompanyResponseLD?.observe(this, Observer {
-                data = it
-                MainAdapter = CompanyDetailsAdapter(viewModel, context, it)
-                view.recyler.layoutManager = LinearLayoutManager(context)
-                view.recyler.adapter = MainAdapter;
-            })
-        }
-        view.usageway.setOnClickListener{ showCustomDialog() }
-
-        return  view
-    }
-    private lateinit var alertDialog: AlertDialog
-    @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
-    fun showCustomDialog() {
-        val inflater: LayoutInflater = this.getLayoutInflater()
-        val dialogView: View = inflater.inflate(R.layout.dialog_custom_view, null)
-
-        val details_image = dialogView.details
-        Glide.with(context!!).load(data!!.first().detailimg).into(details_image)
-
-        val custom_button: Button = dialogView.findViewById(R.id.customBtn)
-        custom_button.setOnClickListener {
-            // Dismiss the popup window
-            alertDialog.dismiss()        }
-        val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.yourCustomDialog)
-
-        dialogBuilder.setOnDismissListener(object : DialogInterface.OnDismissListener {
-            override fun onDismiss(arg0: DialogInterface) {
+        decrease.setOnClickListener {
+            if (minteger > 1) {
+                decreaseInteger (decrease)
+            }else{
+                Log.d("src", "Value can't be less than 0");
             }
+        }
+        increase.setOnClickListener {
+            if (minteger >=1) {
+                increaseInteger (increase)
+            }else{
+                Log.d("src", "Value can't be less than 0");
+            }
+        }
+
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel.getPackageDetails(packageId!!)
+
+        viewModel.CompanyResponseLD?.observe(this, Observer {
+
+            MainAdapter = CompanyDetailsAdapter(viewModel,this, it,this)
+            recyler.layoutManager = GridLayoutManager(this,3,GridLayoutManager.VERTICAL, false)
+
+            recyler.adapter = MainAdapter;
+            data = it
+
+
+            setImageResourcee(logo,data!!.get(0).src)
+
         })
-        dialogBuilder.setView(dialogView)
-        alertDialog = dialogBuilder.create();
-        alertDialog.show()
 
     }
+    override fun onItemClicked(item: CompanyDatum) {
+        Company_id = item.id
+    }
+
+    public fun display(number: Int) {
+        val displayInteger = findViewById<View>(R.id.integer_number) as TextView
+
+        displayInteger.text = "" + number
+    }
+
+    fun increaseInteger(view: View) {
+
+        minteger += 1
+        display(minteger)
+
+    }
+
+    fun decreaseInteger(view: View) {
+
+        minteger -= 1
+
+        display(minteger)
+    }
+
+
 }

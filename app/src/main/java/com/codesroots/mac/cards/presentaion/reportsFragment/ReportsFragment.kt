@@ -8,13 +8,16 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.databinding.ReportFragmentBinding
 import com.codesroots.mac.cards.models.ReportDaily
+import com.codesroots.mac.cards.presentaion.ClickHandler
 import com.codesroots.mac.cards.presentaion.MainActivity
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.report_adapters
@@ -43,14 +46,17 @@ class ReportsFragment  : Fragment() {
 
 
     }
-
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
+        var view: ReportFragmentBinding =
+            DataBindingUtil.inflate(inflater,R.layout.report_fragment, container,false)
 
-        val view = inflater.inflate(R.layout.report_fragment, container, false)
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
+        view.listener = ClickHandler()
+        view.context = context as MainActivity
 
         viewModel.GetMyDeialyReport(PreferenceHelper.getAuthId());
         viewModel.ReportDailyResponseLD?.observe(this , Observer {
+
             if (it.first().err != null){
                 it.first().err!!.snack(( context as MainActivity).window.decorView.rootView)
 
@@ -58,9 +64,10 @@ class ReportsFragment  : Fragment() {
                 val invitedPeople: List<ReportDaily> = it.filter { it.opid > 0 }
 
                 MainAdapter = report_adapters(viewModel, context, invitedPeople)
-                lastvalue.text = it.first().amount
-                value.text = it.get(it.size - 2).amount
+                view.   lastvalue.text = it.first().amount
+                view.   value.text = it.get(it.size - 2).amount
                 println(it.get(it.size - 1).amount)
+                commision.text = it.last().amount
 
                 view.recyler.layoutManager = LinearLayoutManager(context);
                 view.recyler.adapter = MainAdapter;
@@ -87,10 +94,10 @@ class ReportsFragment  : Fragment() {
                 v.to.text = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
                 viewModel.GetMyDatesReport(PreferenceHelper.getAuthId(),from.text.toString(),to.text.toString())
                 viewModel.ReportDailyResponseLD?.observe(this , Observer {
-                    lastvalue.text = it.first().amount
-                    value.text = it.get(it.size - 2).amount
+                  view.  lastvalue.text = it.first().amount
+                    view.   value.text = it.get(it.size - 2).amount
                     println(it.get(it.size - 2).amount)
-                    //commision.text = it.last().amount
+                    commision.text = it.last().amount
 
                     MainAdapter.notifyDataSetChanged()
 
@@ -122,7 +129,7 @@ class ReportsFragment  : Fragment() {
             dpd.show()
         }
 
-        return view;
+        return view.root;
 
 
     }
