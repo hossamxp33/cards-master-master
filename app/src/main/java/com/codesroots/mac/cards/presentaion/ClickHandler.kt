@@ -46,7 +46,7 @@ class ClickHandler {
 
     fun SwitchToPackages( context: Context,comid :String) {
 
-        val homeIntent = Intent(context,CompanyDetails ()::class.java)
+        val homeIntent = Intent(context,CompanyDetails()::class.java)
         val bundle = Bundle()
         homeIntent.putExtra("packageId" , comid)
         (context as MainActivity).startActivity(homeIntent)
