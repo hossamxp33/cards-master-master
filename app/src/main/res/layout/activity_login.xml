@@ -99,8 +99,8 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginRight="30dp">
 
-                <androidx.appcompat.widget.AppCompatButton
-                        android:id="@+id/btnLogin"
+                <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/Loginbtn"
                         android:background="@drawable/button_background"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"

@@ -40,8 +40,7 @@ class LoginActivity : AppCompatActivity() {
             startActivity(Intent(this  , MainActivity::class.java))
 
 
-
-        btnLogin.setOnClickListener {
+        Loginbtn.setOnClickListener {
 
             if (PreferenceHelper.getToken() != "0" ) {
                "تاني مرة".snack(window.decorView.rootView)

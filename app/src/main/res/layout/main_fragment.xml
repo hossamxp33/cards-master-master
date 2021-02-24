@@ -49,7 +49,7 @@
                 android:layout_height="0dp"
                 android:background="@drawable/bottom_rounded"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintHeight_percent="0.23"
+                app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -72,14 +72,16 @@
                 android:id="@+id/pager"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
-                android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                app:layout_constraintHeight_percent="0.2"
-                app:layout_constraintRight_toRightOf="parent"
+                android:background="@drawable/reduisbackground"
+
+                android:padding="8dp"
+                app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/guid" />
+                app:layout_constraintRight_toRightOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/guid"
+               />
 
         <com.facebook.shimmer.ShimmerFrameLayout
                 android:id="@+id/shimmer_view_container2"
@@ -89,7 +91,7 @@
                 android:layout_marginLeft="8dp"
                 android:layout_marginEnd="8dp"
                 android:layout_marginRight="8dp"
-                app:layout_constraintHeight_percent="0.19"
+                app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/guid"
@@ -98,7 +100,7 @@
             <include
                     layout="@layout/layout_placeholder_row_for_slider"
                     android:layout_width="wrap_content"
-                    android:layout_height="110dp" />
+                    android:layout_height="wrap_content" />
         </com.facebook.shimmer.ShimmerFrameLayout>
 
         <com.viewpagerindicator.CirclePageIndicator
@@ -108,24 +110,26 @@
                 android:padding="7dip"
                 app:centered="true"
                 app:fillColor="@color/colorPrimary"
-                app:layout_constraintBottom_toBottomOf="@+id/pager"
-                app:layout_constraintRight_toRightOf="@+id/pager"
                 app:layout_constraintLeft_toLeftOf="@+id/pager"
+                app:layout_constraintRight_toRightOf="@+id/pager"
+                app:layout_constraintTop_toBottomOf="@+id/pager"
                 app:pageColor="#fff"
-                app:snap="false" />
+                app:snap="false"
+                tools:layout_editor_absoluteY="264dp" />
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guid5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.4" />
+                app:layout_constraintGuide_percent="0.42" />
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyler"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
                 android:layout_marginEnd="4dp"
+                app:layout_constraintHeight_percent="0.25"
                 android:layout_marginRight="4dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
@@ -149,7 +153,6 @@
                     android:layout_width="45dp"
                     android:layout_height="45dp"
                     android:background="@drawable/round_bg"
-
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintHeight_percent="1"
@@ -193,7 +196,7 @@
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/constraintLayout4"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="0dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
                 android:layout_marginBottom="8dp"

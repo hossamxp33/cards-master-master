@@ -3,6 +3,7 @@ package com.codesroots.mac.cards.presentaion
 import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
+import android.content.DialogInterface
 import android.content.Intent
 import android.graphics.Bitmap
 import android.graphics.Color
@@ -13,6 +14,7 @@ import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.view.isGone
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
@@ -33,6 +35,7 @@ import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
 import com.codesroots.mac.cards.presentaion.payment.Payment
 import com.codesroots.mac.cards.presentaion.portifliofragment.PortiflioFragment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
+import com.google.android.gms.analytics.internal.zzy.c
 import com.google.android.gms.analytics.internal.zzy.v
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
 import kotlinx.coroutines.GlobalScope
@@ -113,7 +116,22 @@ class ClickHandler {
         if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
             viewmodel.BuyPackageResponseLD?.observe(context as CompanyDetails, Observer {
                 if (it.err != null) {
-                 //   it.err!!.snack((context as CompanyDetails).window.decorView.rootView)
+                    val alertDialogBuilder = AlertDialog.Builder(context)
+                    alertDialogBuilder.setMessage(it.err!!)
+
+                    alertDialogBuilder.setPositiveButton(R.string.ok,
+                        DialogInterface.OnClickListener { arg0, arg1 ->
+                            Toast.makeText(
+                                context,
+                                R.string.ok,
+                                Toast.LENGTH_SHORT
+                            ).show()
+                        })
+
+
+                    val alertDialog = alertDialogBuilder.create()
+
+                    alertDialog.show()
                     //      dialogView.err.isGone = false
 
                     //      dialogView.err.text = it.err

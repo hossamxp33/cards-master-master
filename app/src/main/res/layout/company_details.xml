@@ -40,6 +40,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
+            <ProgressBar
+                    android:id="@+id/progressBar2"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_margin="30dp"
+                    android:visibility="visible"
+                    app:layout_constraintBottom_toBottomOf="@+id/logo"
+                    app:layout_constraintEnd_toEndOf="@+id/logo"
+                    app:layout_constraintStart_toStartOf="@+id/logo"
+                    app:layout_constraintTop_toTopOf="parent" />
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/logo"
                     android:layout_width="90dp"
@@ -47,7 +57,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/logo" />
+                   />
 
             <TextView
                     android:id="@+id/balance"
@@ -74,6 +84,16 @@
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <ProgressBar
+                android:id="@+id/progressBar"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_margin="30dp"
+                android:visibility="visible"
+                app:layout_constraintBottom_toBottomOf="@+id/recyler"
+                app:layout_constraintEnd_toEndOf="@+id/recyler"
+                app:layout_constraintStart_toStartOf="@+id/recyler"
+                app:layout_constraintTop_toBottomOf="@+id/usageway" />
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyler"
                 android:layout_width="match_parent"
@@ -95,6 +115,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
                 android:background="@drawable/nav_bg"
                 android:fontFamily="@font/fonts"
                 android:onClick="@{() -> listener.SwitchToPayment(Context,viewmodel)}"
@@ -103,7 +124,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+                app:layout_constraintTop_toBottomOf="@+id/total" />
 
 
         <LinearLayout
@@ -200,28 +221,6 @@
                 app:layout_constraintTop_toBottomOf="@+id/linearLayout" />
 
         <TextView
-                android:id="@+id/textView8"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="الخصم :"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView4" />
-
-        <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="المجموع الكلي :"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView8" />
-
-        <TextView
                 android:id="@+id/total"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -230,27 +229,6 @@
                 android:text="TextView"
                 app:layout_constraintEnd_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="@+id/textView4" />
-
-        <TextView
-                android:id="@+id/discount"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="1dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toStartOf="@+id/textView8"
-                app:layout_constraintTop_toTopOf="@+id/textView8" />
-
-        <TextView
-                android:id="@+id/gross"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginEnd="16dp"
-                android:layout_marginRight="16dp"
-                android:text="TextView"
-                app:layout_constraintEnd_toStartOf="@+id/textView10"
-                app:layout_constraintTop_toTopOf="@+id/textView10" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

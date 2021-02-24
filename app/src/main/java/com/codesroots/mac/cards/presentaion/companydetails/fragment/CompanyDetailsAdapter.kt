@@ -35,10 +35,13 @@ class CompanyDetailsAdapter ( var viewModel: MainViewModel,var context :Context?
 
 
     override fun onBindViewHolder(p0: CustomViewHolders, p1: Int) {
+
         p0.bind(viewModel,context,data.get(p1),viewModel)
+
         listener.onItemClicked(data.get(p1))
         p0.binding.categoryPrice?.setOnClickListener {
             row_index = p1
+
             notifyDataSetChanged();
         }
         if (row_index == p1){

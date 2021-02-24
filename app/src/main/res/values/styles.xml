@@ -1,6 +1,6 @@
 <resources>
     <style name="NavigationView" >
-        <item name="fontFamily">@font/fonts</item>
+        <item name="fontFamily">@font/d</item>
     </style>
 
 
@@ -10,7 +10,7 @@
         <item name="colorPrimaryDark">@color/colorPrimary</item>
         <item name="colorAccent">@color/colorPrimary</item>
         <item name="drawerArrowStyle">@style/DrawerArrowStyle</item>
-
+        <item name="fontFamily">@font/d</item>
     </style>
     <style name="Department" parent="Theme.AppCompat.DayNight.Dialog.Alert">
         <!-- Customize your theme here. -->

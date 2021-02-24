@@ -50,9 +50,8 @@ class MenuFragment : Fragment() {
 
         view.logout.setOnClickListener {
             if (checkUserLogin(context!!)) {
-                PreferenceHelper.setToken("0",context)
+                PreferenceHelper.setAuthId("0",context)
                 Toast.makeText(context, "تم تسجيل خروجك", Toast.LENGTH_SHORT).show()
-
                 val homeIntent = Intent(context, LoginActivity::class.java)
                 ( context as MainActivity).startActivity(homeIntent)
             }
