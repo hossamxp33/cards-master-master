@@ -23,6 +23,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.CompanyDetailsBinding
@@ -51,12 +52,8 @@ public class CompanyDetails  : AppCompatActivity() , ContentListener {
     override fun onItemClicked(item: CompanyDatum) {
         Company_id = item.id
 
-        fun value() {
             totalvalue = item.sprice
             totalvalue?.let { displaytext(it) }
-        }
-        value()
-
 
 
     }
@@ -130,7 +127,9 @@ public class CompanyDetails  : AppCompatActivity() , ContentListener {
 
     public fun display(number: Int) {
         val displayInteger = findViewById<View>(R.id.integer_number) as TextView
+        val totalInteger = findViewById<View>(R.id.total) as TextView
 
+        totalInteger.text = "" + (number * totalvalue!!.replace(" IQD", "")!!.toInt()) + "IQD"
         displayInteger.text = "" + number
     }
     public fun displaytext(number: String) {

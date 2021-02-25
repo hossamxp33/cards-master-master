@@ -103,6 +103,8 @@ dependencies {
     testImplementation "androidx.room:room-testing:$room_version"
 ///////shimmer
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
+    implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
+    implementation 'com.github.f0ris.sweetalert:library:1.6.2'
 
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"

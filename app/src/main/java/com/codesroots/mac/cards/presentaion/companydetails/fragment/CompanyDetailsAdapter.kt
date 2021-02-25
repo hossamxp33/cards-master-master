@@ -39,19 +39,17 @@ class CompanyDetailsAdapter ( var viewModel: MainViewModel,var context :Context?
         p0.bind(viewModel,context,data.get(p1),viewModel)
 
         listener.onItemClicked(data.get(p1))
+        p0.binding.categoryPrice.setSelected(row_index == p1);
+
         p0.binding.categoryPrice?.setOnClickListener {
-            row_index = p1
+            row_index = p0.layoutPosition;
+          //  notifyItemChanged(row_index!!);
+            notifyItemChanged(row_index!!);
 
-            notifyDataSetChanged();
+            //notifyDataSetChanged()
         }
-        if (row_index == p1){
-            p0.binding.categoryPrice.setBackgroundResource(com.codesroots.mac.cards.R.drawable.bluereduisbackground)
-        }
-        else
-        {
-            p0.binding.categoryPrice.setBackgroundResource(com.codesroots.mac.cards.R.drawable.nav_bg)
 
-        }
+
     }
 
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CustomViewHolders {

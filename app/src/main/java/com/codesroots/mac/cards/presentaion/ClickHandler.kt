@@ -19,6 +19,7 @@ import androidx.core.view.isGone
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.room.Room
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.target.SimpleTarget
 import com.bumptech.glide.request.transition.Transition
@@ -109,111 +110,78 @@ class ClickHandler {
     }
     fun SwitchToPayment(context: Context,viewmodel:MainViewModel) {
         var MyData = context as CompanyDetails
+        var pDialog : SweetAlertDialog? = null;
 
-        val auth = PreferenceHelper.getAuthId()
-        viewmodel.BuyPackage(MyData.Company_id.toString(),auth!!,MyData.minteger.toString())
+            val auth = PreferenceHelper.getAuthId()
+            viewmodel.BuyPackage(MyData.Company_id.toString(),auth!!,MyData.minteger.toString())
 
-        if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-            viewmodel.BuyPackageResponseLD?.observe(context as CompanyDetails, Observer {
-                if (it.err != null) {
-                    val alertDialogBuilder = AlertDialog.Builder(context)
-                    alertDialogBuilder.setMessage(it.err!!)
+            if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
+                viewmodel.BuyPackageResponseLD?.observe(context as CompanyDetails, Observer {
+                    if (it.err != null) {
+                        val alertDialogBuilder = AlertDialog.Builder(context)
+                        alertDialogBuilder.setMessage(it.err!!)
 
-                    alertDialogBuilder.setPositiveButton(R.string.ok,
-                        DialogInterface.OnClickListener { arg0, arg1 ->
-                            Toast.makeText(
-                                context,
-                                R.string.ok,
-                                Toast.LENGTH_SHORT
-                            ).show()
-                        })
+                        alertDialogBuilder.setPositiveButton(R.string.ok,
+                            DialogInterface.OnClickListener { arg0, arg1 ->
+                                Toast.makeText(
+                                    context,
+                                    R.string.ok,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            })
 
 
-                    val alertDialog = alertDialogBuilder.create()
+                        val alertDialog = alertDialogBuilder.create()
 
-                    alertDialog.show()
-                    //      dialogView.err.isGone = false
+                        alertDialog.show()
+                        //      dialogView.err.isGone = false
 
-                    //      dialogView.err.text = it.err
-                } else {
-                    if (!it!!.pencode.isNullOrEmpty()) {
+                        //      dialogView.err.text = it.err
+                    } else {
+                        var data = it
+                        pDialog =  SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
+                        pDialog!!.setTitleText("تم اضافة الطلب!")
+                        pDialog!!.setContentText("يمكنك مشاهدة العرض في صفحتك الشخصية")
+                        pDialog!!.setConfirmText("OK")
 
-                        Glide.with(context as CompanyDetails)
-                            .asBitmap()
-                            .load("http://across-cities.com/"+it.src)
-                            .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
-                                    try {
-                                        AidlUtil.getInstance().printRecipte(it,resource);
-                                        val homeIntent = Intent(context, Payment::class.java)
-                                        homeIntent.putExtra("myobj", it)
-                                        (context as CompanyDetails).startActivity(homeIntent)
+                        pDialog!!.setConfirmClickListener {
+
+
+                            Glide.with(context as CompanyDetails)
+                                .asBitmap()
+                                .load("http://across-cities.com/"+data.src)
+                                .into(object : SimpleTarget<Bitmap>(100, 100) {
+                                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                        try {
+
+
+
+                                            pDialog!!.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
+                                            pDialog!!.show();
+                                            AidlUtil.getInstance().printRecipte(data,resource);
+                                            val homeIntent = Intent(context, Payment::class.java)
+                                            homeIntent.putExtra("myobj", data)
+                                            (context as CompanyDetails).startActivity(homeIntent)
+                                        }
+                                        catch (e: IOException) {
+                                            // handle exception
+                                        }
                                     }
-                                    catch (e: IOException) {
+
+                                    override fun onLoadFailed(errorDrawable: Drawable?) {
                                         // handle exception
                                     }
-                                }
+                                })
+                        }
 
-                                override fun onLoadFailed(errorDrawable: Drawable?) {
-                                    // handle exception
-                                }
-                            })
+
+
                     }
+                })
 
-                }
-
-
-            })
-
-        }
-// You Can Customise your Title here
+            }
 
 
-//            dialogView.saveToRoom.setOnClickListener { v: View? ->
-//            if (SystemClock.elapsedRealtime() - mLastClickTime < 1000){
-//                return@setOnClickListener
-//            }
-//            v!!.isGone = true
-//            mLastClickTime = SystemClock.elapsedRealtime();
-//            val auth = PreferenceHelper.getAuthId()
-//            viewmodel.BuyPackage(id,auth!!,dialogView.from.text.toString())
-//
-//            if (viewmodel.BuyPackageResponseLD?.hasObservers() == false) {
-//                viewmodel.BuyPackageResponseLD?.observe(context, Observer {
-//
-//
-//                    if (it.err != null) {
-//                        it.err!!.snack((context as MainActivity).window.decorView.rootView)
-//                        dialogView.err.text = it.err
-//                        dialogView.err.isGone = false
-//                    } else {
-//                        if (!it!!.pencode.isNullOrEmpty()) {
-//        Thread {
-//            val db = Room.databaseBuilder(
-//                context,
-//                CardDatabase::class.java, "card-database"
-//            ).build()
-//            insertUserWithPet(it, db.getCardDao())
-//            "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-//        }.start()
-//
-//                   GlobalScope.launch {
-//                       val db = Room.databaseBuilder(
-//                          context,
-//                           CardDatabase::class.java, "card-database"
-//                       ).build()
-//                       db.getCardDao().GetAllData()
-//                  "تم الحفظ بالمحفظة بنجاح".snack((context).window.decorView.rootView)
-//                   }
-//
-//
-//                        }
-//
-//                    }
-//
-//                })
-//            }
-//        }
     }
 
     fun insertUserWithPet(user: Buypackge, cardDao: CardDao) {
