@@ -31,6 +31,22 @@ class  DataRepo {
                 }
             )
     }
+    //////Login
+    fun ResetPWord(auth:String ,un:String ,opw : String,npw: String ,livedata: MutableLiveData<CompanyDatum>?) {
+
+        APIServices.create().ResetPassWord(auth,un,opw,npw)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
 
     fun LoginFirstTime(username:String,password:String,livedata: MutableLiveData<LogData>?) {
 

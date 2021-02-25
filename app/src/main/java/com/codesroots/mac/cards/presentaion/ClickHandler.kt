@@ -119,30 +119,21 @@ class ClickHandler {
                 viewmodel.BuyPackageResponseLD?.observe(context as CompanyDetails, Observer {
                     if (it.err != null) {
                         val alertDialogBuilder = AlertDialog.Builder(context)
-                        alertDialogBuilder.setMessage(it.err!!)
+                        pDialog =  SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
+                        pDialog!!.setTitleText("يوجد خطأ!")
+                        pDialog!!.setContentText(it.err!!)
+                        pDialog!!.setConfirmText("OK")
+                        pDialog!!.show()
 
-                        alertDialogBuilder.setPositiveButton(R.string.ok,
-                            DialogInterface.OnClickListener { arg0, arg1 ->
-                                Toast.makeText(
-                                    context,
-                                    R.string.ok,
-                                    Toast.LENGTH_SHORT
-                                ).show()
-                            })
-
-
-                        val alertDialog = alertDialogBuilder.create()
-
-                        alertDialog.show()
-                        //      dialogView.err.isGone = false
-
-                        //      dialogView.err.text = it.err
                     } else {
                         var data = it
                         pDialog =  SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
                         pDialog!!.setTitleText("تم اضافة الطلب!")
                         pDialog!!.setContentText("يمكنك مشاهدة العرض في صفحتك الشخصية")
                         pDialog!!.setConfirmText("OK")
+                        pDialog!!.confirmButtonBackgroundColor = R.color.blue
+                     
+                        pDialog!!.show()
 
                         pDialog!!.setConfirmClickListener {
 

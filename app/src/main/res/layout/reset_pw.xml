@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/mainsms"
+        android:background="@color/white"
+        >
+
+
+
+    <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="15dp"
+            android:background="@drawable/reduisshadowbackground"
+            android:padding="15dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+<androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/change_un"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="تغير كلمة السر"
+        android:textAlignment="center"
+        android:fontFamily="@font/d"
+        android:textSize="24sp">
+
+</androidx.appcompat.widget.AppCompatTextView>
+        <EditText
+                android:id="@+id/reusername"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/change_un"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/shadowbackground"
+                android:hint="كلمة السر القديمة"
+                android:paddingStart="7dp"
+                android:paddingLeft="7dp"
+                android:paddingEnd="50dp"
+                android:paddingRight="50dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
+
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_below="@+id/change_un"
+                android:background="@drawable/security" />
+
+        <EditText
+                android:id="@+id/repassword"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/reusername"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/shadowbackground"
+                android:hint="ادخل كلمة المرور الجديدة"
+                android:paddingStart="7dp"
+                android:paddingLeft="7dp"
+                android:paddingEnd="50dp"
+                android:paddingRight="50dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/reusername"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/security" />
+        <EditText
+                android:id="@+id/confirm_password"
+                android:layout_width="match_parent"
+                android:layout_height="55dp"
+                android:layout_below="@+id/repassword"
+                android:layout_marginStart="10dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="30dp"
+                android:layout_marginEnd="20dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="7dp"
+                android:background="@drawable/shadowbackground"
+                android:hint=" ادخل كلمة المرور الجديدة"
+                android:paddingStart="7dp"
+                android:paddingLeft="7dp"
+                android:paddingEnd="50dp"
+                android:paddingRight="50dp"
+                android:singleLine="true"
+                android:textSize="12sp" />
+        <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:layout_below="@+id/repassword"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentRight="true"
+                android:layout_marginTop="45dp"
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp"
+                android:background="@drawable/security" />
+
+        <RelativeLayout
+                android:id="@+id/bottom"
+                android:layout_width="match_parent"
+                android:layout_height="45dp"
+                android:layout_below="@+id/confirm_password"
+                android:layout_marginStart="40dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginTop="40dp"
+                android:layout_marginBottom= "40dp"
+
+                android:layout_marginEnd="40dp"
+                android:layout_marginRight="40dp">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/change_pw_btn"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:background="@drawable/green_button_background"
+                    android:gravity="center"
+                    android:padding="10dp"
+
+                    android:src="@drawable/login"
+
+                    />
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

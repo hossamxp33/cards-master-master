@@ -11,7 +11,7 @@
             android:layout_height="0dp"
             android:background="@drawable/half_circle"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintHeight_percent="0.3"
+            app:layout_constraintHeight_percent="0.31"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
@@ -78,7 +78,7 @@
             android:background="@drawable/bluereduisbackground"
             android:drawableLeft="@drawable/whitebackbtn"
             android:gravity="center_vertical"
-            android:padding="12dp"
+            android:padding="8dp"
             android:text="تواصل معنا"
             android:textColor="@color/white"
             android:textSize="18dp"
@@ -96,7 +96,7 @@
             android:background="@drawable/bluereduisbackground"
             android:drawableLeft="@drawable/whitebackbtn"
             android:gravity="center_vertical"
-            android:padding="12dp"
+            android:padding="8dp"
             android:text="سياسة الخصوصية"
             android:textColor="@color/white"
             android:textSize="18dp"
@@ -114,7 +114,7 @@
             android:background="@drawable/bluereduisbackground"
             android:drawableLeft="@drawable/whitebackbtn"
             android:gravity="center_vertical"
-            android:padding="12dp"
+            android:padding="8dp"
             android:text="شركائنا"
             android:textColor="@color/white"
             android:textSize="18dp"
@@ -122,6 +122,23 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/favoffers" />
 
+    <TextView
+            android:id="@+id/change_pw"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_marginLeft="8dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="8dp"
+            android:background="@drawable/bluereduisbackground"
+            android:drawableLeft="@drawable/whitebackbtn"
+            android:gravity="center_vertical"
+            android:padding="8dp"
+            android:text="تغيير كلمة السر"
+            android:textColor="@color/white"
+            android:textSize="18dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logout" />
 
     <!--<TextView-->
     <!--android:id="@+id/login"-->
@@ -166,7 +183,7 @@
             android:background="@drawable/bluereduisbackground"
             android:drawableLeft="@drawable/whitebackbtn"
             android:gravity="center_vertical"
-            android:padding="12dp"
+            android:padding="8dp"
             android:text="تسجيل الخروج "
             android:textColor="@color/white"
             android:textSize="18dp"

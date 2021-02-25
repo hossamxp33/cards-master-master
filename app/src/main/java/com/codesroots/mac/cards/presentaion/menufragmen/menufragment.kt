@@ -16,6 +16,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.DataLayer.usecases.checkUserLogin
+import com.codesroots.mac.cards.presentaion.changepassword.changePassWord
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 
 
@@ -56,7 +57,14 @@ class MenuFragment : Fragment() {
                 ( context as MainActivity).startActivity(homeIntent)
             }
         }
+        view.change_pw.setOnClickListener {
 
+          //      PreferenceHelper.setAuthId("0",context)
+       //         Toast.makeText(context, "تم تسجيل خروجك", Toast.LENGTH_SHORT).show()
+                val homeIntent = Intent(context, changePassWord::class.java)
+                ( context as MainActivity).startActivity(homeIntent)
+
+        }
         return view
     }
 

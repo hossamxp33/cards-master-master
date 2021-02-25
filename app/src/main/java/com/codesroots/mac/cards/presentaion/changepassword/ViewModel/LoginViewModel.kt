@@ -13,7 +13,7 @@ import com.codesroots.mac.firstkotlon.DataLayer.Repo.DataRepo
 
 import java.util.ArrayList
 
-class LoginViewModel : ViewModel() {
+class ResetPWViewModel : ViewModel() {
      var loginRepository: LoginRepository = LoginRepository()
 
 
@@ -22,20 +22,17 @@ class LoginViewModel : ViewModel() {
 
     private val error = MutableLiveData<String>()
 
-    var loginResponseLD = MutableLiveData<LogData>()
+    var ResetPassWordLD = MutableLiveData<CompanyDatum>()
 
     init {
 
-        loginResponseLD = MutableLiveData()
+        ResetPassWordLD  = MutableLiveData()
 
     }
-    fun LoginFirstTime(username:String,password:String) {
-        DateRepoCompnay.LoginFirstTime(username,password,loginResponseLD)
-    }
-    fun Login(username:String,password:String) {
-        DateRepoCompnay.Login(username,password,loginResponseLD)
-  }
 
+    fun ResetPassWord(auth:String ,un:String ,opw : String,npw: String) {
+        DateRepoCompnay.ResetPWord(auth,un,opw,npw,ResetPassWordLD)
+    }
 
 
 }

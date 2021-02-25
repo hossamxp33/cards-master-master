@@ -85,7 +85,7 @@ class ReportsFragment  : Fragment() {
             val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-            val dpd = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val dpd = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { vieww, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)
@@ -93,9 +93,10 @@ class ReportsFragment  : Fragment() {
 
                 v.to.text = SimpleDateFormat("yyyy-MM-dd").format(cal.time)
                 viewModel.GetMyDatesReport(PreferenceHelper.getAuthId(),from.text.toString(),to.text.toString())
+               print(PreferenceHelper.getAuthId())
                 viewModel.ReportDailyResponseLD?.observe(this , Observer {
-                  view.  lastvalue.text = it.first().amount
-                    view.   value.text = it.get(it.size - 2).amount
+                  view.lastvalue.text = it.first().amount
+                    view.value.text = it.get(it.size - 2).amount
                     println(it.get(it.size - 2).amount)
                     commision.text = it.last().amount
 
@@ -114,7 +115,7 @@ class ReportsFragment  : Fragment() {
             val day = c.get(Calendar.DAY_OF_MONTH)
 
 
-            val dpd = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { view, year, monthOfYear, dayOfMonth ->
+            val dpd = DatePickerDialog(context!!, DatePickerDialog.OnDateSetListener { vieww, year, monthOfYear, dayOfMonth ->
                 cal.set(Calendar.YEAR, year)
                 cal.set(Calendar.MONTH, monthOfYear)
                 cal.set(Calendar.DAY_OF_MONTH, dayOfMonth)

@@ -9,105 +9,108 @@
 
     <ImageView
             android:id="@+id/logo"
-            android:layout_width="180dp"
-            android:layout_height="180dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="70dp"
             android:background="@drawable/topname" />
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_below="@+id/logo">
 
         <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:padding="15dp"
                 android:layout_margin="15dp"
-                android:background="@drawable/reduisbackground">
+                android:background="@drawable/reduisshadowbackground">
 
             <EditText
                     android:id="@+id/username"
                     android:layout_width="match_parent"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
                     android:layout_marginEnd="20dp"
                     android:layout_marginBottom="7dp"
-                    android:background="@drawable/reduisbackground"
+                    android:background="@drawable/shadowbackground"
                     android:paddingStart="7dp"
                     android:hint="اسم المستخدم"
-                    android:paddingEnd="40dp"
+                    android:paddingEnd="55dp"
                     android:singleLine="true"
                     android:textSize="12sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:paddingRight="40dp"
+                    android:paddingRight="55dp"
                     android:paddingLeft="7dp"
                  />
 
             <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
-                    android:layout_alignParentEnd="true"
-                    android:layout_marginTop="40dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/ic_phone_android_black_24dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="30dp" />
+                    android:layout_alignEnd="@+id/username"
+                    android:layout_alignRight="@+id/username"
+                    android:layout_marginTop="45dp"
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="312dp"
+                    android:background="@drawable/ic_phone_android_black_24dp" />
 
             <EditText
                     android:id="@+id/password"
                     android:layout_width="match_parent"
                     android:layout_below="@+id/username"
-                    android:layout_height="40dp"
+                    android:layout_height="50dp"
                     android:layout_marginStart="10dp"
                     android:layout_marginTop="30dp"
-                    android:layout_marginEnd="20dp"
+                    android:layout_marginEnd="25dp"
                     android:layout_marginBottom="7dp"
                     android:paddingStart="7dp"
-                    android:background="@drawable/reduisbackground"
+                    android:background="@drawable/shadowbackground"
                     android:hint="ادخل كلمة المرور"
-                    android:paddingEnd="40dp"
+                    android:paddingEnd="55dp"
                     android:singleLine="true"
                     android:textSize="12sp"
                     android:layout_marginLeft="10dp"
                     android:layout_marginRight="20dp"
-                    android:paddingRight="40dp"
+                    android:paddingRight="55dp"
                     android:paddingLeft="7dp"
                     />
+
             <ImageView
                     android:layout_width="20dp"
                     android:layout_height="20dp"
                     android:layout_below="@+id/username"
 
-                    android:layout_alignParentEnd="true"
+                    android:layout_alignEnd="@+id/password"
+                    android:layout_alignRight="@+id/password"
                     android:layout_marginTop="40dp"
-                    android:layout_marginEnd="30dp"
-                    android:background="@drawable/security"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="30dp" />
+                    android:layout_marginEnd="24dp"
+                    android:layout_marginRight="317dp"
+                    android:background="@drawable/security" />
+
             <RelativeLayout
+                    android:id="@+id/bottom"
                     android:layout_width="match_parent"
                     android:layout_height="45dp"
-                    android:id="@+id/bottom"
                     android:layout_below="@+id/password"
-                    android:layout_marginStart="30dp"
+                    android:layout_marginStart="60dp"
+                    android:layout_marginLeft="60dp"
                     android:layout_marginTop="40dp"
-                    android:layout_marginEnd="30dp"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginRight="30dp">
+                    android:layout_marginEnd="60dp"
+                    android:layout_marginRight="60dp"
+                    android:layout_marginBottom="25dp">
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/Loginbtn"
-                        android:background="@drawable/button_background"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:padding="10dp"
                         android:layout_centerInParent="true"
+                        android:background="@drawable/button_background"
                         android:gravity="center"
-                      android:src="@drawable/login"
+                        android:padding="10dp"
+                        android:src="@drawable/login"
 
                         />
 
