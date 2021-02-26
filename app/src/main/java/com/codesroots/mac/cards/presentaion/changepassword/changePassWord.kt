@@ -42,7 +42,7 @@ class changePassWord : AppCompatActivity() {
 
         change_pw_btn.setOnClickListener {
                 if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
-                viewModel.ResetPassWord(PreferenceHelper.getAuthId(),reusername.text.toString(),repassword.text.toString(),confirm_password.text.toString())
+                viewModel.ResetPassWord(PreferenceHelper.getAuthId(),"aaa",repassword.text.toString(),confirm_password.text.toString())
                 "انتظر".snack(window.decorView.rootView)
         }
 

@@ -26,8 +26,8 @@ interface APIServices {
                        @Path("password")  password:String): Observable<LogData>
 
     @POST("fw_main/{AuthId}/27")/*{company_id}*/
-    fun ResetPassWord(@Query("val")  auth:String,
-                      @Query("un")  username:String,@Query("opw")  oldpassword:String,@Query("npw")  newpassword:String): Observable<CompanyDatum>
+    fun ResetPassWord(@Path("AuthId")  auth:String,
+                      @Query("opw")  oldpassword:String, @Query("npw")  newpassword:String): Observable<CompanyDatum>
 
     //&un=USERNAME&opw=OLD_PASSWORD&npw=NEW_PASSWORD
 //@GET("iqws.php?o=15")

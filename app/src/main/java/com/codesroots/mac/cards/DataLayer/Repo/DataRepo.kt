@@ -34,7 +34,7 @@ class  DataRepo {
     //////Login
     fun ResetPWord(auth:String ,un:String ,opw : String,npw: String ,livedata: MutableLiveData<CompanyDatum>?) {
 
-        APIServices.create().ResetPassWord(auth,un,opw,npw)
+        APIServices.create().ResetPassWord(auth,opw,npw)
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .map { data -> data }
