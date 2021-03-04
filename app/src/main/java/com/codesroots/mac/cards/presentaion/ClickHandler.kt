@@ -15,7 +15,10 @@ import android.view.LayoutInflater
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.widget.AppCompatImageView
+import androidx.appcompat.widget.AppCompatTextView
 import androidx.core.view.isGone
+import androidx.databinding.ObservableField
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.room.Room
@@ -36,8 +39,7 @@ import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
 import com.codesroots.mac.cards.presentaion.payment.Payment
 import com.codesroots.mac.cards.presentaion.portifliofragment.PortiflioFragment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
-import com.google.android.gms.analytics.internal.zzy.c
-import com.google.android.gms.analytics.internal.zzy.v
+
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
 import kotlinx.coroutines.GlobalScope
 import kotlinx.coroutines.launch
@@ -45,6 +47,7 @@ import org.jetbrains.anko.runOnUiThread
 import java.io.IOException
 
 class ClickHandler {
+    var  mUserId =  ObservableField<Int>();
 
     var  mLastClickTime: Long = 0
 
@@ -68,6 +71,35 @@ class ClickHandler {
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()
     }
 
+    fun RequestBalance( context: Context, viewmodel:MainViewModel) {
+        var pDialog: SweetAlertDialog? = null;
+
+        val auth = PreferenceHelper.getAuthId()
+        viewmodel.RequestBalance(auth!!)
+        mUserId.set(0)
+        if (viewmodel.RequestBalanceLd?.hasObservers() == false) {
+            viewmodel.RequestBalanceLd?.observe(context as MainActivity, Observer {
+                if (it.result == "1") {
+
+                    pDialog = SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
+                    pDialog!!.setTitleText("عملية ناجحية")
+                    pDialog!!.setContentText("إضغط  لطباعة الطلب")
+                    pDialog!!.setConfirmText("طباعة")
+                    pDialog!!.confirmButtonBackgroundColor = R.color.blue
+
+                    pDialog!!.show()
+                }else {
+                    val alertDialogBuilder = AlertDialog.Builder(context)
+                    pDialog =  SweetAlertDialog(context, SweetAlertDialog.ERROR_TYPE);
+                    pDialog!!.setTitleText("يوجد خطأ!")
+                    pDialog!!.setContentText(it.err!!)
+                    pDialog!!.setConfirmText("OK")
+                    pDialog!!.show()
+
+                }
+            })
+        }
+    }
     fun SwitchToHome( context: Context) {
 
         val bundle = Bundle()
@@ -83,7 +115,8 @@ class ClickHandler {
         //  bundle.putParcelable("cliObj" ,clients[position] )
         val frag = ReportsFragment()
         frag.arguments =bundle
-        ( context as MainActivity).supportFragmentManager.beginTransaction()
+        ( context as MainActivity).supportFragmentManager.beginTransaction()    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_up)
+
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()
     }
 
@@ -129,8 +162,8 @@ class ClickHandler {
                         var data = it
                         pDialog =  SweetAlertDialog(context, SweetAlertDialog.SUCCESS_TYPE);
                         pDialog!!.setTitleText("تم اضافة الطلب!")
-                        pDialog!!.setContentText("يمكنك مشاهدة العرض في صفحتك الشخصية")
-                        pDialog!!.setConfirmText("OK")
+                        pDialog!!.setContentText("إضغط  لطباعة الطلب")
+                        pDialog!!.setConfirmText("طباعة")
                         pDialog!!.confirmButtonBackgroundColor = R.color.blue
                      
                         pDialog!!.show()
@@ -142,14 +175,35 @@ class ClickHandler {
                                 .asBitmap()
                                 .load("http://across-cities.com/"+data.src)
                                 .into(object : SimpleTarget<Bitmap>(100, 100) {
-                                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                    override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
                                         try {
 
 
 
                                             pDialog!!.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                                             pDialog!!.show();
-                                            AidlUtil.getInstance().printRecipte(data,resource);
+                                            AidlUtil.getInstance().printRecipte(data,resourcee,viewmodel);
+                                            Glide.with(context as CompanyDetails)
+                                                .asBitmap()
+                                                .load("http://across-cities.com/"+data.notesimg)
+                                                .into(object : SimpleTarget<Bitmap>(100, 100) {
+                                                    override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
+                                                        try {
+
+                                                            IPosPrinterTestDemo.getInstance().printText(data,resourcee,resource, viewmodel);
+
+                                                            val homeIntent = Intent(context, Payment::class.java)
+
+                                                            homeIntent.putExtra("myobj", data)
+
+                                                            (context as CompanyDetails).startActivity(homeIntent)
+
+                                                        } catch (e: IOException) {
+                                                            // handle exception
+                                                        }
+
+
+                                                    }})
                                             val homeIntent = Intent(context, Payment::class.java)
                                             homeIntent.putExtra("myobj", data)
                                             (context as CompanyDetails).startActivity(homeIntent)
@@ -267,7 +321,7 @@ class ClickHandler {
                             .into(object : SimpleTarget<Bitmap>(100, 100) {
                                 override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
                                     try {
-                                        AidlUtil.getInstance().printRecipte(it, resourcee);
+                                        AidlUtil.getInstance().printRecipte(it, resourcee,viewModel);
                                         Glide.with(context as MainActivity)
                                             .asBitmap()
                                             .load("http://across-cities.com/"+it.notesimg)
@@ -275,7 +329,7 @@ class ClickHandler {
                                                 override fun onResourceReady(resource: Bitmap, transition: Transition<in Bitmap>?) {
                                                     try {
 
-                                                        IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource);
+                                                        IPosPrinterTestDemo.getInstance().printText(it,resourcee,resource, viewModel);
 
                                                         val homeIntent = Intent(context, Payment::class.java)
 
@@ -330,7 +384,7 @@ class ClickHandler {
                                         transition: Transition<in Bitmap>?
                                     ) {
                                         try {
-                                            AidlUtil.getInstance().printRecipte(card, resource);
+                                            AidlUtil.getInstance().printRecipte(card, resource,null);
                                             deletedata(context, card!!)
 
 

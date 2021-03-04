@@ -96,7 +96,6 @@
                     android:layout_marginLeft="8dp"
                     app:backgroundTint="@color/colorBottomNavigationAccent"
                     app:cornerRadius="500dp"
-                    app:icon="@drawable/ic_dialog_close_light"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent" />
 

@@ -14,6 +14,7 @@ import android.widget.Toast;
 import com.codesroots.mac.cards.R;
 import com.codesroots.mac.cards.models.Buypackge;
 import com.codesroots.mac.cards.models.Pencode;
+import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel;
 import com.codesroots.mac.cards.presentaion.payment.Payment;
 
 import woyou.aidlservice.jiuiv5.ICallback;
@@ -253,7 +254,7 @@ public class AidlUtil {
         }
 
     }
-    public void printRecipte(Buypackge value,Bitmap bitmaps) {
+    public void printRecipte(Buypackge value,Bitmap bitmaps,MainViewModel viewmodel) {
         if (woyouService == null) {
             Toast.makeText(context,"he service has been disconnected!", Toast.LENGTH_LONG).show();
             return;
@@ -308,7 +309,7 @@ public class AidlUtil {
                    woyouService.printBitmap(bitmap, null);
 
                     woyouService.lineWrap(3, null);
-
+viewmodel.PrintOrder(value.getId());
 
 
             }

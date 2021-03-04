@@ -2,12 +2,19 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
+// Remove the Fabric plugin.
+
+// Add the Firebase Crashlytics plugin.
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
+apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'com.google.gms.google-services'
+
+
 android {
     compileSdkVersion 29
     defaultConfig {
-        applicationId "com.codesroots.mac.buycards"
+        applicationId "com.codesroots.mac.cards"
         minSdkVersion 16
         targetSdkVersion 29
         multiDexEnabled true
@@ -17,6 +24,7 @@ android {
         dataBinding {
             enabled = true
         }
+
     }
     lintOptions {
         checkReleaseBuilds false
@@ -29,6 +37,7 @@ android {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
+
     }
     androidExtensions {
         experimental = true
@@ -58,9 +67,8 @@ dependencies {
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     implementation 'com.android.support:design:29.0.0'
     /* 15.0.1*/
-    implementation 'com.google.android.gms:play-services:9.2.0'
-    implementation 'com.google.android.gms:play-services-location:9.2.0'
-    implementation 'com.google.android.gms:play-services-maps:9.2.0'
+    implementation 'com.google.android.gms:play-services-location:18.0.0'
+    implementation 'com.google.android.gms:play-services-maps:17.0.0'
     implementation 'com.aurelhubert:ahbottomnavigation:2.1.0'
     implementation 'com.android.support:multidex:1.0.3'
     // Networking
@@ -68,9 +76,7 @@ dependencies {
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.okhttp3:okhttp:3.9.1'
     implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
-    implementation('com.crashlytics.sdk.android:crashlytics:2.9.6@aar') {
-        transitive = true
-    }
+
     implementation('io.socket:socket.io-client:1.0.0') {
         // excluding org.json which is provided by Android
         exclude group: 'org.json', module: 'json'
@@ -82,6 +88,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.7.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
     // ViewModel and LiveData
+    implementation platform('com.google.firebase:firebase-bom:26.6.0')
 
     implementation 'android.arch.lifecycle:extensions:1.1.1'
     // alternatively, just ViewModel
@@ -105,9 +112,25 @@ dependencies {
     implementation 'com.facebook.shimmer:shimmer:0.1.0@aar'
     implementation 'com.mikhaellopez:circularprogressbar:3.0.3'
     implementation 'com.github.f0ris.sweetalert:library:1.6.2'
+    implementation 'com.nightonke:boommenu:2.1.1'
 
+    // Add the dependency for the Firebase SDK for Google Analytics
+    // When using the BoM, don't specify versions in Firebase dependencies
     implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core:1.1.1"
     implementation "androidx.navigation:navigation-fragment-ktx:$nav_version"
     implementation "androidx.navigation:navigation-ui-ktx:$nav_version"
+
+    // Declare the dependencies for the Crashlytics and Analytics libraries
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+
+    implementation 'com.google.firebase:firebase-crashlytics:17.3.1'
+    implementation 'com.google.firebase:firebase-messaging:20.0.0'
+
+    implementation 'com.google.firebase:firebase-analytics:18.0.2'
+    implementation 'com.google.firebase:firebase-appindexing:10.0.0'
+
+
+
+
 }
 

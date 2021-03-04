@@ -52,7 +52,20 @@
                 app:layout_constraintHeight_percent="0.25"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
+<androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/username"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintRight_toRightOf="parent"
+        android:layout_marginRight="15dp"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"
+        android:text="اهلا بك حسام"
+        android:textColor="@color/white"
 
+        >
+
+</androidx.appcompat.widget.AppCompatTextView>
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/logo"
                     android:layout_width="0dp"
@@ -144,23 +157,20 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginBottom="4dp"
-                android:background="@drawable/round_bg"
-                android:padding="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/bottom_navigation1"
                 app:layout_constraintLeft_toLeftOf="parent">
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/naz2"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@drawable/round_bg"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintHeight_percent="1"
                     app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:srcCompat="@drawable/logo"
-                    tools:srcCompat="@drawable/logo" />
+                    app:srcCompat="@drawable/alfateh"
+                    tools:srcCompat="@drawable/alfateh" />
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -172,25 +182,48 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginLeft="16dp"
                 android:layout_marginBottom="16dp"
-                android:background="@drawable/round_bg"
-                android:padding="15dp"
                 app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
                 app:layout_constraintLeft_toLeftOf="parent">
 
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/naz"
-                    android:layout_width="45dp"
-                    android:layout_height="45dp"
-                    android:background="@drawable/round_bg"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintHeight_percent="1"
                     app:layout_constraintLeft_toLeftOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.5"
-                    app:srcCompat="@drawable/logonaz"
-                    tools:srcCompat="@drawable/logonaz" />
+                    app:srcCompat="@drawable/alajwad"
+                    tools:srcCompat="@drawable/alajwad" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/tajnaz"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="5dp"
+                android:layout_marginLeft="5dp"
+                android:layout_marginBottom="16dp"
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
+                app:layout_constraintLeft_toRightOf="@id/bottom_navigation1">
+
+
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/tajnaziMG"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintRight_toRightOf="parent"
+                    app:layout_constraintHeight_percent="1"
+                    app:layout_constraintLeft_toLeftOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintWidth_percent="0.5"
+                    app:srcCompat="@drawable/alajwad"
+                    tools:srcCompat="@drawable/alajwad" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -398,6 +431,8 @@
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"
+                    android:onClick="@{() -> listener.RequestBalance(Context,ViewModel)}"
+
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintRight_toLeftOf="@id/lastvalue"
                     app:layout_constraintRight_toRightOf="parent"
@@ -413,7 +448,7 @@
                     android:fontFamily="@font/fonts"
                     android:paddingLeft="10dp"
                     android:paddingRight="10dp"
-                    android:text="@{MyBalance.commession}"
+                    android:text="@{listener.mUserId.toString()}"
                     android:textColor="@color/white"
                     android:textSize="18sp"
                     android:textStyle="bold"

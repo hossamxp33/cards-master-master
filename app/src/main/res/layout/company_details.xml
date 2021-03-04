@@ -25,7 +25,12 @@
                 type="com.codesroots.mac.cards.models.CompanyDatum"/>
 
     </data>
+    <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true"
 
+            >
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -124,7 +129,7 @@
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/total" />
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
 
         <LinearLayout
@@ -152,10 +157,11 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/decrease"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
                         android:layout_marginStart="32dp"
                         android:layout_marginLeft="32dp"
+                        android:layout_marginTop="10dp"
                         android:src="@drawable/left"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
@@ -179,9 +185,9 @@
 
                 <androidx.appcompat.widget.AppCompatImageView
                         android:id="@+id/increase"
-                        android:layout_width="40dp"
-                        android:layout_height="40dp"
-
+                        android:layout_width="50dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="64dp"
                         android:layout_marginRight="64dp"
                         android:background="@drawable/right"
@@ -217,7 +223,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
                 android:layout_marginRight="16dp"
-                android:text="المجموع :"
+                android:text="الثمن :"
                 android:textSize="17sp"
 
                 app:layout_constraintEnd_toEndOf="parent"
@@ -235,6 +241,58 @@
                 app:layout_constraintEnd_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="@+id/textView4" />
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
 
+        <TextView
+                android:id="@+id/discount"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="الخصم :"
+                android:textSize="17sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView4" />
+
+        <TextView
+                android:id="@+id/discountvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="TextView"
+                android:textSize="17sp"
+
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/discount" />
+
+
+        <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="الصافي :"
+                android:textSize="17sp"
+
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/discount" />
+
+        <TextView
+                android:id="@+id/totalvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="TextView"
+                android:textSize="17sp"
+
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/textView6" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+    </ScrollView>
 </layout>

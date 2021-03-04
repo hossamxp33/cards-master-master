@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.codesroots.mac.cards.R;
 import com.codesroots.mac.cards.models.Buypackge;
 import com.codesroots.mac.cards.presentaion.Utils.HandlerUtils;
+import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel;
 import com.codesroots.mac.cards.presentaion.payment.Payment;
 import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
@@ -368,7 +369,7 @@ public class IPosPrinterTestDemo {
     /**
      * 打印文字
      */
-    public void printText(Buypackge value, Bitmap bitmaps,Bitmap notes)  {
+    public void printText(Buypackge value, Bitmap bitmaps, Bitmap notes, MainViewModel viewmodel)  {
         if (mIPosPrinterService != null )
             if (getPrinterStatus() == PRINTER_NORMAL)
                 ThreadPoolManager.getInstance().executeTask(new Runnable() {
@@ -409,8 +410,10 @@ public class IPosPrinterTestDemo {
 
                                     //   bitmapRecycle(bitmap);
                                     mIPosPrinterService.printerPerformPrint(160, callback);
+                                    viewmodel.PrintOrder(value.getId());
 
-                            }
+
+                                }
                             Intent intent = new Intent(context, Payment.class);
 
                             intent.putExtra("myobj", value);
@@ -418,6 +421,7 @@ public class IPosPrinterTestDemo {
                             (context).startActivity(intent);
                         } catch (RemoteException e) {
                             e.printStackTrace();
+
                         }
                     }
                 });

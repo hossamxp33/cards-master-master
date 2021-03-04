@@ -29,20 +29,14 @@ class MenuFragment : Fragment() {
 //        view.login.setOnClickListener {
 //            val homeIntent = Intent(context, LoginActivity::class.java)
 //            ( context as MainActivity).startActivity(homeIntent)
-//        }
-        view.partners.setOnClickListener {
-            activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,Partners())?.addToBackStack("login")?.commit()
-        }
+//
         view.back_btn.setOnClickListener {
             activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,
                 mainFragment()
             )?.addToBackStack("home")?.commit()
         }
 //
-        view.profile.setOnClickListener {
-            if (checkUserLogin(context!!))
-                activity?.supportFragmentManager?.beginTransaction()?.replace(R.id.main_frame,ContactFragment())?.addToBackStack("login")?.commit()
-        }
+
 //
         view.favoffers.setOnClickListener {
             if (checkUserLogin(context!!))
@@ -52,6 +46,7 @@ class MenuFragment : Fragment() {
         view.logout.setOnClickListener {
             if (checkUserLogin(context!!)) {
                 PreferenceHelper.setAuthId("0",context)
+
                 Toast.makeText(context, "تم تسجيل خروجك", Toast.LENGTH_SHORT).show()
                 val homeIntent = Intent(context, LoginActivity::class.java)
                 ( context as MainActivity).startActivity(homeIntent)

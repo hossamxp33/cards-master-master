@@ -45,6 +45,10 @@
         <activity android:name=".presentaion.banks.BankActitvity"  >
 
         </activity>
+
+        <meta-data
+                android:name="firebase_crashlytics_collection_enabled"
+                android:value="true" />
     </application>
 
 </manifest>

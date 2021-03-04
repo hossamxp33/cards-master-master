@@ -1,5 +1,6 @@
 package com.codesroots.mac.cards.presentaion.mainfragment
 
+import android.accessibilityservice.GestureDescription
 import android.app.AlertDialog
 import android.content.DialogInterface
 import android.content.Intent
@@ -12,7 +13,9 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.view.animation.AnimationUtils
+import android.widget.AdapterView
 import android.widget.Button
+import android.widget.ListView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
 import androidx.databinding.DataBindingUtil
@@ -34,6 +37,10 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.setImageResource
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.ContentListener
+import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum
+import com.nightonke.boommenu.BoomMenuButton
+import com.nightonke.boommenu.ButtonEnum
+import com.nightonke.boommenu.Piece.PiecePlaceEnum
 import kotlinx.android.synthetic.main.dialog_custom_view.view.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
@@ -53,6 +60,7 @@ class mainFragment  : Fragment(), ContentListener {
     private var NUM_PAGES = 0
     var pager: ViewPager? = null
     var data : List<CompanyDatum>? = null
+    var  bmb: BoomMenuButton?= null;
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,12 +77,14 @@ class mainFragment  : Fragment(), ContentListener {
 
         view.listener = ClickHandler()
         view.context = context as MainActivity
+
         pager = view.pager
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getcompanyData()
         viewModel.getMyBalance()
         viewModel.GetMyImages(PreferenceHelper.getAuthId())
-
+        view.viewModel = viewModel
+        view.username.text = "اهلا بك  " + PreferenceHelper.getUsername()
         viewModel.CompanyResponseLD?.observe(this , Observer {
 
             MainAdapter = MainAdapter(viewModel,context,it)
@@ -106,6 +116,7 @@ class mainFragment  : Fragment(), ContentListener {
         viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
             view.myBalance = it
+            view.value.text = it.commession
         })
         viewModel.SliderDataResponseLD?.observe(this , Observer {
 
@@ -121,6 +132,7 @@ class mainFragment  : Fragment(), ContentListener {
             val packageId = arguments?.getString("packageId")
             showCustomDialog()
         }
+
         return view.root;
     }
     private lateinit var alertDialog: AlertDialog

@@ -68,23 +68,7 @@
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 
-    <TextView
-            android:id="@+id/profile"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/bluereduisbackground"
-            android:drawableLeft="@drawable/whitebackbtn"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="تواصل معنا"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/logoLayout" />
+
 
     <TextView
             android:id="@+id/favoffers"
@@ -102,25 +86,8 @@
             android:textSize="18dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profile" />
+            app:layout_constraintTop_toBottomOf="@+id/logoLayout" />
 
-    <TextView
-            android:id="@+id/partners"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:layout_marginLeft="8dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginRight="8dp"
-            android:background="@drawable/bluereduisbackground"
-            android:drawableLeft="@drawable/whitebackbtn"
-            android:gravity="center_vertical"
-            android:padding="8dp"
-            android:text="شركائنا"
-            android:textColor="@color/white"
-            android:textSize="18dp"
-            app:layout_constraintLeft_toLeftOf="parent"
-            app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/favoffers" />
 
     <TextView
             android:id="@+id/change_pw"
@@ -138,7 +105,7 @@
             android:textSize="18dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logout" />
+            app:layout_constraintTop_toBottomOf="@+id/favoffers" />
 
     <!--<TextView-->
     <!--android:id="@+id/login"-->
@@ -189,6 +156,6 @@
             android:textSize="18dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/partners" />
+            app:layout_constraintTop_toBottomOf="@+id/change_pw" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

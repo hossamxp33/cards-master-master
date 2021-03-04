@@ -11,6 +11,8 @@ data class CompanyDatum (
     val name: String? = null,
     val src: String? = null,
     val sprice: String? = null,
+    val rprice: String? = null,
+
     val detailimg:String? = null,
     val mount :Int?=  null
 

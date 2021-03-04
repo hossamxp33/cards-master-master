@@ -12,6 +12,7 @@ public class PreferenceHelper {
 	private static String photo = "photo";
 	private static String Token = "token";
 	private static String AuthId = "auth";
+	private static String Username = "username";
 
 	private static String UserId = "userid";
 	private static String UserGroupId = "UserGroupId";
@@ -32,6 +33,16 @@ public class PreferenceHelper {
 		{
 
 		}
+	}
+
+	public static String getUsername() {
+		return app_prefs.getString(Username, null);
+	}
+
+	public static void setUsername(String username) {
+		Editor edit = app_prefs.edit();
+		edit.putString(Username, username);
+		edit.apply();
 	}
 
 

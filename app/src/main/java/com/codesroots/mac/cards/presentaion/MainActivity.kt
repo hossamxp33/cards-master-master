@@ -55,6 +55,9 @@ import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
 import com.codesroots.mac.cards.presentaion.payment.Payment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
 import com.google.android.material.navigation.NavigationView
+import com.google.firebase.FirebaseApp
+import com.google.firebase.crashlytics.FirebaseCrashlytics
+import com.google.firebase.messaging.FirebaseMessaging
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -83,13 +86,19 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+        val crashlytics = FirebaseCrashlytics.getInstance()
+       // throw RuntimeException("Test Crash")
+        FirebaseApp.initializeApp(this)
+        FirebaseMessaging.getInstance()
+       // FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserId().toString())
+        FirebaseMessaging.getInstance().subscribeToTopic("10")
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorAccent)
         IPosPrinterTestDemo.getInstance().connectPrinterService(this)
 
     //    val binding = DataBindingUtil.setContentView<ActivityMainBinding>(this, R.layout.activity_main)
         val typeface = Typeface.createFromAsset(this!!.assets, "fonts/DroidKufi_Regular.ttf")
 
-        viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getMyBalance()
 
         ///////// tool bar and drawerToggle

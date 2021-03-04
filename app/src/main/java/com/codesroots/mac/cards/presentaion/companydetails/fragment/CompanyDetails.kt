@@ -34,7 +34,6 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.setImageResourcee
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.ContentListener
-import com.google.android.gms.analytics.internal.zzy.v
 import kotlinx.android.synthetic.main.company_details.*
 import kotlinx.android.synthetic.main.company_details.view.*
 import kotlinx.android.synthetic.main.dialog_custom_view.view.*
@@ -48,12 +47,12 @@ import java.net.URL
 
 public class CompanyDetails  : AppCompatActivity() , ContentListener {
 
-
+var item :CompanyDatum? = null
     override fun onItemClicked(item: CompanyDatum) {
         Company_id = item.id
-
+        this.item = item
             totalvalue = item.sprice
-            totalvalue?.let { displaytext(it) }
+            totalvalue?.let { displaytext(it,item.rprice!!,item.sprice!!) }
 
 
     }
@@ -126,16 +125,39 @@ public class CompanyDetails  : AppCompatActivity() , ContentListener {
 
 
     public fun display(number: Int) {
-        val displayInteger = findViewById<View>(R.id.integer_number) as TextView
-        val totalInteger = findViewById<View>(R.id.total) as TextView
+        if (number <= 2) {
+            val displayInteger = findViewById<View>(R.id.integer_number) as TextView
+            val totalInteger = findViewById<View>(R.id.totalvalue) as TextView
+            val Discount = findViewById<View>(R.id.discountvalue) as TextView
+            val TotalValue = findViewById<View>(R.id.total) as TextView
+            Discount.text = "" + (number * item!!.rprice!!.toInt())
+            TotalValue.text = "" + (number * totalvalue!!.replace(
+                " IQD",
+                ""
+            )!!.toInt() + item!!.rprice!!.toInt()) + "IQD"
 
-        totalInteger.text = "" + (number * totalvalue!!.replace(" IQD", "")!!.toInt()) + "IQD"
-        displayInteger.text = "" + number
+            totalInteger.text = "" + (number * totalvalue!!.replace(" IQD", "")!!.toInt()) + "IQD"
+            displayInteger.text = "" + number
+        }else {
+            var pDialog : SweetAlertDialog? = null;
+
+            val alertDialogBuilder = AlertDialog.Builder(this)
+            pDialog =  SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
+            pDialog!!.setTitleText("يوجد خطأ!")
+            pDialog!!.setContentText("لا يمكن شراء اكثر من بطاقتين")
+            pDialog!!.setConfirmText("OK")
+            pDialog!!.show()
+
+        }
     }
-    public fun displaytext(number: String) {
-        val displayInteger = findViewById<View>(R.id.total) as TextView
+    public fun displaytext(number: String,discount: String,total: String) {
+        val displayInteger = findViewById<View>(R.id.totalvalue) as TextView
+        val Discount = findViewById<View>(R.id.discountvalue) as TextView
+        val TotalValue = findViewById<View>(R.id.total) as TextView
 
         displayInteger.text = "" + number
+        Discount.text = "" + discount
+        TotalValue.text = "" + (total!!.replace(" IQD", "")!!.toInt() + item!!.rprice!!.toInt()) + "IQD"
     }
     fun increaseInteger(view: View) {
 

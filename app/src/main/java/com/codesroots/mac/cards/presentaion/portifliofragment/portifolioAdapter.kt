@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.databinding.ReportFragmentBinding
 import com.codesroots.mac.cards.databinding.ReportItemBinding
 import com.codesroots.mac.cards.databinding.SavedLayoutBinding
 import com.codesroots.mac.cards.models.Buypackge
@@ -23,18 +24,17 @@ class portifolioAdapter(var viewModel: MainViewModel, var context : Context?, va
         p0.bind(viewModel,context,data.get(p1))
     }
     override fun onCreateViewHolder(p0: ViewGroup, p1: Int): CustomViewHolder {
-        val  binding: SavedLayoutBinding = DataBindingUtil.inflate (
+        val  binding: ReportItemBinding = DataBindingUtil.inflate (
             LayoutInflater.from(p0.context),
-            R.layout.saved_layout,p0,false)
+            R.layout.report_item,p0,false)
         return  CustomViewHolder(binding)
     }
 }
 class CustomViewHolder (
-    private val binding: SavedLayoutBinding
+    private val binding: ReportItemBinding
 ) : RecyclerView.ViewHolder(binding.root){
     fun bind(viewModel: MainViewModel, context: Context?, data: Buypackge) {
         binding.listener = ClickHandler()
-        binding.data = data
         binding.context = context as MainActivity?
     }
 

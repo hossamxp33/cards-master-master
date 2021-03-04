@@ -43,6 +43,12 @@ interface APIServices {
     fun GetMyBlanceData(@Path("auth") auth: String):
             Observable<MyBalance>
 
+
+    @POST("fw_main/{auth}/21")/*{company_id}*/
+    fun PrintOrder(@Path("auth") auth: String,@Query("val") OrderId: String,@Query("printed") printed: String):
+            Observable<MyBalance>
+
+
     @POST("fw_main/{auth}/3")/*{company_id}*/
     fun GetPackageDetails(@Path("auth") auth: String,@Query("val") packageid: String):
             Observable<List<CompanyDatum>>
@@ -56,9 +62,21 @@ interface APIServices {
     fun BuyPackage(@Path("auth") auth: String,@Query("val") packageid: String,@Query("mount") amount: String):
             Observable<Buypackge>
 
+
+    @POST("fw_main/{auth}/28")/*{company_id}*/
+    fun RequestBalance(@Path("auth") auth: String):
+            Observable<RequestBalance>
+
+
     @POST("fw_main/{auth}/18")/*{company_id}*/
     fun PrintReport(@Path("auth") auth: String,@Query("val") packageid: String):
             Observable<Buypackge>
+
+    @POST("fw_main/{auth}/22")/*{company_id}*/
+    fun GetNonPrinted(@Path("auth") auth: String):
+            Observable<NonPrintedData>
+
+
     @POST("fw_main/{auth}/17")/*{company_id}*/
     fun SliderData(@Path("auth") auth: String):
             Observable<List<SliderElement>>
@@ -97,7 +115,7 @@ interface APIServices {
                 .build()
 
             val retrofit = Retrofit.Builder()
-                .baseUrl("http://across-cities.com/")
+                .baseUrl("https://across-cities.com/")
                 .addConverterFactory(GsonConverterFactory.create())
                 .addCallAdapterFactory( RxJava2CallAdapterFactory.createWithScheduler(Schedulers.io()))
                 .client(okHttpClient)

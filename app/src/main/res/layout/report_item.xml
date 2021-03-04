@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginLeft="4dp"
-                android:text="@{data.opdate}"
+                android:text="@{data.opdate == null ? data.odate : data.opdate}"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 app:fontFamily="@font/fonts"

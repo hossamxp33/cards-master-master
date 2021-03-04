@@ -1,6 +1,7 @@
 package com.codesroots.mac.cards.presentaion.login
 
 
+import android.app.AlertDialog
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -11,6 +12,7 @@ import android.widget.EditText
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
+import cn.pedant.SweetAlert.SweetAlertDialog
 import com.codesroots.hossam.mandoobapp.presentation.login.ViewModel.LoginViewModel
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.DataLayer.usecases.checkUserLogin
@@ -25,6 +27,8 @@ import org.jetbrains.anko.internals.AnkoInternals.getContext
 
 class LoginActivity : AppCompatActivity() {
     var network_enabled = false
+    var pDialog : SweetAlertDialog? = null;
+
     private val viewModel: LoginViewModel by lazy {
         ViewModelProviders.of(this).get(LoginViewModel::class.java)
     }
@@ -41,24 +45,30 @@ class LoginActivity : AppCompatActivity() {
 
 
         Loginbtn.setOnClickListener {
-
+            PreferenceHelper.setUsername(username.text.toString())
+//PreferenceHelper.setToken("0",this)
             if (PreferenceHelper.getToken() != "0" ) {
-               "تاني مرة".snack(window.decorView.rootView)
+            //   "تاني مرة".snack(window.decorView.rootView)
                 if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
                 viewModel.Login(username.text.toString(),password.text.toString())
             }else {
                 if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
                 viewModel.LoginFirstTime(username.text.toString(),password.text.toString())
-                "اول مرة".snack(window.decorView.rootView)
+               // "اول مرة".snack(window.decorView.rootView)
             }
         }
 
         viewModel.loginResponseLD?.observe(this , Observer {
-            "سجل".snack(window.decorView.rootView)
+         //   "سجل".snack(window.decorView.rootView)
 
 
     if (it.auth == null){
-        "كلمة المرور خاطئة".snack(window.decorView.rootView)
+        val alertDialogBuilder = AlertDialog.Builder(this)
+        pDialog =  SweetAlertDialog(this, SweetAlertDialog.ERROR_TYPE);
+        pDialog!!.setTitleText("يوجد خطأ!")
+        pDialog!!.setContentText("كلمة المرور خاطئة")
+        pDialog!!.setConfirmText("OK")
+        pDialog!!.show()
     }else {
        PreferenceHelper.setToken(it.taken,this)
         PreferenceHelper.setAuthId(it.auth,this)

@@ -45,7 +45,7 @@
                     app:layout_constraintRight_toRightOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintWidth_percent="0.7"
-                    app:srcCompat="@drawable/logos"></androidx.appcompat.widget.AppCompatImageView>
+                    app:srcCompat="@drawable/topname"></androidx.appcompat.widget.AppCompatImageView>
         </androidx.constraintlayout.widget.ConstraintLayout>
 <androidx.constraintlayout.widget.Guideline
         android:layout_width="wrap_content"
@@ -60,7 +60,6 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="32dp"
                 android:paddingBottom="4dp"
-                android:background="@color/wallet_bright_foreground_disabled_holo_light"
                 app:cardCornerRadius="50dp"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
@@ -237,7 +236,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/serialvalue" />
 
-                <TextView
+                <EditText
                         android:id="@+id/numbervalue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -254,7 +253,7 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toBottomOf="@id/number" />
 
-                <TextView
+                <EditText
                         android:id="@+id/officename"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"

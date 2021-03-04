@@ -11,7 +11,10 @@ import kotlinx.android.parcel.RawValue
 @Entity(tableName = "Buypackge")
 @Parcelize
 data class Buypackge (
+
     var opno: Int? = null,
+    var odate: String? = null,
+
     var salor: String? = null,
     var time: String? = null,
     var device: String? = null,
@@ -33,12 +36,21 @@ data class Buypackge (
         var id : Int = 0
 
 }
+data class NonPrintedData(
+    val result: List<ReportDaily>
 
+
+)
 data class LogData(
     val auth: String,
     val err: Int,
     val taken:String? = null
 
+
+)
+data class RequestBalance (
+    val err: String? = null,
+    val result: String? = null
 )
 data class MyBalance (
     val account: String? = null,
@@ -48,6 +60,8 @@ data class ReportDaily (
     val opid: Long,
     val opno: String,
     val opdate: String,
+    var odate: String? = null,
+
     val strcase: String,
     val amount: String,
     val err: String? = null,

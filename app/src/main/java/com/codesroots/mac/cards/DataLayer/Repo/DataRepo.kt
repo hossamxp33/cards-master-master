@@ -119,6 +119,23 @@ class  DataRepo {
     }
     @SuppressLint("CheckResult")
 
+    fun RequestBalance(auth:String,livedata: MutableLiveData<RequestBalance>?) {
+
+(   APIServices.create().RequestBalance(auth)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+                    print(error)
+                }
+            ))
+    }
+    @SuppressLint("CheckResult")
+
     fun getBanksData(livedata: MutableLiveData<List<BankDatum>>?) {
 
         APIServices.create().GetMyBanksData()
@@ -263,6 +280,41 @@ class  DataRepo {
             .subscribe(
                 { books ->
                     livedata?.postValue(books)
+                },
+                { error ->
+                    print(error)
+                }
+            )
+    }
+
+    @SuppressLint("CheckResult")
+
+    fun PrintOrder(livedata: MutableLiveData<MyBalance>?,ID: String) {
+
+        APIServices.create().PrintOrder(PreferenceHelper.getAuthId(),ID.toString(),"1")
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
+    @SuppressLint("CheckResult")
+
+    fun GetNonPrinted(auth:String,livedata: MutableLiveData<List<ReportDaily>>?) {
+
+        APIServices.create().GetNonPrinted(auth)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books.result)
                 },
                 { error ->
                     print(error)

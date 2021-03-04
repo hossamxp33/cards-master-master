@@ -4,16 +4,22 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/mainsms"
-        android:background="@color/white"
+        android:background="#303259"
         >
-
+    <ImageView
+            android:id="@+id/circleBackround"
+            android:layout_width="match_parent"
+            android:layout_height="350dp"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="-100dp"
+            android:background="@drawable/rectangle_login" />
     <ImageView
             android:id="@+id/logo"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width= "300dp"
+            android:layout_height  = "150dp"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="70dp"
-            android:background="@drawable/topname" />
+            android:layout_marginTop="30dp"
+            android:background="@drawable/logologin" />
 
     <androidx.core.widget.NestedScrollView
             android:layout_width="wrap_content"
@@ -21,6 +27,7 @@
             android:layout_below="@+id/logo">
 
         <RelativeLayout
+                android:id="@+id/main_layout"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="15dp"
@@ -91,33 +98,86 @@
                     android:background="@drawable/security" />
 
             <RelativeLayout
-                    android:id="@+id/bottom"
+                    android:id="@+id/Loginbtn"
                     android:layout_width="match_parent"
-                    android:layout_height="45dp"
+                    android:layout_height="55dp"
                     android:layout_below="@+id/password"
                     android:layout_marginStart="60dp"
                     android:layout_marginLeft="60dp"
-                    android:layout_marginTop="40dp"
+                    android:layout_marginTop="20dp"
+                    android:background="@drawable/loginbackground"
                     android:layout_marginEnd="60dp"
                     android:layout_marginRight="60dp"
                     android:layout_marginBottom="25dp">
 
-                <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/Loginbtn"
+
+                <androidx.appcompat.widget.AppCompatTextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_centerInParent="true"
-                        android:background="@drawable/button_background"
-                        android:gravity="center"
-                        android:padding="10dp"
-                        android:src="@drawable/login"
+                        android:text="دخول"
+                        android:textAlignment="center"
+                        android:layout_marginBottom="10dp"
+                        android:textColor="@color/white"
+                        android:textSize="18dp">
 
-                        />
-
+                </androidx.appcompat.widget.AppCompatTextView>
 
             </RelativeLayout>
+            <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="200dp"
+                    android:layout_below="@id/Loginbtn"
+                    android:layout_gravity="bottom">
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="10dp"
+                        android:text="للأشتراك يرجي الاتصال"
+                        android:textAlignment="center"
+                        android:textColor="@color/black"
+                        android:id="@+id/pleasecontact"
+                        android:textSize="20dp">
 
+                </androidx.appcompat.widget.AppCompatTextView>
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:layout_below="@id/pleasecontact"
+                        android:text="07510096538"
+                        android:textAlignment="center"
+                        android:id="@+id/firstnum"
+                        android:textColor="@color/black"
+                        android:textSize="20dp">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="07702956386"
+                        android:textAlignment="center"
+                        android:id="@+id/secondnum"
+                        android:layout_below="@+id/firstnum"
+                        android:textColor="@color/black"
+                        android:textSize="20dp">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+                <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="5dp"
+                        android:text="07709322024"
+                        android:textAlignment="center"
+                        android:layout_below="@id/secondnum"
+                        android:textColor="@color/black"
+                        android:textSize="20dp">
+
+                </androidx.appcompat.widget.AppCompatTextView>
+            </RelativeLayout>
         </RelativeLayout>
+
+
     </androidx.core.widget.NestedScrollView>
 
 </RelativeLayout>
