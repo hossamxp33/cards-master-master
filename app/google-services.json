@@ -1,0 +1,98 @@
+{
+  "project_info": {
+    "project_number": "714887118419",
+    "firebase_url": "https://mandoob.firebaseio.com",
+    "project_id": "mandoob",
+    "storage_bucket": "mandoob.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714887118419:android:7ce31d75b7cd816f2090a6",
+        "android_client_info": {
+          "package_name": "com.codesroots.mac.cards"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714887118419-bp5qd1vk3gfiurbl1uhtsoo1inctoldp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV51vAx4Fr4X3mv1iKpaj26Is1IBCWwoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714887118419-bp5qd1vk3gfiurbl1uhtsoo1inctoldp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714887118419:android:54d395ff5beb25c52090a6",
+        "android_client_info": {
+          "package_name": "com.codesroots.mac.tajemployee"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714887118419-bp5qd1vk3gfiurbl1uhtsoo1inctoldp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV51vAx4Fr4X3mv1iKpaj26Is1IBCWwoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714887118419-bp5qd1vk3gfiurbl1uhtsoo1inctoldp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:714887118419:android:c22bb4ab9026ef1c",
+        "android_client_info": {
+          "package_name": "com.example.hossam.mandoobapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "714887118419-bp5qd1vk3gfiurbl1uhtsoo1inctoldp.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDV51vAx4Fr4X3mv1iKpaj26Is1IBCWwoc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "714887118419-bp5qd1vk3gfiurbl1uhtsoo1inctoldp.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
