@@ -410,7 +410,8 @@ public class IPosPrinterTestDemo {
 
                                     //   bitmapRecycle(bitmap);
                                     mIPosPrinterService.printerPerformPrint(160, callback);
-                                    viewmodel.PrintOrder(value.getId());
+
+                                    viewmodel.PrintOrder(value.getOpno());
 
 
                                 }

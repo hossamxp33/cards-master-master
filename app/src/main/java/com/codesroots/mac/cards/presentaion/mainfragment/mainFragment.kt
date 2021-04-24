@@ -26,6 +26,7 @@ import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.viewpager.widget.ViewPager
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
+import com.codesroots.mac.cards.DataLayer.usecases.openNewTabWindow
 import com.codesroots.mac.cards.R
 import com.codesroots.mac.cards.databinding.MainFragmentBinding
 import com.codesroots.mac.cards.models.CompanyDatum
@@ -37,6 +38,9 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.setImageResource
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.ContentListener
+import com.mazenrashed.printooth.Printooth
+import com.mazenrashed.printooth.data.printer.Printer
+import com.mazenrashed.printooth.utilities.Printing
 import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum
 import com.nightonke.boommenu.BoomMenuButton
 import com.nightonke.boommenu.ButtonEnum
@@ -53,14 +57,14 @@ class mainFragment  : Fragment(), ContentListener {
     }
 
     lateinit var CompanyAdapter: CompanyDetailsAdapter
-
     lateinit var MainAdapter: MainAdapter
     lateinit var viewModel: MainViewModel
     private var currentPage = 0
     private var NUM_PAGES = 0
     var pager: ViewPager? = null
     var data : List<CompanyDatum>? = null
-    var  bmb: BoomMenuButton?= null;
+    var  bmb: BoomMenuButton? = null;
+    private var printing : Printing? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -77,6 +81,7 @@ class mainFragment  : Fragment(), ContentListener {
 
         view.listener = ClickHandler()
         view.context = context as MainActivity
+        view.textView12.text = ( if (Printooth.hasPairedPrinter()) "Un-pair ${Printooth.getPairedPrinter()?.name}" else "Pair with printer")
 
         pager = view.pager
         viewModel =   ViewModelProviders.of(this).get(MainViewModel::class.java)
@@ -89,21 +94,8 @@ class mainFragment  : Fragment(), ContentListener {
 
             MainAdapter = MainAdapter(viewModel,context,it)
             view.recyler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
-            data =it
-
-
-
-            naz.setOnClickListener {
-                val launchIntent =    getActivity()!!.getPackageManager().getLaunchIntentForPackage("com.codesroots.mac.Tajnaz");
-                if (launchIntent != null) {
-                    startActivity(launchIntent);
-                } else {
-                    val i =  Intent(Intent.ACTION_VIEW);
-                    i.setData(Uri.parse("https://play.google.com/store/apps/details?id=com.codesroots.mac.Tajnaz" ));
-                    startActivity(i);
-                }
-
-            }
+            data = it
+          
 
             view.recyler.adapter = MainAdapter;
             view.textView11.typeface = typeface
@@ -130,9 +122,17 @@ class mainFragment  : Fragment(), ContentListener {
 
         view.naz2.setOnClickListener (){
             val packageId = arguments?.getString("packageId")
-            showCustomDialog()
+            openNewTabWindow("https://al-fateh-iq.com/",context as MainActivity)
         }
 
+        view.bottomNavigation1.setOnClickListener (){
+            val packageId = arguments?.getString("packageId")
+            openNewTabWindow("https://play.google.com/store/apps/details?id=com.codesroots.agwad",context as MainActivity)
+        }
+        view.tajnaz.setOnClickListener (){
+            val packageId = arguments?.getString("packageId")
+            openNewTabWindow("https://play.google.com/store/apps/details?id=com.codesroots.mac.Tajnaz",context as MainActivity)
+        }
         return view.root;
     }
     private lateinit var alertDialog: AlertDialog
@@ -159,7 +159,9 @@ class mainFragment  : Fragment(), ContentListener {
 
         custom_button.setOnClickListener {
             // Dismiss the popup window
-            alertDialog.dismiss()        }
+            alertDialog.dismiss()
+
+        }
 
         val dialogBuilder: AlertDialog.Builder = AlertDialog.Builder(context!!,R.style.yourCustomDialog)
 

@@ -63,15 +63,21 @@ interface APIServices {
             Observable<Buypackge>
 
 
+    @POST("fw_main/{auth}/29")/*{company_id}*/
+    fun PostToken(@Path("auth") auth: String,@Query("val") packageid: String):
+            Observable<Buypackge>
+
+
     @POST("fw_main/{auth}/28")/*{company_id}*/
     fun RequestBalance(@Path("auth") auth: String):
             Observable<RequestBalance>
 
-
     @POST("fw_main/{auth}/18")/*{company_id}*/
     fun PrintReport(@Path("auth") auth: String,@Query("val") packageid: String):
             Observable<Buypackge>
-
+    @POST("fw_main/{auth}/21")/*{company_id}*/
+    fun ConfirmNonPrint(@Path("auth") auth: String,@Query("val") packageid: String,@Query("printed") printed: String):
+            Observable<Buypackge>
     @POST("fw_main/{auth}/22")/*{company_id}*/
     fun GetNonPrinted(@Path("auth") auth: String):
             Observable<NonPrintedData>

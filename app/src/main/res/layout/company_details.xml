@@ -130,7 +130,23 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
+        <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/blutooth"
+                android:layout_width="110dp"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/nav_bg"
+                android:fontFamily="@font/fonts"
+                android:onClick="@{() -> listener.BluetoothList(Context)}"
+                android:text="بلوتوث ليست"
+                android:textColor="@color/white"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/appCompatButton" />
 
         <LinearLayout
                 android:id="@+id/linearLayout"
@@ -292,7 +308,31 @@
 
                 app:layout_constraintEnd_toStartOf="@+id/textView4"
                 app:layout_constraintTop_toTopOf="@+id/textView6" />
+        <TextView
+                android:id="@+id/textView7"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:text="بلوتوث :"
+                android:textSize="17sp"
+                android:onClick="@{() ->  listener.BlutoothName()}"
 
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/totalvalue" />
+
+        <TextView
+                android:id="@+id/blutoothvalue"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:textSize="17sp"
+                android:text="@{listener.blutoothName.toString()}"
+                android:onClick="@{() -> listener.DeleteBloototh(Context,viewmodel)}"
+                app:layout_constraintEnd_toStartOf="@+id/textView4"
+                app:layout_constraintTop_toTopOf="@+id/textView7" />
     </androidx.constraintlayout.widget.ConstraintLayout>
     </ScrollView>
 </layout>

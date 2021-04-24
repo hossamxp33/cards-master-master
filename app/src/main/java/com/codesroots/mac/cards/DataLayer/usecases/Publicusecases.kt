@@ -8,6 +8,7 @@ import android.graphics.drawable.BitmapDrawable
 import android.net.ConnectivityManager
 import android.net.Uri
 import android.os.Build
+import android.os.Bundle
 import androidx.annotation.RequiresApi
 import androidx.core.content.ContextCompat
 import androidx.viewpager.widget.ViewPager
@@ -111,7 +112,14 @@ fun setupviewPager(viewPager: ViewPager) {
 
     return null
 }
-
+fun openNewTabWindow(urls: String, context : Context) {
+    val uris = Uri.parse(urls)
+    val intents = Intent(Intent.ACTION_VIEW, uris)
+    val b = Bundle()
+    b.putBoolean("new_window", true)
+    intents.putExtras(b)
+    context.startActivity(intents)
+}
  fun checkUserLogin(context: Context): Boolean {
      if (PreferenceHelper.getAuthId() != "0")
     return true

@@ -309,7 +309,7 @@ public class AidlUtil {
                    woyouService.printBitmap(bitmap, null);
 
                     woyouService.lineWrap(3, null);
-viewmodel.PrintOrder(value.getId());
+viewmodel.PrintOrder(value.getOpno());
 
 
             }

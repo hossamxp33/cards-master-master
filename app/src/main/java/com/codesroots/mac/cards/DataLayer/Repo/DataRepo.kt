@@ -169,6 +169,25 @@ class  DataRepo {
                 }
             )
     }
+
+
+    @SuppressLint("CheckResult")
+
+    fun PostToken(token:String,livedata: MutableLiveData<Buypackge>?) {
+
+        APIServices.create().PostToken(PreferenceHelper.getAuthId(),token)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .map { data -> data }
+            .subscribe(
+                { books ->
+                    livedata?.postValue(books)
+                },
+                { error ->
+
+                }
+            )
+    }
     @SuppressLint("CheckResult")
     fun GetMyDeialyReport(auth:String,livedata: MutableLiveData<List<ReportDaily>>?) {
 

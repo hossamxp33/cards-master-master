@@ -1,6 +1,7 @@
 package com.codesroots.mac.cards.presentaion
 
 import android.app.AlertDialog
+import android.bluetooth.BluetoothAdapter
 import android.content.Context
 import android.content.Intent
 import android.graphics.Bitmap
@@ -44,6 +45,7 @@ import com.codesroots.mac.cards.db.CardDatabase
 import com.codesroots.mac.cards.models.Buypackge
 import com.codesroots.mac.cards.presentaion.Printer.AidlUtil
 import com.codesroots.mac.cards.presentaion.banks.BankActitvity
+import com.codesroots.mac.cards.presentaion.bluetooth.WorkService
 
 import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetails
 import com.codesroots.mac.cards.presentaion.login.LoginActivity
@@ -54,10 +56,15 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
 import com.codesroots.mac.cards.presentaion.payment.Payment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
+import com.google.android.gms.tasks.OnCompleteListener
 import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
+import com.google.firebase.FirebaseAppLifecycleListener
+import com.google.firebase.FirebaseCommonRegistrar
 import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessaging
+import com.mazenrashed.printooth.Printooth
+import com.mazenrashed.printooth.ui.ScanningActivity
 import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.alert_add_reserve.view.*
 import kotlinx.android.synthetic.main.app_bar_main.*
@@ -76,6 +83,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var moreFragment: MenuFragment
     lateinit var wallet: PortiflioFragment
     lateinit var viewModel: MainViewModel
+    private val BLUETOOTH_REQUEST = 1
 
     lateinit var navigationView: NavigationView
     override fun onResume() {
@@ -90,6 +98,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
        // throw RuntimeException("Test Crash")
         FirebaseApp.initializeApp(this)
         FirebaseMessaging.getInstance()
+        Printooth.init(this)
+
        // FirebaseMessaging.getInstance().subscribeToTopic(PreferenceHelper.getUserId().toString())
         FirebaseMessaging.getInstance().subscribeToTopic("10")
         window.statusBarColor = ContextCompat.getColor(this, R.color.colorAccent)
@@ -100,7 +110,21 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
         viewModel.getMyBalance()
+        FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
+            if (!task.isSuccessful) {
+                //   Log.w(TAG, "Fetching FCM registration token failed", task.exception)
+                return@OnCompleteListener
+            }
 
+            // Get new FCM registration token
+            val token = task.result
+
+//            // Log and toast
+//            val msg = getString(R.string.msg_token_fmt, token)
+            Log.d("tken", token)
+            viewModel.PostToken(token)
+//            Toast.makeText(baseContext, msg, Toast.LENGTH_SHORT).show()
+        })
         ///////// tool bar and drawerToggle
         setSupportActionBar(toolBar)
         val actionBar = supportActionBar
@@ -124,6 +148,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         AidlUtil.getInstance().connectPrinterService(this)
         PreferenceHelper(this)
         animation()
+        val adapter = BluetoothAdapter.getDefaultAdapter()
+
+        if (!adapter.isEnabled) run {
+            val enableBtIntent = Intent(BluetoothAdapter.ACTION_REQUEST_ENABLE)
+            startActivityForResult(enableBtIntent, BLUETOOTH_REQUEST)
+        }
+
+
 
         viewModel.MyBalanceResponseLD?.observe(this , Observer {
 
@@ -187,6 +219,8 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             super.onBackPressed()
         }
     }
+
+
 }
 
 

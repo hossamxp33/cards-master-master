@@ -106,7 +106,9 @@ class MainViewModel : ViewModel() {
         DateRepoCompnay.GetMyImages(auth,SliderDataResponseLD)
     }
 
-
+    fun PostToken(token:String){
+        DateRepoCompnay.PostToken(token,BuyPackageResponseLD)
+    }
     override fun onCleared() {
         super.onCleared()
         mCompositeDisposable.dispose()

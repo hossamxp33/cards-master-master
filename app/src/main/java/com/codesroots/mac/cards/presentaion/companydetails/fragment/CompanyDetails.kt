@@ -34,6 +34,7 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.setImageResourcee
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.CompanyDetailsAdapter
 import com.codesroots.mac.cards.presentaion.reportsFragment.adapters.ContentListener
+import com.mazenrashed.printooth.Printooth
 import kotlinx.android.synthetic.main.company_details.*
 import kotlinx.android.synthetic.main.company_details.view.*
 import kotlinx.android.synthetic.main.dialog_custom_view.view.*
