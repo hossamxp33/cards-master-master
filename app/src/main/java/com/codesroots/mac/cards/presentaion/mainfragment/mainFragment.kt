@@ -18,6 +18,7 @@ import android.widget.Button
 import android.widget.ListView
 import android.widget.TextView
 import androidx.annotation.RequiresApi
+import androidx.core.view.GravityCompat
 import androidx.databinding.DataBindingUtil
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -45,6 +46,7 @@ import com.nightonke.boommenu.BoomButtons.ButtonPlaceEnum
 import com.nightonke.boommenu.BoomMenuButton
 import com.nightonke.boommenu.ButtonEnum
 import com.nightonke.boommenu.Piece.PiecePlaceEnum
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.dialog_custom_view.view.*
 import kotlinx.android.synthetic.main.main_fragment.*
 import kotlinx.android.synthetic.main.main_fragment.view.*
@@ -89,7 +91,7 @@ class mainFragment  : Fragment(), ContentListener {
         viewModel.getMyBalance()
         viewModel.GetMyImages(PreferenceHelper.getAuthId())
         view.viewModel = viewModel
-        view.username.text = "اهلا بك  " + PreferenceHelper.getUsername()
+
         viewModel.CompanyResponseLD?.observe(this , Observer {
 
             MainAdapter = MainAdapter(viewModel,context,it)
@@ -144,7 +146,7 @@ class mainFragment  : Fragment(), ContentListener {
 
         viewModel.CompanyResponseLD?.observe(this, Observer {
             CompanyAdapter = CompanyDetailsAdapter(viewModel,activity, it,this)
-            dialogView.recyler.layoutManager = LinearLayoutManager(context)
+            dialogView.recyler.layoutManager = GridLayoutManager(context,3)
             dialogView.recyler.adapter = CompanyAdapter;
             data = it
 
@@ -174,6 +176,7 @@ class mainFragment  : Fragment(), ContentListener {
         alertDialog.show()
 
     }
+
     private fun animation(){
         val ttb = AnimationUtils.loadAnimation(context, R.anim.ttb)
         pager!!.animation = ttb

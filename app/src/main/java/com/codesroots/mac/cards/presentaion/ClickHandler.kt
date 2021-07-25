@@ -268,7 +268,7 @@ type = 1
         //  bundle.putParcelable("cliObj" ,clients[position] )
         val frag = MenuFragment()
         frag.arguments = bundle
-        (context as MainActivity).supportFragmentManager.beginTransaction()
+        ( context as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb,0, 0,0)
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()
 
     }

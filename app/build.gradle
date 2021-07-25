@@ -2,12 +2,9 @@ apply plugin: 'com.android.application'
 
 apply plugin: 'kotlin-android'
 
-// Remove the Fabric plugin.
-
-// Add the Firebase Crashlytics plugin.
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
-apply plugin: 'com.google.firebase.crashlytics'
+apply plugin: 'io.fabric'
 apply plugin: 'com.google.gms.google-services'
 
 
@@ -125,7 +122,7 @@ dependencies {
     // Declare the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
 
-    implementation 'com.google.firebase:firebase-crashlytics:17.3.1'
+    implementation 'com.crashlytics.sdk.android:crashlytics:2.10.1'
     implementation 'com.google.firebase:firebase-messaging:20.0.0'
     implementation 'com.google.firebase:firebase-analytics:18.0.2'
 

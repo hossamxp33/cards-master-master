@@ -38,6 +38,7 @@ import com.bumptech.glide.request.transition.Transition
 import com.codesroots.mac.cards.DataLayer.helper.PreferenceHelper
 import com.codesroots.mac.cards.DataLayer.usecases.checkUserLogin
 import com.codesroots.mac.cards.R
+import com.codesroots.mac.cards.databinding.ActivityMainBinding
 import com.codesroots.mac.cards.databinding.ActivityPaymentBinding
 import com.codesroots.mac.cards.databinding.MainAdapterBinding
 import com.codesroots.mac.cards.db.CardDao
@@ -61,7 +62,6 @@ import com.google.android.material.navigation.NavigationView
 import com.google.firebase.FirebaseApp
 import com.google.firebase.FirebaseAppLifecycleListener
 import com.google.firebase.FirebaseCommonRegistrar
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.google.firebase.messaging.FirebaseMessaging
 import com.mazenrashed.printooth.Printooth
 import com.mazenrashed.printooth.ui.ScanningActivity
@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     lateinit var wallet: PortiflioFragment
     lateinit var viewModel: MainViewModel
     private val BLUETOOTH_REQUEST = 1
+    var binding : ActivityMainBinding? = null
 
     lateinit var navigationView: NavigationView
     override fun onResume() {
@@ -93,8 +94,10 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     @RequiresApi(Build.VERSION_CODES.LOLLIPOP)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        val crashlytics = FirebaseCrashlytics.getInstance()
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main)
+        binding?.listener = ClickHandler()
+        binding?.context = this
+    //    val crashlytics = FirebaseCrashlytics.getInstance()
        // throw RuntimeException("Test Crash")
         FirebaseApp.initializeApp(this)
         FirebaseMessaging.getInstance()
@@ -109,7 +112,11 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val typeface = Typeface.createFromAsset(this!!.assets, "fonts/DroidKufi_Regular.ttf")
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        viewModel.getMyBalance()
+//        binding!!.username.text = "اهلا بك  " + PreferenceHelper.getUsername()
+        binding!!.btnMenu.setOnClickListener{ v ->
+            (this).openCloseNavigationDrawer(v)
+        }
+//        viewModel.getMyBalance()
         FirebaseMessaging.getInstance().token.addOnCompleteListener(OnCompleteListener { task ->
             if (!task.isSuccessful) {
                 //   Log.w(TAG, "Fetching FCM registration token failed", task.exception)
@@ -219,7 +226,13 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             super.onBackPressed()
         }
     }
-
+    fun openCloseNavigationDrawer(view: View) {
+        if (drawerLayout.isDrawerOpen(GravityCompat.START)) {
+            drawerLayout.closeDrawer(GravityCompat.START)
+        } else {
+            drawerLayout.openDrawer(GravityCompat.START)
+        }
+    }
 
 }
 
