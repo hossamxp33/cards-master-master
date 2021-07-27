@@ -140,6 +140,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
             object : ActionBarDrawerToggle(this, drawerLayout, toolBar, (R.string.open), (R.string.close)) {
 
             }
+
         drawerToggle.isDrawerIndicatorEnabled = true
         drawerLayout.addDrawerListener(drawerToggle)
         drawerToggle.syncState()

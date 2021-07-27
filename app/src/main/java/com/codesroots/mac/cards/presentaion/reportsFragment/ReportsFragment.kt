@@ -64,10 +64,10 @@ class ReportsFragment  : Fragment() {
                 val invitedPeople: List<ReportDaily> = it.filter { it.opid > 0 }
 
                 MainAdapter = report_adapters(viewModel, context, invitedPeople)
-                view.   lastvalue.text = it.first().amount
-                view.   value.text = it.get(it.size - 2).amount
+              //  view.   lastvalue.text = it.first().amount
+         //       view.   value.text = it.get(it.size - 2).amount
                 println(it.get(it.size - 1).amount)
-                commision.text = it.last().amount
+            //    commision.text = it.last().amount
 
                 view.recyler.layoutManager = LinearLayoutManager(context);
                 view.recyler.adapter = MainAdapter;
@@ -95,10 +95,10 @@ class ReportsFragment  : Fragment() {
                 viewModel.GetMyDatesReport(PreferenceHelper.getAuthId(),from.text.toString(),to.text.toString())
                print(PreferenceHelper.getAuthId())
                 viewModel.ReportDailyResponseLD?.observe(this , Observer {
-                  view.lastvalue.text = it.first().amount
-                    view.value.text = it.get(it.size - 2).amount
+                //  view.lastvalue.text = it.first().amount
+                //    view.value.text = it.get(it.size - 2).amount
                     println(it.get(it.size - 2).amount)
-                    commision.text = it.last().amount
+                //    commision.text = it.last().amount
 
                     MainAdapter.notifyDataSetChanged()
 

@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.Bundle
 import androidx.databinding.ObservableField
+import androidx.fragment.app.FragmentTransaction
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProviders
 import androidx.room.Room
@@ -25,8 +26,10 @@ import com.codesroots.mac.cards.presentaion.companydetails.fragment.CompanyDetai
 import com.codesroots.mac.cards.presentaion.mainfragment.mainFragment
 import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 import com.codesroots.mac.cards.presentaion.menufragmen.MenuFragment
+import com.codesroots.mac.cards.presentaion.menufragmen.TermsFragment
 import com.codesroots.mac.cards.presentaion.payment.Payment
 import com.codesroots.mac.cards.presentaion.portifliofragment.PortiflioFragment
+import com.codesroots.mac.cards.presentaion.profilefragment.ProfileFragment
 import com.codesroots.mac.cards.presentaion.reportsFragment.ReportsFragment
 import com.mazenrashed.printooth.Printooth
 import com.mazenrashed.printooth.data.converter.ArabicConverter
@@ -54,6 +57,16 @@ var type = 0
         val bundle = Bundle()
         homeIntent.putExtra("packageId" , comid)
         (context as MainActivity).startActivity(homeIntent)
+
+
+    }
+    fun SwitchToProfile( context: Context) {
+
+        val profile = ProfileFragment()
+        ( context as MainActivity). supportFragmentManager.beginTransaction()
+            .replace(R.id.main_frame, profile).addToBackStack(null)
+            .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+            .commit()
 
 
     }
@@ -266,7 +279,7 @@ type = 1
 
         val bundle = Bundle()
         //  bundle.putParcelable("cliObj" ,clients[position] )
-        val frag = MenuFragment()
+        val frag = TermsFragment()
         frag.arguments = bundle
         ( context as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.ttb,0, 0,0)
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()

@@ -18,47 +18,36 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-            android:layout_width="150dp"
-            android:layout_height="150dp"
-            android:background="@drawable/reduisshadowbackground"
-            android:padding="16dp"
+            android:layout_width="120dp"
+            android:layout_height="120dp"
+            android:layout_margin="8dp"
+            android:background="@drawable/mainbg"
             android:onClick="@{() -> listener.SwitchToPackages(Context,data.id)}">
 
-        <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/constraintLayout"
-                android:layout_width="110dp"
-                android:layout_height="110dp"
-                android:background="@drawable/mainbg"
+
+        <androidx.cardview.widget.CardView
+                android:id="@+id/myCardView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@color/transparent"
+                app:cardCornerRadius="5dp"
+                app:cardElevation="0dp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintLeft_toLeftOf="parent"
+                app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.cardview.widget.CardView
-                    android:id="@+id/myCardView"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_centerHorizontal="true"
-                    android:layout_centerVertical="true"
-                    app:cardCornerRadius="0dp"
-                    app:cardElevation="0dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+            <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/roundedimage"
+                    android:layout_width="70dp"
+                    android:layout_height="70dp"
+                    android:adjustViewBounds="true"
+                    android:background="@color/transparent"
+                    android:scaleType="fitXY"
+                    app:imageResource="@{data.src}" />
 
-                <androidx.appcompat.widget.AppCompatImageView
-                        android:id="@+id/roundedimage"
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:adjustViewBounds="true"
-                        android:scaleType="fitXY"
-                        app:imageResource="@{data.src}" />
+        </androidx.cardview.widget.CardView>
 
-            </androidx.cardview.widget.CardView>
-
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

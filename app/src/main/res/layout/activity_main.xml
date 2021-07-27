@@ -134,6 +134,8 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:src="@drawable/clockicon"
+                android:onClick="@{() -> listener.SwitchToProfile(Context)}"
+
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/home"
                 app:layout_constraintStart_toEndOf="@+id/call_us"
@@ -150,5 +152,6 @@
                 app:layout_constraintRight_toLeftOf="@+id/reports"
                 app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

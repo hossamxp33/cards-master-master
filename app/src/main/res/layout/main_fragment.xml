@@ -35,7 +35,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.13" />
-
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                app:layout_constraintGuide_percent="0.93" />
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guid3"
                 android:layout_width="wrap_content"
@@ -99,26 +104,24 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.42" />
+
         <androidx.recyclerview.widget.RecyclerView
                 android:id="@+id/recyler"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="4dp"
-                android:layout_marginLeft="4dp"
-                android:layout_marginEnd="4dp"
-                app:layout_constraintHeight_percent="0.25"
-                android:layout_marginRight="4dp"
-                android:layout_marginBottom="8dp"
-                app:layout_constraintTop_toBottomOf="@id/indicator"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayout4"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="0dp"
+                app:layout_constraintBottom_toTopOf="@+id/guid2"
+                app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toLeftOf="parent" />
+                app:layout_constraintTop_toBottomOf="@id/guid5" />
 
         <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:visibility="gone"
-                app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest">
+                app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
+                tools:ignore="MissingConstraints">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                     android:id="@+id/bottom_navigation"
@@ -153,7 +156,6 @@
                     android:layout_marginStart="16dp"
                     android:layout_marginLeft="16dp"
                     android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
                     app:layout_constraintLeft_toLeftOf="parent">
 
 
@@ -179,7 +181,6 @@
                     android:layout_marginStart="5dp"
                     android:layout_marginLeft="5dp"
                     android:layout_marginBottom="16dp"
-                    app:layout_constraintBottom_toTopOf="@+id/constraintLayouttest"
                     app:layout_constraintLeft_toRightOf="@id/bottom_navigation1">
 
 

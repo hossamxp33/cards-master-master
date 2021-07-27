@@ -1,10 +1,12 @@
 <resources>
     <string name="app_name"> Accross Cities </string>
-    <string name="tab_1">الرئيسية</string>
     <string name="tab_2">تقارير</string>
     <string name="tab_3">المزيد</string>
     <string name="tab_4">المحفظة</string>
-
+    <string name="tab_1">شركة الفاتح للحلول برمجية مختصون ببرمجة جميع أنواع تطبيقات . ومواقع .برامج حسابية كما يتوفر جميع أنواع برامج صيرفية . وماركت . ومولات
+متوفر فروعنا في .....
+كركوك . حي العسكري . سايدين الرئيسي
+بغداد . حي أور . قرب مطعم بن عطية</string>
     <string name="manadeeb">المناديب</string>
     <string name="chat">المحادثة</string>
     <string name="products">المنتجات</string>

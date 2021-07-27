@@ -61,7 +61,6 @@ data class ReportDaily (
     val opno: String,
     val opdate: String,
     var odate: String? = null,
-
     val strcase: String,
     val amount: String,
     val err: String? = null,

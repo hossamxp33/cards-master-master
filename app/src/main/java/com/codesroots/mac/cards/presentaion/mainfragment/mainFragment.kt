@@ -95,7 +95,7 @@ class mainFragment  : Fragment(), ContentListener {
         viewModel.CompanyResponseLD?.observe(this , Observer {
 
             MainAdapter = MainAdapter(viewModel,context,it)
-            view.recyler.layoutManager = LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL ,false)
+            view.recyler.layoutManager = GridLayoutManager(context, 3)
             data = it
           
 
@@ -139,6 +139,7 @@ class mainFragment  : Fragment(), ContentListener {
     }
     private lateinit var alertDialog: AlertDialog
     @RequiresApi(Build.VERSION_CODES.JELLY_BEAN_MR1)
+
     fun showCustomDialog() {
 
         val inflater: LayoutInflater = this.getLayoutInflater()

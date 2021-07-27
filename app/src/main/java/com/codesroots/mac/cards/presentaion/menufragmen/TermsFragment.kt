@@ -37,10 +37,10 @@ class TermsFragment : Fragment() {
             ViewModelProviders.of(this).get(ContactViewModel::class.java)
 //
         contactViewModel.getTermsData()
-        contactViewModel.contactMutableLiveData?.observe(this , Observer {
-            phone2.text = it.details
-            phone2.setMovementMethod(ScrollingMovementMethod());
-        })
+//        contactViewModel.contactMutableLiveData?.observe(this , Observer {
+//            phone2.text = it.details
+//            phone2.setMovementMethod(ScrollingMovementMethod());
+//        })
 //
 //        contactViewModel.error.observe(
 //            this,
