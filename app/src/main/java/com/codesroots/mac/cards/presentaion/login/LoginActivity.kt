@@ -37,23 +37,23 @@ class LoginActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-      setContentView(R.layout.activity_login)
+      setContentView(R.layout.activity_signin)
         PreferenceHelper(this)
 
         if (checkUserLogin(this))
             startActivity(Intent(this  , MainActivity::class.java))
 
 
-        Loginbtn.setOnClickListener {
-            PreferenceHelper.setUsername(username.text.toString())
+        btnLogin.setOnClickListener {
+            PreferenceHelper.setUsername(etUsername.text.toString())
 //PreferenceHelper.setToken("0",this)
             if (PreferenceHelper.getToken() != "0" ) {
             //   "تاني مرة".snack(window.decorView.rootView)
                 if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
-                viewModel.Login(username.text.toString(),password.text.toString())
+                viewModel.Login(etUsername.text.toString(),etPassword.text.toString())
             }else {
                 if (!isInternetConnectionAvailable(this)) "رجاء تأكد من اتصالك بالانترنت".snack(window.decorView.rootView)
-                viewModel.LoginFirstTime(username.text.toString(),password.text.toString())
+                viewModel.LoginFirstTime(etUsername.text.toString(),etPassword.text.toString())
                // "اول مرة".snack(window.decorView.rootView)
             }
         }

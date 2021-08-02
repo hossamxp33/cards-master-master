@@ -16,12 +16,7 @@
             android:usesCleartextTraffic="true"
             android:theme="@style/AppTheme">
         <activity android:name=".presentaion.MainActivity">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN"/>
 
-                <category android:name="android.intent.category.LAUNCHER"/>
-
-            </intent-filter>
         </activity>
         <activity android:name=".presentaion.payment.Payment"  >
 
@@ -34,10 +29,15 @@
     </activity>
 
         <activity android:name=".presentaion.login.LoginActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN"/>
 
+                <category android:name="android.intent.category.LAUNCHER"/>
+
+            </intent-filter>
         </activity>
         <activity android:name=".presentaion.companydetails.fragment.CompanyDetails"
-                android:theme="@style/Department"
+                android:theme="@style/AppTheme"
                 android:label=""
                 >
 

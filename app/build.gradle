@@ -130,6 +130,9 @@ dependencies {
 
     implementation 'com.github.mazenrashed:Printooth:1.2.2'
 
+    implementation 'com.github.gratusik:AGIKSwipeButton:1.0.1'
+    implementation 'com.h6ah4i.android.widget.verticalseekbar:verticalseekbar:1.0.0'
+
 
 
 }

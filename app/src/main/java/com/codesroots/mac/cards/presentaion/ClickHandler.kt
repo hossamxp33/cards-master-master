@@ -270,7 +270,7 @@ type = 1
         //  bundle.putParcelable("cliObj" ,clients[position] )
         val frag = ReportsFragment()
         frag.arguments =bundle
-        ( context as MainActivity).supportFragmentManager.beginTransaction()    .setCustomAnimations(R.anim.slide_in_left, R.anim.slide_up)
+        ( context as MainActivity).supportFragmentManager.beginTransaction().setCustomAnimations(R.anim.slide_in_left, R.anim.slide_up)
 
             .replace(R.id.main_frame, frag).addToBackStack(null).commit()
     }
@@ -324,17 +324,12 @@ type = 1
                         pDialog!!.show()
 
                         pDialog!!.setConfirmClickListener {
-
-
                             Glide.with(context as CompanyDetails)
                                 .asBitmap()
                                 .load("http://across-cities.com/"+data.src)
                                 .into(object : SimpleTarget<Bitmap>(100, 100) {
                                     override fun onResourceReady(resourcee: Bitmap, transition: Transition<in Bitmap>?) {
                                         try {
-
-
-
                                             pDialog!!.changeAlertType(SweetAlertDialog.SUCCESS_TYPE);
                                             pDialog!!.show();
                                             if (type == 0) {
@@ -354,11 +349,9 @@ type = 1
                                                             }else {
                                                              //   printSampleReceipt(data,resourcee,context)
                                                                 printSampleReceipt(data,resourcee,resource, viewmodel)
-
                                                             }
 
                                                             val homeIntent = Intent(context, Payment::class.java)
-
                                                             homeIntent.putExtra("myobj", data)
 
                                                             (context as CompanyDetails).startActivity(homeIntent)

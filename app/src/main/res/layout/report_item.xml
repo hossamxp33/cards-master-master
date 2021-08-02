@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout
-        xmlns:tools="http://schemas.android.com/tools" xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto" android:id="@+id/layout"
+        xmlns:tools="http://schemas.android.com/tools"
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/layout"
         >
 
     <data>
@@ -20,12 +22,11 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="180dp"
             android:layout_margin="10dp"
             android:background="@drawable/report_item"
             android:layoutAnimation="@anim/layout_animation"
-            android:layoutDirection="rtl"
-            android:padding="5dp">
+            android:layoutDirection="rtl">
 
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guid_logo"
@@ -53,21 +54,7 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.36" />
 
-        <TextView
-                android:id="@+id/mobile_num"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/kokn"
-                android:text="  رقم الهاتف : "
-                android:textColor="@color/white"
-                android:layout_marginRight="32dp"
-                android:textSize="18sp"
-                android:visibility="gone"
-                app:layout_constraintTop_toBottomOf="@+id/tvPreviousText"
-                app:layout_constraintLeft_toRightOf="@+id/tvTotalPrice"
-                app:layout_constraintRight_toRightOf="parent"
 
-                />
         <TextView
                 android:id="@+id/tvUnpaid"
                 android:layout_width="wrap_content"
@@ -75,29 +62,14 @@
                 android:layout_marginRight="8dp"
                 android:gravity="center"
                 android:maxLines="2"
-                android:text="@{data.opno}"
+                android:text="@{data.cardname}"
                 android:textColor="@color/white"
                 android:textSize="14sp"
                 android:textStyle="bold"
                 app:layout_constraintRight_toLeftOf="@+id/guid"
                 app:layout_constraintTop_toBottomOf="@+id/guid_horizontal" />
 
-        <TextView
-                android:id="@+id/tvPreviousText"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:fontFamily="@font/kokn"
-                android:paddingStart="1dp"
-                android:paddingLeft="1dp"
-                android:text="  رقم : "
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintLeft_toRightOf="@+id/tvTotalPrice"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/tvTotalPrice"
-                app:layout_constraintWidth_percent="0.22" />
+
 
         <TextView
                 android:id="@+id/tvTotalPrice"
@@ -116,12 +88,13 @@
         <androidx.cardview.widget.CardView
                 android:id="@+id/ivProfileP"
                 android:layout_width="0dp"
-                android:layout_height="75dp"
+                android:layout_height="50dp"
                 app:cardElevation="3dp"
                 app:cardUseCompatPadding="true"
-                app:layout_constraintLeft_toLeftOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.25">
+                app:layout_constraintLeft_toRightOf="@+id/guid_logo"
+                app:layout_constraintTop_toTopOf="@id/guid_horizontal"
+           app:layout_constraintRight_toLeftOf="@id/guid4"
+              >
 
             <androidx.appcompat.widget.AppCompatImageView
                     android:id="@+id/ivProfilePe"
@@ -133,59 +106,31 @@
 
         </androidx.cardview.widget.CardView>
 
-
-        <TextView
-                android:id="@+id/tvNameP"
+        <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/guid4"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_marginTop="8dp"
-                android:marqueeRepeatLimit="marquee_forever"
-                android:scrollHorizontally="true"
-                android:singleLine="true"
-                android:text="@{data.cardname}"
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintRight_toLeftOf="@id/tvMessageC"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.45" />
+                android:orientation="vertical"
+                app:layout_constraintGuide_percent="0.1" />
 
 
-        <TextView
-                android:id="@+id/tvMessageC"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/kokn"
-                android:paddingStart="1dp"
-                android:paddingLeft="1dp"
-                android:text="مبلغ : "
-                android:textColor="@color/white"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintWidth_percent="0.15" />
+
 
 
         <TextView
                 android:id="@+id/tvDateP"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:layout_marginRight="8dp"
+                android:layout_marginRight="32dp"
                 android:fontFamily="@font/kokn"
                 android:gravity="bottom|start"
                 android:textColor="@color/white"
                 android:textDirection="ltr"
-                android:textSize="18sp"
+                android:textSize="14sp"
+                android:text="@string/tab_2"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintHeight_percent="0.3"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvPreviousText"
-                app:layout_constraintWidth_percent="0.3" />
+                app:layout_constraintRight_toRightOf="@id/guid"
+                app:layout_constraintTop_toBottomOf="@+id/guid_horizontal" />
 
         <View
                 android:layout_width="0dp"

@@ -12,6 +12,7 @@ import android.net.Uri
 import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.os.Handler
 import android.os.SystemClock
 import android.util.Log
 import android.view.Gravity
@@ -112,7 +113,14 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         val typeface = Typeface.createFromAsset(this!!.assets, "fonts/DroidKufi_Regular.ttf")
 
         viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-//        binding!!.username.text = "اهلا بك  " + PreferenceHelper.getUsername()
+
+   binding!!.username.text =  "اهلا بك  " + PreferenceHelper.getUsername()
+
+        val animationFadeOut = AnimationUtils.loadAnimation(this, R.anim.fade_out)
+        animationFadeOut.reset()
+        binding!!.username.clearAnimation()
+        binding!!.username.startAnimation(animationFadeOut)
+
         binding!!.btnMenu.setOnClickListener{ v ->
             (this).openCloseNavigationDrawer(v)
         }
@@ -217,6 +225,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     }
     private fun animation(){
         val ttb = AnimationUtils.loadAnimation(this, R.anim.img)
+        val fade_out = AnimationUtils.loadAnimation(this, R.anim.fade_out)
 
     }
     override fun onBackPressed() {

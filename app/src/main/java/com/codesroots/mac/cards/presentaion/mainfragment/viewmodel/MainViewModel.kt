@@ -2,6 +2,7 @@ package com.codesroots.mac.cards.presentaion.mainfragment.viewmodel
 
 import android.view.View
 import android.widget.ImageView
+import android.widget.SeekBar
 import androidx.appcompat.widget.AppCompatImageView
 import androidx.core.view.isGone
 import androidx.databinding.BindingAdapter
@@ -41,11 +42,10 @@ class MainViewModel : ViewModel() {
     var SliderDataResponseLD : MutableLiveData<List<SliderElement>>? = null
     var BuyPackageResponseLD : MutableLiveData<Buypackge>? = null
     var RequestBalanceLd : MutableLiveData<RequestBalance>? = null
-
     var GetNonPrinted : MutableLiveData<List<ReportDaily>>? = null
-
     var ReportDailyResponseLD : MutableLiveData<List<ReportDaily>>? = null
     var BankResponseLD : MutableLiveData<List<BankDatum>>? = null
+    var SeekBarNumber = MutableLiveData<Int>()
 
     init {
         CompanyResponseLD = MutableLiveData()
@@ -56,6 +56,7 @@ class MainViewModel : ViewModel() {
         BankResponseLD = MutableLiveData()
         GetNonPrinted = MutableLiveData()
         RequestBalanceLd = MutableLiveData()
+        SeekBarNumber = MutableLiveData()
 
         mCompositeDisposable  = CompositeDisposable()
     }
@@ -108,6 +109,9 @@ class MainViewModel : ViewModel() {
 
     fun PostToken(token:String){
         DateRepoCompnay.PostToken(token,BuyPackageResponseLD)
+    }
+    fun getSeekBarNumber(index: Int?) {
+        SeekBarNumber.postValue(index)
     }
     override fun onCleared() {
         super.onCleared()

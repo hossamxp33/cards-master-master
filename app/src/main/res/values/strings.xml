@@ -7,6 +7,11 @@
 متوفر فروعنا في .....
 كركوك . حي العسكري . سايدين الرئيسي
 بغداد . حي أور . قرب مطعم بن عطية</string>
+    <string name="radio1">1</string>
+    <string name="radio2">2</string>
+    <string name="radio3">3</string>
+    <string name="radio4">4</string>
+
     <string name="manadeeb">المناديب</string>
     <string name="chat">المحادثة</string>
     <string name="products">المنتجات</string>

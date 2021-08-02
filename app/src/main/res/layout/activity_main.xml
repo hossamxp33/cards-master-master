@@ -16,7 +16,8 @@
     </data>
 <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="#e0eaf4">
 
     <androidx.drawerlayout.widget.DrawerLayout
             android:id="@+id/drawerLayout"
@@ -55,25 +56,13 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_marginTop="24dp"
-            android:background="@drawable/bottom_rounded"
-            app:layout_constraintHeight_percent="0.1"
+            android:background="@drawable/top_bar"
+            app:layout_constraintHeight_percent="0.08"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-        <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/username"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="10dp"
-                android:text="اهلا بك حسام"
-                android:textColor="@color/white"
-                android:textSize="20dp"
-                app:layout_constraintEnd_toStartOf="@+id/btn_menu"
-                app:layout_constraintStart_toEndOf="@+id/notification"
-                app:layout_constraintTop_toTopOf="parent">
 
-        </androidx.appcompat.widget.AppCompatTextView>
 
         <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/notification"
@@ -82,10 +71,10 @@
                 android:layout_marginLeft="24dp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
-
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintWidth_percent="0.3"
                 app:srcCompat="@drawable/notification" />
+
 
         <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/btn_menu"
@@ -98,7 +87,18 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/menu_btn" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/logo"
+            android:layout_width="wrap_content"
+            android:layout_height="60dp"
+            android:layout_marginTop="45dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/logo1" />
     <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
             android:layout_height="50dp"
             android:background="#6fb8e5"
@@ -111,8 +111,8 @@
                 android:layout_width="70dp"
                 android:layout_height="50dp"
                 android:layout_marginLeft="16dp"
-                android:src="@drawable/call_us"
                 android:onClick="@{() -> listener.SwitchToMore(Context)}"
+                android:src="@drawable/call_us"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
@@ -133,8 +133,8 @@
         <androidx.appcompat.widget.AppCompatImageView
                 android:layout_width="70dp"
                 android:layout_height="50dp"
-                android:src="@drawable/clockicon"
                 android:onClick="@{() -> listener.SwitchToProfile(Context)}"
+                android:src="@drawable/clockicon"
 
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toStartOf="@+id/home"
@@ -143,15 +143,29 @@
 
         <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/home"
-                android:onClick="@{() -> listener.SwitchToHome(Context)}"
                 android:layout_width="75dp"
                 android:layout_height="50dp"
                 android:layout_marginEnd="16dp"
+                android:onClick="@{() -> listener.SwitchToHome(Context)}"
                 android:src="@drawable/home_icon"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintRight_toLeftOf="@+id/reports"
                 app:layout_constraintTop_toTopOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
+    <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/username"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/blue_redius"
+            android:fontFamily="@font/kokn"
+            android:gravity="center"
+            android:padding="10dp"
+            android:text="اهلا بك علاء"
+            android:textColor="@color/white"
+            android:textSize="30dp"
+            app:layout_constraintBottom_toTopOf="@+id/constraintLayout"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="@+id/drawerLayout" />
 </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

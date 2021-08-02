@@ -53,7 +53,6 @@ class ContactFragment : Fragment() {
             phone2.text = it.mobile
             mail.text = it.email
            insta.setOnClickListener { v -> openNewTabWindow(it.fb, context!!) }
-
             phone2.setMovementMethod(ScrollingMovementMethod());
         })
 

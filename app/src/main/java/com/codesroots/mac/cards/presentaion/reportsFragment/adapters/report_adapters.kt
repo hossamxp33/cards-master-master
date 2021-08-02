@@ -19,11 +19,11 @@ import com.codesroots.mac.cards.presentaion.mainfragment.viewmodel.MainViewModel
 class report_adapters ( var viewModel: MainViewModel,var context :Context?,var data:List<ReportDaily>) : RecyclerView.Adapter<CustomViewHolder>() {
     override fun getItemCount(): Int {
 
-        return  data.size
+        return  1
     }
 
     override fun onBindViewHolder(p0: CustomViewHolder, p1: Int) {
-        p0.bind(viewModel,context,data.get(p1))
+        p0.bind(viewModel,context)
 
     }
 
@@ -46,10 +46,10 @@ class CustomViewHolder (
     private val binding:ReportItemBinding
 ) : RecyclerView.ViewHolder(binding.root){
 
-    fun bind(viewModel:MainViewModel,context: Context?,data:ReportDaily) {
+    fun bind(viewModel:MainViewModel,context: Context?) {
 
         binding.listener = ClickHandler()
-        binding.data = data
+   //     binding.data = data
         binding.context = context as MainActivity?
     }
 

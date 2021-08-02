@@ -26,7 +26,9 @@
             android:layout_height="match_parent"
             android:layout_marginTop="36dp"
             android:layout_marginBottom="0dp"
-            android:background="#e0eaf4" />
+            android:background="#e0eaf4" >
+
+    </FrameLayout>
 
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

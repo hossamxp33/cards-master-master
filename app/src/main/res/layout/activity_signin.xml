@@ -15,16 +15,17 @@
                 type="com.codesroots.mac.cards.models.CompanyDatum"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@color/signinpurple">
+            android:background="#e0eaf5">
+
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide1"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
-                app:layout_constraintGuide_percent="0.11" />
+                app:layout_constraintGuide_percent="0.08" />
+
         <androidx.constraintlayout.widget.Guideline
                 android:id="@+id/guide2"
                 android:layout_width="wrap_content"
@@ -32,58 +33,32 @@
                 android:orientation="horizontal"
                 app:layout_constraintGuide_percent="0.28" />
 
-        <TextView
-                android:id="@+id/tvMain"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:background="@color/colorPrimaryDark"
-
-                android:backgroundTint="@color/signinpurple"
-                android:fontFamily="@font/fonts"
-                android:gravity="center"
-                android:text="تسجيل الدخول "
-                android:textColor="@color/white"
-                android:textSize="20sp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-        <TextView
+        <androidx.appcompat.widget.AppCompatImageView
                 android:id="@+id/img"
                 android:layout_width="wrap_content"
-                android:layout_height="0dp"
-                android:layout_marginTop="32dp"
+                android:layout_height="wrap_content"
                 android:fontFamily="@font/fonts"
                 android:scaleType="fitXY"
-                android:text="عبر المدن"
+                android:src="@drawable/logo1"
                 android:textColor="#FFFFFF"
-                android:textSize="30sp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/tvMain" />
-        <View
-                android:id="@+id/horspliter"
-                android:layout_width="match_parent"
-                android:layout_height="1.5dp"
-                android:background="@color/white"
-                app:layout_constraintHeight_percent="0.002"
-                app:layout_constraintTop_toBottomOf="@id/tvMain"
-                app:layout_constraintWidth_percent="0.65" />
+                app:layout_constraintTop_toTopOf="@+id/guide1" />
 
 
         <EditText
                 android:id="@+id/etUsername"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
-
                 android:layout_marginTop="32dp"
-                android:background="@drawable/white_rounded_background"
+                android:textSize="16dp"
+                android:background="@drawable/username_bk"
                 android:fontFamily="@font/fonts"
                 android:gravity="center"
                 android:hint=" اسم المستخدم "
                 android:inputType="text"
-
-                android:textColor="@color/colorPrimary"
+                android:textColor="#184eb4"
+                android:textColorHint="#184eb4"
                 android:theme="@style/edittextStyle"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHeight_percent="0.1"
@@ -96,15 +71,16 @@
                 android:id="@+id/etPassword"
                 android:layout_width="0dp"
                 android:layout_height="0dp"
+                android:textSize="16dp"
                 android:layout_marginTop="10dp"
                 android:autoSizeTextType="uniform"
-                android:background="@drawable/white_rounded_background"
+                android:background="@drawable/username_bk"
                 android:fontFamily="@font/fonts"
                 android:gravity="center"
                 android:hint=" كلمة المرور "
                 android:inputType="textPassword"
-                android:textColor="@color/colorPrimary"
-
+                android:textColor="@color/white"
+                android:textColorHint="#184eb4"
                 android:theme="@style/edittextStyle"
                 app:layout_constraintBottom_toTopOf="@+id/btnLogin"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -117,24 +93,32 @@
 
         <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btnLogin"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                android:autoSizeMaxTextSize="18dp"
-                android:background="@drawable/yellow_rounded_back"
-                android:fontFamily="@font/fonts"
-                android:gravity="center"
-                android:inputType="text"
-                android:text="تسجيل الدخول"
-                android:textColor="@color/black"
+                android:paddingBottom="10dp"
+                android:textSize="24sp"
+                android:background="@drawable/bluereduisbackground"
+                android:fontFamily="@font/kokn"
+                android:text = " دخول "
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHeight_percent="0.08"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etPassword"
-
-                app:layout_constraintWidth_percent="0.5" />
-
+                />
 
 
+        <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/version"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="@font/fonts"
+                android:scaleType="fitXY"
+                android:src="@drawable/version"
+                android:textColor="#FFFFFF"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

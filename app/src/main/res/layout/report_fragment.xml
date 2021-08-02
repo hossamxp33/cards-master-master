@@ -36,32 +36,19 @@
                 android:layout_marginTop="16dp"
                 android:fontFamily="@font/kokn"
                 android:scaleType="fitXY"
-                android:text="انشاء تقرير خلال في زمنية "
-                android:textColor="@color/white"
+                android:text="انشاء تقرير"
+                android:textColor="@color/colorAccent"
                 android:textSize="16dp"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-                android:id="@+id/text_from"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="من"
-                android:fontFamily="@font/kokn"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/from"
-                app:layout_constraintTop_toBottomOf="@+id/img" />
-        <TextView
                 android:id="@+id/from"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/linear_background"
+                android:background="@drawable/from"
                 android:gravity="center"
                 android:hint="بداية المدة"
                 android:textColor="@color/black"
@@ -69,28 +56,15 @@
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/img"
-                app:layout_constraintWidth_percent="0.4" />
+                app:layout_constraintWidth_percent="0.5" />
 
-        <TextView
-                android:id="@+id/text_to"
-                android:layout_width="0dp"
-                android:layout_height="30dp"
-                android:layout_marginTop="8dp"
-                android:gravity="center"
-                android:text="الي"
-                android:fontFamily="@font/kokn"
-                android:textColor="@color/white"
-                android:textStyle="bold"
-                app:layout_constraintBottom_toBottomOf="@+id/to"
-                app:layout_constraintRight_toRightOf="parent"
-                app:layout_constraintLeft_toRightOf="@+id/from"
-                app:layout_constraintTop_toBottomOf="@+id/from" />
+
         <TextView
                 android:id="@+id/to"
                 android:layout_width="0dp"
-                android:layout_height="30dp"
+                android:layout_height="35dp"
                 android:layout_marginTop="8dp"
-                android:background="@drawable/linear_background"
+                android:background="@drawable/to_icon"
                 android:gravity="center"
                 android:hint="نهاية المدة"
                 android:textColor="@color/black"
@@ -98,13 +72,13 @@
                 app:layout_constraintRight_toRightOf="parent"
                 app:layout_constraintLeft_toLeftOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/from"
-                app:layout_constraintWidth_percent="0.4" />
+                app:layout_constraintWidth_percent="0.5" />
 
         <View
                 android:layout_width="0dp"
                 android:layout_height="3dp"
                 android:layout_marginTop="8dp"
-                android:background="@color/white"
+                android:background="@color/colorAccent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/to"
